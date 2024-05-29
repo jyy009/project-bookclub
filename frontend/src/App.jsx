@@ -1,8 +1,10 @@
-export const App = () => {
+import { BrowserRouter } from "react-router-dom";
+import { Home } from "./pages/Home";
 
+export const App = () => {
   return (
-    <>
-      <h1>Welcome to Final Project!</h1>
-    </>
+    <BrowserRouter>
+      <Home />
+    </BrowserRouter>
   );
 };

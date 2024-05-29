@@ -1,3 +1,3 @@
-export const Headline = () => {
-  return <div>Headline</div>;
+export const Headline = ({ titleText }) => {
+  return <h1>{titleText}</h1>;
 };
