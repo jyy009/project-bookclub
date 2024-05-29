@@ -8,6 +8,7 @@ export default {
         jeans: "#093D5D", // footer and text
         heroSand: "#F4F0EC", // hero section background
         warmOrange: "#EEAD59", // our orange
+        plum: "#683651",
       },
     },
     fontFamily: {
