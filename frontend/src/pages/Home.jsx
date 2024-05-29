@@ -1,11 +1,14 @@
-import { SignIn } from "../components/SignIn";
-import { Register } from "./Register";
+import { BrowserRouter } from "react-router-dom";
+import { RouteList } from "../components/RouteList";
+import { Header } from "../components/Header";
 
 export const Home = () => {
   return (
-    <div>
-      <Register />
-      <SignIn />
-    </div>
+    <>
+      <Header />
+      <BrowserRouter>
+        <RouteList />
+      </BrowserRouter>
+    </>
   );
 };

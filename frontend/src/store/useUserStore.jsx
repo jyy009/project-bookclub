@@ -53,7 +53,7 @@ export const useUserStore = create((set, get) => ({
       return false;
     }
     try {
-      const response = await fetch("https://user-api/users", {
+      const response = await fetch("http://localhost:8080/users", {
         method: "POST",
         body: JSON.stringify({
           name: signUpData.name,
@@ -102,7 +102,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
     const { loginData } = get();
     try {
-      const response = await fetch("https://user-api/sessions", {
+      const response = await fetch("http://localhost:8080/sessions", {
         method: "POST",
         body: JSON.stringify({
           username: loginData.username,
@@ -129,7 +129,7 @@ export const useUserStore = create((set, get) => ({
 
   fetchLoggedInData: async (accessToken) => {
     try {
-      const response = await fetch("https://user-api/logged-in", {
+      const response = await fetch("http://localhost:8080/logged-in", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

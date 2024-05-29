@@ -1,3 +1,9 @@
+import { SignIn } from "../components/SignIn";
+
 export const Landing = () => {
-  return <div>Landing</div>;
+  return (
+    <div>
+      <SignIn />
+    </div>
+  );
 };
