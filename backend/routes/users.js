@@ -43,12 +43,12 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.get("/membership", authenticateUser);
-router.get("/membership", (req, res) => {
+router.get("/users/membership", authenticateUser);
+router.get("/users/membership", (req, res) => {
   res.json({ message: "Success: user found" });
 });
 
-router.post("/sessions", async (req, res) => {
+router.post("/users/sessions", async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
     res.json({ userId: user._id, accessToken: user.accessToken });
