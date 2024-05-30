@@ -1,5 +1,5 @@
-import cors from "cors"
-import express from "express"
+import cors from "cors";
+import express from "express";
 
 import usersRoutes from "./routes/users.js";
 
