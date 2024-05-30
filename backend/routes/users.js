@@ -1,10 +1,73 @@
 import express from "express";
-import User from "../models/User.js"
+import bcrypt from "bcrypt";
+import User from "../models/User";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+const authenticateUser = async (req, res, next) => {
+  const user = await User.findOne({ accessToken: req.header("Authorization") });
+  if (user) {
+    req.user = user;
+    next();
+  } else {
+    res.status(401).json({ loggedOut: true });
+  }
+};
+
+router.get("/users", async (req, res) => {
+  const allUsers = await User.find().exec();
+  if (allUsers.length > 0) {
+    res.json(allUsers);
+  } else {
+    res.status(404).send("No users found");
+  }
 });
 
-export default router
+router.post("/users", async (req, res) => {
+  try {
+    const { name, username, email, password, address } = req.body;
+    if (!password || password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters long",
+      });
+    }
+    const salt = bcrypt.genSaltSync();
+    const user = new User({
+      name,
+      username,
+      email,
+      password: bcrypt.hashSync(password, salt),
+      address,
+    });
+    await user.save();
+    res.status(201).json({
+      success: true,
+      userId: user._id,
+      accessToken: user.accessToken,
+      message: "User created",
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      errors: error.message,
+      message: "Could not create user",
+    });
+  }
+});
+
+router.get("/users/membership", authenticateUser);
+router.get("/users/membership", (req, res) => {
+  res.json({ message: "Success: user found" });
+});
+
+router.post("/users/sessions", async (req, res) => {
+  const user = await User.findOne({ username: req.body.username });
+  if (user && bcrypt.compareSync(req.body.password, user.password)) {
+    res.json({ userId: user._id, accessToken: user.accessToken });
+  } else {
+    res.json({ notFound: true });
+  }
+});
+
+export default router;
