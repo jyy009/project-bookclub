@@ -1,0 +1,20 @@
+[
+  {
+    "altText": "Emily",
+    "imageUrl": "/images/pexels-olly-774909.jpg",
+    "name": "Emily",
+    "text": "Emily is a literature professor with a knack for uncovering hidden gems in the literary world. Her vast knowledge and keen eye for exceptional storytelling ensure that our monthly selections are always top-notch."
+  },
+  {
+    "altText": "Sarah",
+    "imageUrl": "/images/pexels-george-dolgikh-551816-1310522.jpg",
+    "name": "Sarah",
+    "text": "Sarah is a dedicated librarian who believes in the transformative power of books. Her organizational skills and love for community building have been instrumental in creating a supportive and vibrant book club environment."
+  },
+  {
+    "altText": "Jack",
+    "imageUrl": "/images/pexels-italo-melo-881954-2379004.jpg",
+    "name": "Jack",
+    "text": "Jack is a seasoned editor and writer, bringing a deep appreciation for diverse genres and voices. His enthusiasm for books is contagious, and he loves fostering engaging discussions that inspire members to think deeply about what they read."
+  }
+]

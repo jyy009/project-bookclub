@@ -1,3 +1,5 @@
 export const Text = ({ text }) => {
-  return <div>{text}</div>;
+  return (
+    <p className="font-worksans text-base md:text-lg lg:text-xl">{text}</p>
+  );
 };
