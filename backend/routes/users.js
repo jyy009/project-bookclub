@@ -26,6 +26,12 @@ router.get("/users", async (req, res) => {
 router.post("/users", async (req, res) => {
   try {
     const { name, username, email, password, address } = req.body;
+    if (!password || password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters long",
+      });
+    }
     const salt = bcrypt.genSaltSync();
     const user = new User({
       name,
@@ -35,11 +41,18 @@ router.post("/users", async (req, res) => {
       address,
     });
     await user.save();
-    res.status(201).json({ userId: user._id, accessToken: user.accessToken });
+    res.status(201).json({
+      success: true,
+      userId: user._id,
+      accessToken: user.accessToken,
+      message: "User created",
+    });
   } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Could not create user", errors: error.message });
+    res.status(400).json({
+      success: false,
+      errors: error.message,
+      message: "Could not create user",
+    });
   }
 });
 

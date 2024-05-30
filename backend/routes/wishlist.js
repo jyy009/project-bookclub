@@ -18,10 +18,11 @@ router.get("/wishlist", async (req, res) => {
 
 router.post("/wishlist", async (req, res) => {
   try {
+    const { title, author, message } = req.body;
     const bookWish = new BookWish({
-      title: req.body.title,
-      author: req.body.author,
-      message: req.body.message,
+      title,
+      author,
+      message,
     });
     await bookWish.save();
     res.status(201).json({
