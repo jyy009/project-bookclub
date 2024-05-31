@@ -4,7 +4,7 @@ import { Text } from "../atoms/Text";
 
 export const FounderCard = ({ founder }) => {
   return (
-    <div className="flex flex-col items-center gap-4 break-normal px-2 w-full ">
+    <div className="flex flex-col items-center box-border">
       <div className="flex justify-center">
         <Image
           link={founder.imageUrl}
@@ -12,11 +12,8 @@ export const FounderCard = ({ founder }) => {
           section={"rounded-full inset-0 object-cover w-52 h-52"}
         />
       </div>
-
       <Headline titleText={founder.name} />
-      <div >
-        <Text text={founder.text} />
-      </div>
+      <Text text={founder.text} />
     </div>
   );
 };

@@ -17,7 +17,7 @@ export const Carousel = ({ children }) => {
   };
 
   return (
-    <div className="overflow-hidden relative p-2 max-w-xs">
+    <div className="overflow-hidden relative">
       <div
         className="flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${current * 100}%)` }}
@@ -31,7 +31,7 @@ export const Carousel = ({ children }) => {
       <div className="absolute inset-0 flex items-center justify-between">
         <button
           onClick={showPrev}
-          className="bg-warmOrange rounded-full p-1 shadow bg-opacity-80 hover:bg-opacity-100"
+          className="bg-warmOrange rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
           <Image
             link={"./public/icons/chevron-left.svg"}
@@ -40,7 +40,7 @@ export const Carousel = ({ children }) => {
         </button>
         <button
           onClick={showNext}
-          className="bg-warmOrange rounded-full p-1 shadow bg-opacity-80 hover:bg-opacity-100"
+          className="bg-warmOrange rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
           <Image
             link={"./public/icons/chevron-right.svg"}
@@ -51,3 +51,10 @@ export const Carousel = ({ children }) => {
     </div>
   );
 };
+
+/*
+
+
+
+
+ */
