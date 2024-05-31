@@ -14,7 +14,7 @@ export const FounderCard = ({ founder }) => {
       </div>
 
       <Headline titleText={founder.name} />
-      <div className="max-w-xs">
+      <div >
         <Text text={founder.text} />
       </div>
     </div>
