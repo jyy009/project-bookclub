@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { LeftArrow } from "../atoms/LeftArrow";
-import { RightArrow } from "../atoms/RightArrow";
+import { Image } from "../atoms/Image";
 
 export const Carousel = ({ children }) => {
   const [current, setCurrent] = useState(0);
@@ -25,7 +24,6 @@ export const Carousel = ({ children }) => {
       >
         {children.map((child, index) => (
           <div key={index} className="flex-shrink-0 w-full">
-            {/* Added wrapper div */}
             {child}
           </div>
         ))}
@@ -35,13 +33,19 @@ export const Carousel = ({ children }) => {
           onClick={showPrev}
           className="bg-warmOrange rounded-full p-1 shadow bg-opacity-80 hover:bg-opacity-100"
         >
-          <LeftArrow />
+          <Image
+            link={"./public/icons/chevron-left.svg"}
+            imgText={"left arrow"}
+          />
         </button>
         <button
           onClick={showNext}
           className="bg-warmOrange rounded-full p-1 shadow bg-opacity-80 hover:bg-opacity-100"
         >
-          <RightArrow />
+          <Image
+            link={"./public/icons/chevron-right.svg"}
+            imgText={"left arrow"}
+          />
         </button>
       </div>
     </div>
