@@ -37,11 +37,13 @@ export const AboutUs = () => {
           ))}
         </div>
         <div className="flex flex-col items-center md:flex-row gap-6 pb-7">
-          <Image
-            link={"../public/images/pexels-karolina-grabowska-5706001.jpg"}
-            imgText={"Envelope"}
-            section={"object-cover max-w-md"}
-          />
+          <div className="max-w-sm">
+            <Image
+              link={"../public/images/pexels-karolina-grabowska-5706001.jpg"}
+              imgText={"Envelope"}
+              section={"object-cover"}
+            />
+          </div>
           <div className="flex flex-col gap-2 items-center">
             <Headline titleText={"Get in touch!"} />
             <Text
