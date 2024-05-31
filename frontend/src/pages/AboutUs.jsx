@@ -1,5 +1,6 @@
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
+import { Carousel } from "../components/Carousel";
 import { FounderCard } from "../components/FounderCard";
 import founders from "../components/founders.json";
 
@@ -14,17 +15,19 @@ export const AboutUs = () => {
   return (
     <section className="bg-cream text-jeans text-justify">
       <div className="mx-4">
-        <div className="flex flex-col gap-4 pt-7 items-center">
+        <div className="flex flex-col gap-4 py-7 items-center">
           <Headline titleText={"Our Story"} />
           <Text text={introParaOne} />
           <Text text={introParaTwo} />
+        </div>
+        <div className="flex justify-center py-4">
           <Headline titleText={"Meet the founders"} />
         </div>
-      </div>
-      <div className="flex overflow-x-auto gap-8 text-left py-7 mx-1">
-        {ourFounders.map((founder, index) => (
-          <FounderCard key={index} founder={founder} />
-        ))}
+        <Carousel>
+          {ourFounders.map((founder, index) => (
+            <FounderCard key={index} founder={founder} />
+          ))}
+        </Carousel>
       </div>
     </section>
   );
