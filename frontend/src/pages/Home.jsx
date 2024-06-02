@@ -6,8 +6,8 @@ import { Footer } from "../components/Footer";
 export const Home = () => {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <RouteList />
       </BrowserRouter>
       <Footer />
