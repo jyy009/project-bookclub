@@ -1,3 +1,3 @@
-export const Image = () => {
-  return <div>Image</div>;
+export const Image = ({ section, link, imgText }) => {
+  return <img src={link} alt={imgText} className={`${section}`} />;
 };

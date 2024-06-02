@@ -1,5 +1,4 @@
 import { Button } from "../atoms/Button";
-import { Headline } from "../atoms/Headline";
 import { TextInput } from "../atoms/TextInput";
 import { useUserStore } from "../store/useUserStore";
 import { useState } from "react";
