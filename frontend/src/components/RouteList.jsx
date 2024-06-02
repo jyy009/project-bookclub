@@ -5,6 +5,7 @@ import { Wishlist } from "../pages/Wishlist";
 import { Register } from "../pages/Register";
 import { NotFound } from "../pages/NotFound";
 import { Landing } from "../pages/Landing";
+import { SignIn } from "./SignIn";
 
 export const RouteList = () => {
   return (
@@ -14,6 +15,7 @@ export const RouteList = () => {
       <Route path="/book-club" element={<BookClub />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/sign-up" element={<Register />} />
+      <Route path="/sign-in" element={<SignIn />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

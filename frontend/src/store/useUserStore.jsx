@@ -18,7 +18,10 @@ export const useUserStore = create((set, get) => ({
   },
 
   accessToken: "",
+  username: "",
   message: "",
+  isLoggedIn: false,
+  // we need to change this isLoggedIn, just did it as a static boolean to try things out.
 
   resetSignUpData: () =>
     set({
@@ -45,8 +48,7 @@ export const useUserStore = create((set, get) => ({
   handleSubmitForm: async (event) => {
     event.preventDefault();
     const { signUpData } = get();
-    const constructedAddress =
-      signUpData.street + signUpData.postCode + signUpData.city;
+    const constructedAddress = signUpData.street + signUpData.postCode + signUpData.city;
 
     if (signUpData.password !== signUpData.verifyingPassword) {
       console.error("Passwords do not match");
@@ -117,11 +119,13 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         accessToken: result.accessToken,
+        username: loginData.username,
       }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().loginData.username;
       localStorage.setItem("token", JSON.stringify(updatedAccessToken));
       localStorage.setItem("username", JSON.stringify(updatedUsername));
+      resetLoginData();
     } catch (error) {
       console.error("Error logging in", error);
     }
