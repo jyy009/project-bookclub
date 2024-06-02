@@ -6,6 +6,8 @@ import { Footer } from "../components/Footer";
 import { useUserStore } from "../store/useUserStore";
 
 export const Home = () => {
+  const username = "Pelle";
+  const isLoggedIn = false;
   // const { fetchLoggedInData } = useUserStore();
 
   // useEffect(() => {
@@ -18,10 +20,11 @@ export const Home = () => {
   //     console.error("Error parsing token:", err);
   //   }
   // }, [fetchLoggedInData]);
+
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header username={username} isLoggedIn={isLoggedIn} />
         <RouteList />
         <Footer />
       </BrowserRouter>
