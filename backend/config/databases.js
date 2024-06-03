@@ -7,8 +7,6 @@ const wishlistMongoUrl =
 
 const usersDB = mongoose.createConnection(usersMongoUrl);
 const wishlistDB = mongoose.createConnection(wishlistMongoUrl);
-
-// mongoose.connect(usersMongoUrl);
 mongoose.Promise = Promise;
 
 export { usersDB, wishlistDB };
