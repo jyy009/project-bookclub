@@ -21,6 +21,21 @@ export const useWishStore = create((set, get) => ({
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [...state.wishlist, newWish] })),
 
+  sortWishlistByDate: (state) => {
+    const { wishlist } = get();
+    const sortedWishlist = wishlist.sort(
+      (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
+    );
+    return { ...state, wishlist: sortedWishlist };
+  },
+
+  // setWishlist: (newWish) => {
+
+  //   set((state) => {
+  //     const updatedWishlist = [...state.wishlist, newWish];
+  //   return {...state, wishlist: updatedWishlist.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)) };
+  // })},
+
   handleWishlistChange: (field, value) => {
     set((state) => ({
       wishlistData: {
@@ -32,7 +47,7 @@ export const useWishStore = create((set, get) => ({
 
   handleWishlistSubmit: async (event) => {
     event.preventDefault();
-    const { wishlistData, wishlist, setWishlist } = get();
+    const { wishlistData, wishlist, setWishlist, sortWishlistByDate } = get();
 
     try {
       const response = await fetch("http://localhost:8080/wishlist", {
@@ -50,7 +65,8 @@ export const useWishStore = create((set, get) => ({
 
       const result = await response.json();
       console.log(result);
-      setWishlist(result.response);
+      const sortedResult = sortWishlistByDate(result.response);
+      setWishlist(sortedResult);
       console.log("posted to wishlist;", get().wishlist);
     } catch (error) {
       console.error("Error posting wish:", error);
@@ -67,7 +83,7 @@ export const useWishStore = create((set, get) => ({
   },
 
   fetchWishlist: async () => {
-    const { setWishlist } = get();
+    // const { setWishlist, wishlist } = get();
     try {
       const response = await fetch("http://localhost:8080/wishlist");
 
@@ -76,7 +92,9 @@ export const useWishStore = create((set, get) => ({
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
+      set({ wishlist: data });
+      // console.log("fetched from wishlist;", get().wishlist);
     } catch (error) {
       console.error("Error posting wish:", error);
       return false;
