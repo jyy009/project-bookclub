@@ -18,7 +18,7 @@ export const useUserStore = create((set, get) => ({
   },
 
   accessToken: "",
-  message: "",
+  isLoggedIn: false,
 
   resetSignUpData: () =>
     set({
@@ -129,7 +129,7 @@ export const useUserStore = create((set, get) => ({
 
   fetchLoggedInData: async (accessToken) => {
     try {
-      const response = await fetch("http://localhost:8080/logged-in", {
+      const response = await fetch("http://localhost:8080/membership", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export const useUserStore = create((set, get) => ({
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
-      set((state) => ({ ...state, message: result.message }));
+      set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
