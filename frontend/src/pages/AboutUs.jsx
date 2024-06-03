@@ -46,7 +46,7 @@ export const AboutUs = () => {
               section={"object-cover"}
             />
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center md:items-start md:self-start">
             <Headline titleText={"Get in touch!"} />
             <Text text={contactUs} />
           </div>

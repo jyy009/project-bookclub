@@ -58,7 +58,7 @@ router.post("/users", async (req, res) => {
 
 router.get("/users/membership", authenticateUser);
 router.get("/users/membership", (req, res) => {
-  res.json({ message: "Success: user found" });
+  res.json({ isLoggedIn: true });
 });
 
 router.post("/users/sessions", async (req, res) => {

@@ -48,6 +48,21 @@ export const Carousel = ({ children }) => {
           />
         </button>
       </div>
+      <div className="bottom-0 py-4 flex justify-center gap-3 w-full">
+        {children.map((child, index) => {
+          return (
+            <div
+              // onClick={() => {
+              //   setCurrent(index);
+              // }}
+              key={index}
+              className={`rounded-full w-4 h-4 cursor-pointer  ${
+                index == current ? "bg-warmOrange" : "bg-jeans"
+              }`}
+            ></div>
+          );
+        })}
+      </div>
     </div>
   );
 };
