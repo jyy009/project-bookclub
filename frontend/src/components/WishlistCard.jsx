@@ -4,8 +4,7 @@ import { Heart } from "../components/Heart";
 import { useEffect } from "react";
 
 export const WishlistCard = () => {
-  const { wishlist, fetchWishlist, handleWishlistSubmit, sortWishlistByDate } =
-    useWishStore();
+  const { wishlist, fetchWishlist } = useWishStore();
 
   // const sortWishlistByDate = (wishlist) => {
   //   return wishlist.sort(
@@ -20,14 +19,15 @@ export const WishlistCard = () => {
   }, []);
 
   return (
-    <>
+    <div className="">
       {wishlist.map((wish) => (
-        <div key={wish._id}>
+        <div key={wish._id} className="border border-black border-solid">
           <Text text={wish.title} />
           <Text text={wish.author} />
           <Text text={wish.message} />
+          <Heart emoji="❤️" label="heart" onClick={null} likes={wish.hearts} />
         </div>
       ))}
-    </>
+    </div>
   );
 };
