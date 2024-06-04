@@ -39,4 +39,32 @@ router.post("/wishlist", async (req, res) => {
   }
 });
 
+router.post("/wishlist/:wishId/like", async (req, res) => {
+  const { wishId } = req.params;
+  try {
+    const wish = await BookWish.findById(wishId);
+
+    if (!wish) {
+      return res.status(404).json({
+        success: false,
+        message: "Book not found",
+      });
+    }
+
+    const incrementLike = await BookWish.findByIdAndUpdate(
+      wishId,
+      { $inc: { likes: 1 } },
+      { new: true }
+    );
+
+    res.json({ success: true, likes: incrementLike.likes });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Could not like book",
+    });
+  }
+});
+
 export default router;
