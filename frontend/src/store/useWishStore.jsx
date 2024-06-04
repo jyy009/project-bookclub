@@ -74,7 +74,7 @@ export const useWishStore = create((set, get) => ({
           message: "",
         },
       });
-      // fetchWishlist()
+      fetchWishlist()
 
     }
   },
