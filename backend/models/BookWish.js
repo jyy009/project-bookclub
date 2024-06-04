@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
-import { wishlistDB } from "../config/databases.js";
+import mongoose from "../config/databases.js";
+
+const { Schema, model } = mongoose;
 
 // Schema
-const bookWishSchema = new mongoose.Schema({
+const bookWishSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -25,9 +26,13 @@ const bookWishSchema = new mongoose.Schema({
     type: Date,
     default: () => new Date(),
   },
+  user: {
+    type: String,
+    required: true,
+  },
 });
 
 // Model
-const BookWish = wishlistDB.model("BookWish", bookWishSchema);
+const BookWish = model("BookWish", bookWishSchema);
 
 export default BookWish;
