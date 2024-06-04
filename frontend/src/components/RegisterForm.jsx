@@ -11,6 +11,7 @@ export const RegisterForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
+    console.log(event);
 
     const success = await handleSubmitForm(event);
     if (success) {
@@ -59,9 +60,7 @@ export const RegisterForm = () => {
               inputName={"postcode"}
               placeholder={"xxx xx"}
               value={signUpData.postCode.toString()}
-              onChange={(event) =>
-                handleSignUpChange("postCode", event.target.value)
-              }
+              onChange={(event) => handleSignUpChange("postCode", event.target.value)}
             />
           </div>
 
@@ -72,9 +71,7 @@ export const RegisterForm = () => {
               inputName={"city"}
               placeholder={"Type your city"}
               value={signUpData.city}
-              onChange={(event) =>
-                handleSignUpChange("city", event.target.value)
-              }
+              onChange={(event) => handleSignUpChange("city", event.target.value)}
             />
           </div>
         </div>
@@ -101,9 +98,7 @@ export const RegisterForm = () => {
         inputName={"verifyingPassword"}
         placeholder={"Re-enter your password"}
         value={signUpData.verifyingPassword}
-        onChange={(event) =>
-          handleSignUpChange("verifyingPassword", event.target.value)
-        }
+        onChange={(event) => handleSignUpChange("verifyingPassword", event.target.value)}
       />
       {passwordError && <p>Passwords do not match</p>}
       <Button type={"submit"} btnText={"Sign up"} disabled={isLoading} />

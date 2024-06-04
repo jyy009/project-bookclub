@@ -18,14 +18,8 @@ export const useUserStore = create((set, get) => ({
   },
 
   accessToken: "",
-<<<<<<< HEAD
   username: "",
-  message: "",
   isLoggedIn: false,
-  // we need to change this isLoggedIn, just did it as a static boolean to try things out.
-=======
-  isLoggedIn: false,
->>>>>>> main
 
   resetSignUpData: () =>
     set({
@@ -41,17 +35,32 @@ export const useUserStore = create((set, get) => ({
       },
     }),
 
-  resetLoginData: () =>
+  resetLoginData: () => {
     set({
       loginData: {
         username: "",
         password: "",
       },
-    }),
+    });
+  },
+
+  // removes accesstoken and username from localstorage and resets/empties the data in zustand when the user sign out.
+  signOut: () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    set({
+      accessToken: "",
+      username: "",
+      isLoggedIn: false,
+    });
+    resetLoginData();
+  },
 
   handleSubmitForm: async (event) => {
     event.preventDefault();
+
     const { signUpData } = get();
+    console.log(signUpData);
     const constructedAddress = signUpData.street + signUpData.postCode + signUpData.city;
 
     if (signUpData.password !== signUpData.verifyingPassword) {
@@ -70,6 +79,7 @@ export const useUserStore = create((set, get) => ({
         }),
         headers: { "Content-Type": "application/json" },
       });
+      console.log(response.json());
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -108,7 +118,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
     const { loginData } = get();
     try {
-      const response = await fetch("http://localhost:8080/sessions", {
+      const response = await fetch("http://localhost:8080/users/sessions", {
         method: "POST",
         body: JSON.stringify({
           username: loginData.username,
@@ -135,9 +145,9 @@ export const useUserStore = create((set, get) => ({
     }
   },
 
-  fetchLoggedInData: async (accessToken) => {
+  validateLoggedInData: async (accessToken) => {
     try {
-      const response = await fetch("http://localhost:8080/membership", {
+      const response = await fetch("http://localhost:8080/users/membership", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

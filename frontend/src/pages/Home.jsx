@@ -6,20 +6,18 @@ import { Footer } from "../components/Footer";
 import { useUserStore } from "../store/useUserStore";
 
 export const Home = () => {
-  const username = "Pelle";
-  const isLoggedIn = false;
+  const { username, isLoggedIn, validateLoggedInData } = useUserStore();
   // const { fetchLoggedInData } = useUserStore();
 
   // useEffect(() => {
-  //   const storedAccessToken = localStorage.getItem("token");
   //   try {
-  //     const parsedToken = JSON.parse(storedAccessToken);
-  //     fetchLoggedInData(parsedToken);
+  //     const parsedToken = localStorage.getItem("token");
+  //     console.log(parsedToken);
+  //     validateLoggedInData(parsedToken);
   //   } catch (err) {
-  //     setError(true);
   //     console.error("Error parsing token:", err);
   //   }
-  // }, [fetchLoggedInData]);
+  // }, [validateLoggedInData]);
 
   return (
     <>
