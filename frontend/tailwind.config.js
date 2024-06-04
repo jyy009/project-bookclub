@@ -13,6 +13,9 @@ export default {
         secondary: "#F5F5F5", // background
         tertiary: "#D33F2A", // buttons
       },
+      height: {
+        largeImg: "500px",
+      },
     },
     fontFamily: {
       josefinsans: ["Josefin Sans", "sans-serif"], // Headers, Buttons
