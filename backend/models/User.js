@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
-import { usersDB } from "../config/databases.js";
 import bcrypt from "bcrypt";
+import mongoose from "../config/databases.js";
+
+const { Schema, model } = mongoose;
 
 // Schema
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -33,6 +34,6 @@ const userSchema = new mongoose.Schema({
 });
 
 // Model
-const User = usersDB.model("User", userSchema);
+const User = model("User", userSchema);
 
 export default User;
