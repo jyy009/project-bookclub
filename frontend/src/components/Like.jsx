@@ -1,4 +1,4 @@
-export const Heart = ({ emoji, label, onClick, likes, time }) => {
+export const Like = ({ emoji, label, onClick, likes, time }) => {
   return (
     <div
       className="heart-container"

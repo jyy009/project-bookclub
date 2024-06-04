@@ -9,7 +9,6 @@ export const useWishStore = create((set, get) => ({
 
   wishlist: [],
 
-
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [...state.wishlist, newWish] })),
 
@@ -19,16 +18,10 @@ export const useWishStore = create((set, get) => ({
       (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
     );
     // return { ...state, wishlist: sortedWishlist };
-    set((state) => ({...state, wishlist: sortedWishlist }));
-
+    set((state) => ({ ...state, wishlist: sortedWishlist }));
   },
 
-  // setWishlist: (newWish) => {
-
-  //   set((state) => {
-  //     const updatedWishlist = [...state.wishlist, newWish];
-  //   return {...state, wishlist: updatedWishlist.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)) };
-  // })},
+ 
 
   handleWishlistChange: (field, value) => {
     set((state) => ({
@@ -39,10 +32,34 @@ export const useWishStore = create((set, get) => ({
     }));
   },
 
+  handleLike: async (event, wishId) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(
+        "http://localhost:8080/wishlist/:wishId/like",
+        {
+          method: "POST",
+          body: JSON.stringify({}),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = response.json();
+      setWishlist(result.likes);
+    } catch (error) {
+      console.error("Error posting wish:", error);
+      return false;
+    }
+  },
+
   handleWishlistSubmit: async (event) => {
     event.preventDefault();
-    const { wishlistData, setWishlist, fetchWishlist
-    } = get();
+    const { wishlistData, setWishlist, fetchWishlist } = get();
 
     try {
       const response = await fetch("http://localhost:8080/wishlist", {
@@ -60,7 +77,7 @@ export const useWishStore = create((set, get) => ({
 
       const result = await response.json();
       console.log("post to API successful:", result);
-      // const sortedResult = sortWishlistByDate(result.response);
+  
       setWishlist(result.response);
       console.log("post set to wishlist;", get().wishlist);
     } catch (error) {
@@ -74,8 +91,7 @@ export const useWishStore = create((set, get) => ({
           message: "",
         },
       });
-      fetchWishlist()
-
+      fetchWishlist();
     }
   },
 

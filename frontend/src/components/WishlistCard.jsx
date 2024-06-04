@@ -1,18 +1,12 @@
 import { useWishStore } from "../store/useWishStore";
 import { Text } from "../atoms/Text";
-import { Heart } from "../components/Heart";
+import { Like } from "./Like";
 import { useEffect } from "react";
 
 export const WishlistCard = () => {
-  const { wishlist, fetchWishlist } = useWishStore();
+  const { wishlist, fetchWishlist, handleLike } = useWishStore();
 
-  // const sortWishlistByDate = (wishlist) => {
-  //   return wishlist.sort(
-  //     (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
-  //   );
-  // };
 
-  // const sortedWishlist = sortWishlistByDate(wishlist);
 
   useEffect(() => {
     fetchWishlist();
@@ -25,7 +19,12 @@ export const WishlistCard = () => {
           <Text text={wish.title} />
           <Text text={wish.author} />
           <Text text={wish.message} />
-          <Heart emoji="❤️" label="heart" onClick={null} likes={wish.hearts} />
+          <Like 
+            emoji="❤️" 
+            label="heart" 
+            onClick={(event) => handleLike(event, wish._id)} 
+            likes={wish.likes} 
+          />
         </div>
       ))}
     </div>
