@@ -22,11 +22,11 @@ export const Home = () => {
         validateLoggedInData(accessToken);
         setData("username", localStorage.getItem("username"));
         setData("isLoggedIn", localStorage.getItem("isLoggedIn"));
-        setLoading(false);
       } catch (error) {
         console.error("Error parsing token:", error);
       }
     }
+    setLoading(false);
   }, [validateLoggedInData]);
 
   // This shows an empty page until the validation is done to prevent to show unwanted pages for users that are already signed in.
