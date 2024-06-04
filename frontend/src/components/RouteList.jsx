@@ -6,8 +6,10 @@ import { Register } from "../pages/Register";
 import { NotFound } from "../pages/NotFound";
 import { Landing } from "../pages/Landing";
 import { SignIn } from "./SignIn";
+import { useUserStore } from "../store/useUserStore";
 
 export const RouteList = () => {
+  const { isLoggedIn } = useUserStore();
   return (
     <Routes>
       <Route path="/" element={<Landing />} />

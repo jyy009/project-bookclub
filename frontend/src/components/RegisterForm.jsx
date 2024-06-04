@@ -15,7 +15,7 @@ export const RegisterForm = () => {
 
     const success = await handleSubmitForm(event);
     if (success) {
-      window.location.href = "/logged-in";
+      window.location.href = "/";
     } else {
       console.error("Error logging in");
       setPasswordError(true);

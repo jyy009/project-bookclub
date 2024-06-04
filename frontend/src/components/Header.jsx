@@ -2,8 +2,10 @@ import { Navbar } from "./Navbar";
 import { Link } from "react-router-dom";
 import MobileLogo from "/icons/OMC.png";
 import TabletLogo from "/icons/OMC-MobileLogo2.png";
+import { useUserStore } from "../store/useUserStore";
 
-export const Header = ({ username, isLoggedIn }) => {
+export const Header = () => {
+  const { isLoggedIn, username } = useUserStore();
   return (
     <>
       <header className="bg-cream px-2 py-3 sticky top-0 sm:flex sm:hidden">
@@ -14,7 +16,7 @@ export const Header = ({ username, isLoggedIn }) => {
             </Link>
           </div>
           <div>
-            <Navbar isLoggedIn={isLoggedIn} />
+            <Navbar />
           </div>
         </div>
         {isLoggedIn ? (
@@ -39,7 +41,7 @@ export const Header = ({ username, isLoggedIn }) => {
           )}
         </div>
         <div className="mt-6">
-          <Navbar isLoggedIn={isLoggedIn} />
+          <Navbar />
         </div>
       </header>
     </>

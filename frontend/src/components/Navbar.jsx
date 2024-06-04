@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useUserStore } from "../store/useUserStore";
 
-export const Navbar = ({ isLoggedIn }) => {
+export const Navbar = () => {
+  const { isLoggedIn } = useUserStore();
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {

@@ -1,10 +1,10 @@
 import { Button } from "../atoms/Button";
 import { TextInput } from "../atoms/TextInput";
 import { useUserStore } from "../store/useUserStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const SignIn = () => {
-  const { loginData, handleSubmitLogin, handleLoginChange, resetLoginData } = useUserStore();
+  const { loginData, handleSubmitLogin, handleLoginChange } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
@@ -13,8 +13,8 @@ export const SignIn = () => {
 
     try {
       await handleSubmitLogin(event);
-      // Redirect to /logged-in after successful login
-      window.location.href = "/logged-in";
+      // Redirect to landing-page after successful login
+      window.location.href = "/";
     } catch (error) {
       console.error("Error logging in", error);
       setIsLoading(false);

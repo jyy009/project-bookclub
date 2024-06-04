@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export const useUserStore = create((set, get) => ({
+  // TODO Breakout this to a useEffect in the sign-up component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   signUpData: {
     name: "",
     email: "",
@@ -12,6 +13,7 @@ export const useUserStore = create((set, get) => ({
     verifyingPassword: "",
   },
 
+  // TODO Breakout this to a useEffect in the sign-in component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   loginData: {
     username: "",
     password: "",
@@ -20,6 +22,11 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
+
+  // TODO create function that takes key and value as input and updates keys here in zustand.
+  setData: (key, value) => {
+    set({ [key]: value });
+  },
 
   resetSignUpData: () =>
     set({
@@ -51,16 +58,14 @@ export const useUserStore = create((set, get) => ({
     set({
       accessToken: "",
       username: "",
-      isLoggedIn: false,
+      isLoggedIn: true,
     });
-    resetLoginData();
   },
 
   handleSubmitForm: async (event) => {
     event.preventDefault();
 
     const { signUpData } = get();
-    console.log(signUpData);
     const constructedAddress = signUpData.street + signUpData.postCode + signUpData.city;
 
     if (signUpData.password !== signUpData.verifyingPassword) {
@@ -79,9 +84,9 @@ export const useUserStore = create((set, get) => ({
         }),
         headers: { "Content-Type": "application/json" },
       });
-      console.log(response.json());
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorResponse = await response.json();
+        console.error("Backend error:", errorResponse.message || errorResponse);
       }
       const result = await response.json();
       set((state) => ({ ...state, accessToken: result.accessToken }));
@@ -137,9 +142,14 @@ export const useUserStore = create((set, get) => ({
       }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().loginData.username;
-      localStorage.setItem("token", JSON.stringify(updatedAccessToken));
-      localStorage.setItem("username", JSON.stringify(updatedUsername));
-      resetLoginData();
+      localStorage.setItem("token", updatedAccessToken);
+      localStorage.setItem("username", updatedUsername);
+      set({
+        loginData: {
+          username: "",
+          password: "",
+        },
+      });
     } catch (error) {
       console.error("Error logging in", error);
     }
@@ -158,6 +168,7 @@ export const useUserStore = create((set, get) => ({
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
+      localStorage.setItem("isLoggedIn", result.isLoggedIn);
       set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
