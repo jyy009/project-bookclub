@@ -18,11 +18,13 @@ router.get("/wishlist", async (req, res) => {
 
 router.post("/wishlist", async (req, res) => {
   try {
-    const { title, author, message } = req.body;
+    const { title, author, message, user } = req.body;
+
     const bookWish = new BookWish({
       title,
       author,
       message,
+      user,
     });
     await bookWish.save();
     res.status(201).json({
@@ -33,7 +35,7 @@ router.post("/wishlist", async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      response: error,
+      response: error.message,
       message: "Could not post to wishlist",
     });
   }

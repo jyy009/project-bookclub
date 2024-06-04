@@ -31,7 +31,7 @@ export const Carousel = ({ children }) => {
       <div className="absolute inset-0 flex items-center justify-between">
         <button
           onClick={showPrev}
-          className="bg-warmOrange rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
+          className="bg-primary rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
           <Image
             link={"./public/icons/chevron-left.svg"}
@@ -40,7 +40,7 @@ export const Carousel = ({ children }) => {
         </button>
         <button
           onClick={showNext}
-          className="bg-warmOrange rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
+          className="bg-primary rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
           <Image
             link={"./public/icons/chevron-right.svg"}
@@ -52,12 +52,9 @@ export const Carousel = ({ children }) => {
         {children.map((child, index) => {
           return (
             <div
-              // onClick={() => {
-              //   setCurrent(index);
-              // }}
               key={index}
               className={`rounded-full w-4 h-4 cursor-pointer  ${
-                index == current ? "bg-warmOrange" : "bg-jeans"
+                index == current ? "bg-tertiary" : "bg-primary"
               }`}
             ></div>
           );
