@@ -9,6 +9,9 @@ export default {
         heroSand: "#F4F0EC", // hero section background
         warmOrange: "#EEAD59", // our orange
         plum: "#683651",
+        primary: "#8DACB1", // footer, nav-links
+        secondary: "#F5F5F5", // background
+        tertiary: "#D33F2A", // buttons
       },
     },
     fontFamily: {
