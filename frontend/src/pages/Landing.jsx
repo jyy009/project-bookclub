@@ -3,12 +3,11 @@ import { Image } from "../atoms/Image";
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
 // import { Button } from "../atoms/Button"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export const Landing = () => {
   return (
     <div>
-      <Header />
       <div>
         <Image
           link={"/images/pexels-merve-bayar-158520570-10863551.jpg"}
@@ -24,7 +23,7 @@ export const Landing = () => {
           }
         />
         <Link to="/sign-up">Sign Up</Link>
-        </div>
+      </div>
     </div>
   );
 };

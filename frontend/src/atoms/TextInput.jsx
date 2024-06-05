@@ -1,14 +1,7 @@
-export const TextInput = ({
-  inputType,
-  inputName,
-  placeholder,
-  label,
-  value,
-  onChange,
-}) => {
+export const TextInput = ({ inputType, inputName, placeholder, label, value, onChange, labelStyle, inputStyle }) => {
   return (
     <>
-      <label>
+      <label className={labelStyle}>
         {label}
         <input
           type={inputType}
@@ -17,6 +10,7 @@ export const TextInput = ({
           required
           value={value}
           onChange={onChange}
+          className={inputStyle}
         />
       </label>
     </>
