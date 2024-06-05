@@ -14,7 +14,9 @@ export const InfoCard = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center md:${rowDirection} md:mx-8 lg:mx-32 xl:mx-56 md:gap-6 lg:gap-8`}
+      className={`flex flex-col items-center md:${
+        rowDirection === "row-reverse" ? "flex-row-reverse" : "flex-row"
+      } md:mx-8 lg:mx-32 xl:mx-56 md:gap-6 lg:gap-8`}
     >
       <div className="w-full md:w-1/2">
         <Image
@@ -26,10 +28,15 @@ export const InfoCard = ({
       <div className="flex flex-col mx-4 items-center md:mx-0 md:w-1/2 md:self-start md:items-start">
         <Headline titleText={titleText} />
         <Text text={text} />
-        <div className="self-center">
+        <div className="self-center py-4 md:pt-16 lg:py-4">
           {button && (
             <Link to={"/sign-up"}>
-              <Button btnText={"Sign Up"} />
+              <Button
+                btnText={"Sign Up"}
+                buttonStyle={
+                  "bg-tertiary px-12 py-2 text-secondary font-josefinsans rounded-md"
+                }
+              />
             </Link>
           )}
         </div>

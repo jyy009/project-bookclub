@@ -1,10 +1,6 @@
-export const Button = ({ btnText, type, onClick }) => {
+export const Button = ({ btnText, type, onClick, buttonStyle }) => {
   return (
-    <button
-      className="bg-tertiary px-12 py-2 text-secondary font-josefinsans rounded-md"
-      onClick={onClick}
-      type={type}
-    >
+    <button onClick={onClick} type={type} className={buttonStyle}>
       {btnText}
     </button>
   );
