@@ -42,16 +42,18 @@ export const Home = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/book-club" element={<BookClub />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+
           {isLoggedIn ? (
             <>
               <Route path="/sign-up" element={<Navigate to="/" />} />
               <Route path="/sign-in" element={<Navigate to="/" />} />
+              <Route path="/wishlist" element={<Wishlist />} />
             </>
           ) : (
             <>
               <Route path="/sign-up" element={<Register />} />
               <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/wishlist" element={<Navigate to="/" />} />
             </>
           )}
           <Route path="/*" element={<NotFound />} />
