@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
 
 export const Navbar = () => {
-  const { isLoggedIn } = useUserStore();
+  const { isLoggedIn, signOut } = useUserStore();
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -92,9 +92,12 @@ export const Navbar = () => {
               Wishlist
             </NavLink>
             <NavLink
-              to="/sign-out"
+              to="/"
               className={"cursor-pointer [&.active]:underline underline-offset-4"}
-              onClick={toggleMenu}>
+              onClick={() => {
+                toggleMenu;
+                signOut();
+              }}>
               Sign out
             </NavLink>
           </>
