@@ -5,10 +5,21 @@ export const useWishStore = create((set, get) => ({
     title: "",
     author: "",
     message: "",
-    username: "",
+    user: "",
   },
 
   wishlist: [],
+
+  isChecked: false,
+
+  setIsChecked: () => {
+    set((state) => ({ isChecked: !state.isChecked }))
+    console.log("anonymous status", get().isChecked)
+},
+// setIsChecked: (newValue) => {
+//   set({ isChecked: newValue })
+//   console.log("anonymous status", get().isChecked)
+// },
 
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
@@ -80,16 +91,20 @@ export const useWishStore = create((set, get) => ({
 
   handleWishlistSubmit: async (event) => {
     event.preventDefault();
-    const { wishlistData, setWishlist } = get();
+    const { wishlistData, setWishlist, isChecked } = get();
 
+    const formData = {
+      title: wishlistData.title,
+          author: wishlistData.author,
+          message: wishlistData.message,
+          user: isChecked
+    }
     try {
       const response = await fetch("http://localhost:8080/wishlist", {
         method: "POST",
-        body: JSON.stringify({
-          title: wishlistData.title,
-          author: wishlistData.author,
-          message: wishlistData.message,
-        }),
+        body: JSON.stringify(
+          formData
+        ),
         headers: { "Content-Type": "application/json" },
       });
       if (!response.ok) {
@@ -111,6 +126,7 @@ export const useWishStore = create((set, get) => ({
           title: "",
           author: "",
           message: "",
+          user: false
         },
       });
     }

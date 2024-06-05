@@ -17,6 +17,11 @@ export const WishlistCard = () => {
           <Text text={wish.title} />
           <Text text={wish.author} />
           <Text text={wish.message} />
+
+          
+            <Text text={`submitted by ${wish.user}`}/>
+        
+          <Text text={`submitted by ${wish.user}`}/>
           <Like
             emoji="❤️"
             label="heart"
