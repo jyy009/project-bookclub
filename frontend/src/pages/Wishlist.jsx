@@ -10,7 +10,7 @@ export const Wishlist = () => {
 
   return (
     <>
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? ( */}
         <div>
           <Headline titleText={"Book Wishlist"} />
           <Text text={"What book would you like to read next?"} />
@@ -18,10 +18,12 @@ export const Wishlist = () => {
           <WishlistForm />
           <WishlistCard />
         </div>
-      ) : (
+      ) 
+      
+      {/* : (
         <Navigate replace to="/sign-up" />
       )}
-      ;
+      ; */}
     </>
   );
 };

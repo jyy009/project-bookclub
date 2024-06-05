@@ -1,10 +1,13 @@
 import { useWishStore } from "../store/useWishStore";
+import { useUserStore } from "../store/useUserStore";
 import { Text } from "../atoms/Text";
 import { Like } from "./Like";
 import { useEffect } from "react";
 
 export const WishlistCard = () => {
-  const { wishlist, fetchWishlist, handleLike, likesData } = useWishStore();
+  const { wishlist, fetchWishlist, handleLike } = useWishStore();
+
+  const username = useUserStore((state) => state.username);
 
   useEffect(() => {
     fetchWishlist();
@@ -18,10 +21,9 @@ export const WishlistCard = () => {
           <Text text={wish.author} />
           <Text text={wish.message} />
 
-          
-            <Text text={`submitted by ${wish.user}`}/>
-        
-          <Text text={`submitted by ${wish.user}`}/>
+          {/* <Text text={`submitted by ${wish.user}`}/> */}
+
+          <Text text={wish.user ? "anonymous" : username} />
           <Like
             emoji="❤️"
             label="heart"

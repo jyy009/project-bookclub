@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { useUserStore } from "../store/useUserStore"
 
 export const useWishStore = create((set, get) => ({
   wishlistData: {
@@ -12,14 +13,11 @@ export const useWishStore = create((set, get) => ({
 
   isChecked: false,
 
+
   setIsChecked: () => {
     set((state) => ({ isChecked: !state.isChecked }))
     console.log("anonymous status", get().isChecked)
 },
-// setIsChecked: (newValue) => {
-//   set({ isChecked: newValue })
-//   console.log("anonymous status", get().isChecked)
-// },
 
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
@@ -115,6 +113,7 @@ export const useWishStore = create((set, get) => ({
       const newWish = result.response
       console.log("post to API successful:", result);
       console.log("before post set to wishlist;", get().wishlist);
+
       setWishlist(newWish);
       console.log("post set to wishlist;", get().wishlist);
     } catch (error) {

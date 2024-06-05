@@ -18,6 +18,7 @@ export const useUserStore = create((set, get) => ({
   },
 
   accessToken: "",
+  username: "",
   isLoggedIn: false,
 
   resetSignUpData: () =>
@@ -73,6 +74,9 @@ export const useUserStore = create((set, get) => ({
       const updatedUsername = get().signUpData.username;
       localStorage.setItem("token", JSON.stringify(updatedAccessToken));
       localStorage.setItem("username", JSON.stringify(updatedUsername));
+
+      // set({ username: updatedUsername })
+
       return true;
     } catch (error) {
       console.error("Error adding new user:", error);
@@ -122,6 +126,8 @@ export const useUserStore = create((set, get) => ({
       const updatedUsername = get().loginData.username;
       localStorage.setItem("token", JSON.stringify(updatedAccessToken));
       localStorage.setItem("username", JSON.stringify(updatedUsername));
+
+      // set({ username: updatedUsername })
     } catch (error) {
       console.error("Error logging in", error);
     }
