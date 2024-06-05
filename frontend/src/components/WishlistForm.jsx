@@ -45,8 +45,6 @@ export const WishlistForm = () => {
         />
         <Button type={"submit"} btnText={"Submit"} />
       </form>
-
-      <WishlistCard />
     </div>
   );
 };

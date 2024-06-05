@@ -4,9 +4,7 @@ import { Like } from "./Like";
 import { useEffect } from "react";
 
 export const WishlistCard = () => {
-  const { wishlist, fetchWishlist, handleLike } = useWishStore();
-
-
+  const { wishlist, fetchWishlist, handleLike, likesData } = useWishStore();
 
   useEffect(() => {
     fetchWishlist();
@@ -19,11 +17,11 @@ export const WishlistCard = () => {
           <Text text={wish.title} />
           <Text text={wish.author} />
           <Text text={wish.message} />
-          <Like 
-            emoji="❤️" 
-            label="heart" 
-            onClick={(event) => handleLike(event, wish._id)} 
-            likes={wish.likes} 
+          <Like
+            emoji="❤️"
+            label="heart"
+            onClick={(event) => handleLike(event, wish._id)}
+            likes={wish.likes}
           />
         </div>
       ))}
