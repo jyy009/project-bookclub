@@ -121,6 +121,7 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         accessToken: result.accessToken,
+        username: loginData.username,
       }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().loginData.username;

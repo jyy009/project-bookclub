@@ -2,12 +2,14 @@ import { useWishStore } from "../store/useWishStore";
 import { useUserStore } from "../store/useUserStore";
 import { Text } from "../atoms/Text";
 import { Like } from "./Like";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export const WishlistCard = () => {
   const { wishlist, fetchWishlist, handleLike } = useWishStore();
 
-  const username = useUserStore((state) => state.username);
+  const username = localStorage.getItem("username");
+
+  // const username = useUserStore((state) => state.username);
 
   useEffect(() => {
     fetchWishlist();

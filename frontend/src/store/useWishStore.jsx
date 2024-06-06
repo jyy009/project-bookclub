@@ -77,7 +77,7 @@ export const useWishStore = create((set, get) => ({
 
       const data = await response.json();
       console.log(data);
-            console.log("wishlist before setting;", get().wishlist);
+    
 
       set({ wishlist: data });
       console.log("wishlist after setting;", get().wishlist);
@@ -93,10 +93,10 @@ export const useWishStore = create((set, get) => ({
 
     const formData = {
       title: wishlistData.title,
-          author: wishlistData.author,
-          message: wishlistData.message,
-          user: isChecked
-    }
+      author: wishlistData.author,
+      message: wishlistData.message,
+      user: isChecked
+  }
     try {
       const response = await fetch("http://localhost:8080/wishlist", {
         method: "POST",
