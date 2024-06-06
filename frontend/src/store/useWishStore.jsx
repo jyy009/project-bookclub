@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { useUserStore } from "../store/useUserStore"
 
 export const useWishStore = create((set, get) => ({
   wishlistData: {
@@ -42,7 +41,7 @@ export const useWishStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `http://localhost:8080/wishlist/${wishId}/like`,
+        `https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
         {
           method: "POST",
           body: JSON.stringify({}),
@@ -69,7 +68,7 @@ export const useWishStore = create((set, get) => ({
 
   fetchWishlist: async () => {
     try {
-      const response = await fetch("http://localhost:8080/wishlist");
+      const response = await fetch("https://project-final-rvhj.onrender.com/wishlist");
 
       if (!response.ok) {
         throw new Error("Network reponse was not ok ");
@@ -98,7 +97,7 @@ export const useWishStore = create((set, get) => ({
       user: isChecked
   }
     try {
-      const response = await fetch("http://localhost:8080/wishlist", {
+      const response = await fetch("https://project-final-rvhj.onrender.com/wishlist", {
         method: "POST",
         body: JSON.stringify(
           formData

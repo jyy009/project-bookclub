@@ -14,9 +14,7 @@ export const InfoCard = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center md:${
-        rowDirection === "row-reverse" ? "flex-row-reverse" : "flex-row"
-      } md:mx-8 lg:mx-32 xl:mx-56 md:gap-6 lg:gap-8`}
+      className={`flex flex-col items-center md:${rowDirection} md:mx-8 lg:mx-32 xl:mx-56 md:gap-6 lg:gap-8`}
     >
       <div className="w-full md:w-1/2">
         <Image

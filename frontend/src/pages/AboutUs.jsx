@@ -41,7 +41,7 @@ export const AboutUs = () => {
         <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10">
           <div className="max-w-md">
             <Image
-              link={"../public/images/letter.png"}
+              link={"../public/images/letter.svg"}
               imgText={"Envelope"}
               section={"object-cover"}
             />

@@ -8,7 +8,7 @@ export const Header = () => {
   const { isLoggedIn, username } = useUserStore();
   return (
     <>
-      <header className="bg-cream px-2 py-3 sticky top-0 sm:flex sm:hidden">
+      <header className="bg-cream px-2 py-3 sticky top-0 sm:hidden">
         <div className="flex justify-between sm:flex-col">
           <div className="flex items-center sm:items-start">
             <Link to="/" className="cursor-pointer">
