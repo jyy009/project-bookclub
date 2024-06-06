@@ -1,3 +1,5 @@
+import plugin from "tailwindcss";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -13,11 +15,18 @@ export default {
         secondary: "#F5F5F5", // background
         tertiary: "#D33F2A", // buttons
       },
+      height: {
+        largeImg: "500px",
+      },
     },
     fontFamily: {
       josefinsans: ["Josefin Sans", "sans-serif"], // Headers, Buttons
       worksans: ["Work Sans", "sans-serif"], // Text
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("current", "&.active");
+    }),
+  ],
 };

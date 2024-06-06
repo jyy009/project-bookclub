@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export const useUserStore = create((set, get) => ({
+  // TODO Breakout this to a useEffect in the sign-up component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   signUpData: {
     name: "",
     email: "",
@@ -12,6 +13,7 @@ export const useUserStore = create((set, get) => ({
     verifyingPassword: "",
   },
 
+  // TODO Breakout this to a useEffect in the sign-in component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   loginData: {
     username: "",
     password: "",
@@ -20,6 +22,11 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
+
+  // TODO create function that takes key and value as input and updates keys here in zustand.
+  setData: (key, value) => {
+    set({ [key]: value });
+  },
 
   resetSignUpData: () =>
     set({
@@ -35,19 +42,31 @@ export const useUserStore = create((set, get) => ({
       },
     }),
 
-  resetLoginData: () =>
+  resetLoginData: () => {
     set({
       loginData: {
         username: "",
         password: "",
       },
-    }),
+    });
+  },
+
+  // removes accesstoken and username from localstorage and resets/empties the data in zustand when the user sign out.
+  signOut: () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    set({
+      accessToken: "",
+      username: "",
+      isLoggedIn: false,
+    });
+  },
 
   handleSubmitForm: async (event) => {
     event.preventDefault();
+
     const { signUpData } = get();
-    const constructedAddress =
-      signUpData.street + signUpData.postCode + signUpData.city;
+    const constructedAddress = signUpData.street + signUpData.postCode + signUpData.city;
 
     if (signUpData.password !== signUpData.verifyingPassword) {
       console.error("Passwords do not match");
@@ -66,7 +85,8 @@ export const useUserStore = create((set, get) => ({
         headers: { "Content-Type": "application/json" },
       });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorResponse = await response.json();
+        console.error("Backend error:", errorResponse.message || errorResponse);
       }
       const result = await response.json();
       set((state) => ({ ...state, accessToken: result.accessToken }));
@@ -106,7 +126,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
     const { loginData } = get();
     try {
-      const response = await fetch("http://localhost:8080/sessions", {
+      const response = await fetch("http://localhost:8080/users/sessions", {
         method: "POST",
         body: JSON.stringify({
           username: loginData.username,
@@ -125,18 +145,24 @@ export const useUserStore = create((set, get) => ({
       }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().loginData.username;
-      localStorage.setItem("token", JSON.stringify(updatedAccessToken));
-      localStorage.setItem("username", JSON.stringify(updatedUsername));
 
-      // set({ username: updatedUsername })
+      localStorage.setItem("token", updatedAccessToken);
+      localStorage.setItem("username", updatedUsername);
+      set({
+        loginData: {
+          username: "",
+          password: "",
+        },
+      });
+
     } catch (error) {
       console.error("Error logging in", error);
     }
   },
 
-  fetchLoggedInData: async (accessToken) => {
+  validateLoggedInData: async (accessToken) => {
     try {
-      const response = await fetch("http://localhost:8080/membership", {
+      const response = await fetch("http://localhost:8080/users/membership", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -147,6 +173,7 @@ export const useUserStore = create((set, get) => ({
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
+      localStorage.setItem("isLoggedIn", result.isLoggedIn);
       set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
