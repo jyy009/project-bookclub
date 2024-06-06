@@ -2,8 +2,8 @@ import { Header } from "../components/Header";
 import { Image } from "../atoms/Image";
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
-// import { Button } from "../atoms/Button"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+
 
 export const Landing = () => {
   return (

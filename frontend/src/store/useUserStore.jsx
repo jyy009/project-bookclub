@@ -94,6 +94,9 @@ export const useUserStore = create((set, get) => ({
       const updatedUsername = get().signUpData.username;
       localStorage.setItem("token", JSON.stringify(updatedAccessToken));
       localStorage.setItem("username", JSON.stringify(updatedUsername));
+
+      // set({ username: updatedUsername })
+
       return true;
     } catch (error) {
       console.error("Error adding new user:", error);
@@ -142,6 +145,7 @@ export const useUserStore = create((set, get) => ({
       }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().loginData.username;
+
       localStorage.setItem("token", updatedAccessToken);
       localStorage.setItem("username", updatedUsername);
       set({
@@ -150,6 +154,7 @@ export const useUserStore = create((set, get) => ({
           password: "",
         },
       });
+
     } catch (error) {
       console.error("Error logging in", error);
     }
