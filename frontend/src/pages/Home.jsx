@@ -37,28 +37,32 @@ export const Home = () => {
   return (
     <>
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/book-club" element={<BookClub />} />
+        <div className="flex flex-col h-screen">
+          <Header />
+          <div className="flex-grow overflow-auto bg-secondary">
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/book-club" element={<BookClub />} />
 
-          {isLoggedIn ? (
-            <>
-              <Route path="/sign-up" element={<Navigate to="/" />} />
-              <Route path="/sign-in" element={<Navigate to="/" />} />
-              <Route path="/wishlist" element={<Wishlist />} />
-            </>
-          ) : (
-            <>
-              <Route path="/sign-up" element={<Register />} />
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="/wishlist" element={<Navigate to="/" />} />
-            </>
-          )}
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-        <Footer />
+              {isLoggedIn ? (
+                <>
+                  <Route path="/sign-up" element={<Navigate to="/" />} />
+                  <Route path="/sign-in" element={<Navigate to="/" />} />
+                  <Route path="/wishlist" element={<Wishlist />} />
+                </>
+              ) : (
+                <>
+                  <Route path="/sign-up" element={<Register />} />
+                  <Route path="/sign-in" element={<SignIn />} />
+                  <Route path="/wishlist" element={<Navigate to="/" />} />
+                </>
+              )}
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
       </BrowserRouter>
     </>
   );
