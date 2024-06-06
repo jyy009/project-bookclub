@@ -4,19 +4,10 @@ import { Button } from "../atoms/Button";
 import { useState, useEffect } from "react"
 
 export const WishlistForm = () => {
-  const { wishlistData, handleWishlistChange, handleWishlistSubmit, isChecked, setIsChecked } =
-    useWishStore();
+  const { wishlistData, handleWishlistChange, handleWishlistSubmit, setSubmissionType, submissionType, setIsChecked } = useWishStore();
   
-  // const [isChecked, setIsChecked] = useState(false)
-
-  // const handleIsChecked = (event) => {
-  //   setIsChecked(event.target.checked)
-    
-  // }
-
-  // useEffect(() => {
-  //   console.log("checkbox status", isChecked)
-  // }, [isChecked])
+  
+ 
 
   return (
     <div className="flex flex-col">
@@ -54,16 +45,27 @@ export const WishlistForm = () => {
             handleWishlistChange("message", event.target.value)
           }
         />
-        <label>
+        <div>
+          <label>Username
           <input 
-          type="checkbox"
-          name="user"
-          checked={isChecked}
-          onChange={(event) => setIsChecked(event.target.checked)}
+            type="radio"
+            name="user"
+            value="username"
+            checked={submissionType === "username"}
+            onChange={(event) => setSubmissionType(event.target.value)}
           />
-          anonymous
+          </label>
 
-        </label>
+          <label>Anonymous
+          <input 
+            type="radio"
+            name="user"
+            value="anonymous"
+            checked={submissionType === "anonymous"}
+            onChange={(event) => setSubmissionType(event.target.value)}
+          />
+          </label>
+        </div>
         <Button type={"submit"} btnText={"Submit"} />
       </form>
     </div>

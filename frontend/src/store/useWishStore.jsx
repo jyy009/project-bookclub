@@ -5,21 +5,19 @@ export const useWishStore = create((set, get) => ({
     title: "",
     author: "",
     message: "",
-    user: "",
+    user: ""
   },
 
   wishlist: [],
-
-  isChecked: false,
-
-
-  setIsChecked: () => {
-    set((state) => ({ isChecked: !state.isChecked }))
-    console.log("anonymous status", get().isChecked)
-},
-
+  
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
+  
+  submissionType: "username",
+
+setSubmissionType: (type) => {
+    set({ submissionType: type})
+  },
 
 
   handleWishlistChange: (field, value) => {
@@ -88,14 +86,17 @@ export const useWishStore = create((set, get) => ({
 
   handleWishlistSubmit: async (event) => {
     event.preventDefault();
-    const { wishlistData, setWishlist, isChecked } = get();
+    const { wishlistData, setWishlist, submissionType } = get();
 
     const formData = {
       title: wishlistData.title,
       author: wishlistData.author,
       message: wishlistData.message,
-      user: isChecked
+      user: submissionType
   }
+
+  
+
     try {
       const response = await fetch("https://project-final-rvhj.onrender.com/wishlist", {
         method: "POST",
@@ -115,6 +116,8 @@ export const useWishStore = create((set, get) => ({
 
       setWishlist(newWish);
       console.log("post set to wishlist;", get().wishlist);
+      console.log("submission type:", get().submissionType)
+
     } catch (error) {
       console.error("Error posting wish:", error);
       return false;
@@ -124,7 +127,7 @@ export const useWishStore = create((set, get) => ({
           title: "",
           author: "",
           message: "",
-          user: false
+          user: ""
         },
       });
     }
