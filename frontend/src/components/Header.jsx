@@ -8,7 +8,7 @@ export const Header = () => {
   const { isLoggedIn, username } = useUserStore();
   return (
     <>
-      <header className="bg-cream px-2 py-3 sticky top-0 sm:hidden">
+      <header className="bg-cream px-2 py-3 sticky top-0 z-50 sm:hidden">
         <div className="flex justify-between sm:flex-col">
           <div className="flex items-center sm:items-start">
             <Link to="/" className="cursor-pointer">
@@ -21,7 +21,9 @@ export const Header = () => {
         </div>
         {isLoggedIn ? (
           <div className="flex justify-center mt-3 mb-1 sm:hidden">
-            <p className="font-worksans text-jeans">Welcome {username}, happy reading!</p>
+            <p className="font-worksans text-jeans">
+              Welcome {username}, happy reading!
+            </p>
           </div>
         ) : (
           ""
@@ -30,11 +32,17 @@ export const Header = () => {
       <header className="hidden sm:flex flex-col mt-5 mb-2 mx-5">
         <div className="flex justify-between">
           <Link to="/" className="cursor-pointer">
-            <img src={TabletLogo} alt="OMC Book Club" className="hidden sm:flex" />
+            <img
+              src={TabletLogo}
+              alt="OMC Book Club"
+              className="hidden sm:flex"
+            />
           </Link>
           {isLoggedIn ? (
             <div className="flex justify-center my-3 sm:flex">
-              <p className="font-worksans text-jeans">Welcome {username}, happy reading!</p>
+              <p className="font-worksans text-jeans">
+                Welcome {username}, happy reading!
+              </p>
             </div>
           ) : (
             ""
