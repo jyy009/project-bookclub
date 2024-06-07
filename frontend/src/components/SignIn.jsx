@@ -1,6 +1,7 @@
 import { Button } from "../atoms/Button";
 import { TextInput } from "../atoms/TextInput";
 import { useUserStore } from "../store/useUserStore";
+import { Loading } from "./Loading";
 import { useState, useEffect } from "react";
 
 export const SignIn = () => {
@@ -30,6 +31,7 @@ export const SignIn = () => {
           let the literary adventures continue!
         </p>
       </div>
+      {isLoading ? <Loading /> : ""}
       <div>
         <TextInput
           label={"Username"}
@@ -37,7 +39,9 @@ export const SignIn = () => {
           inputName={"username"}
           placeholder={"Type your username"}
           value={loginData.username}
-          onChange={(event) => handleLoginChange("username", event.target.value)}
+          onChange={(event) =>
+            handleLoginChange("username", event.target.value)
+          }
           labelStyle="font-josefinsans text-base flex flex-col mx-3 my-2"
           inputStyle="font-worksans text-sm border-2 rounded-lg p-1"
         />
@@ -48,7 +52,9 @@ export const SignIn = () => {
           inputName={"password"}
           placeholder={"Type your password"}
           value={loginData.password}
-          onChange={(event) => handleLoginChange("password", event.target.value)}
+          onChange={(event) =>
+            handleLoginChange("password", event.target.value)
+          }
           labelStyle="font-josefinsans text-base flex flex-col mx-3 my-2"
           inputStyle="font-worksans text-sm border-2 rounded-lg p-1"
         />

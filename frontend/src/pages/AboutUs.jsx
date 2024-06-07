@@ -17,39 +17,37 @@ export const AboutUs = () => {
   const ourFounders = founders;
 
   return (
-    <section className="bg-secondary text-black ">
-      <div className="mx-4 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
-        <Headline titleText={"Our Story"} />
-        <Text text={introParaOne} />
-        <Text text={introParaTwo} />
-        <Headline titleText={"Meet the founders"} />
+    <section className="mx-4 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
+      <Headline titleText={"Our Story"} />
+      <Text text={introParaOne} />
+      <Text text={introParaTwo} />
+      <Headline titleText={"Meet the founders"} />
 
-        <div className="md:hidden flex justify-center max-w-sm">
-          <Carousel>
-            {ourFounders.map((founder, index) => (
-              <FounderCard key={index} founder={founder} />
-            ))}
-          </Carousel>
-        </div>
-
-        <div className="hidden md:flex md:gap-10 lg:justify-between w-full">
+      <div className="md:hidden flex justify-center max-w-sm">
+        <Carousel>
           {ourFounders.map((founder, index) => (
             <FounderCard key={index} founder={founder} />
           ))}
-        </div>
+        </Carousel>
+      </div>
 
-        <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10">
-          <div className="max-w-md">
-            <Image
-              link={"../public/images/letter.svg"}
-              imgText={"Envelope"}
-              section={"object-cover"}
-            />
-          </div>
-          <div className="flex flex-col items-center md:items-start md:self-start">
-            <Headline titleText={"Get in touch!"} />
-            <Text text={contactUs} />
-          </div>
+      <div className="hidden md:flex md:gap-10 lg:justify-between w-full">
+        {ourFounders.map((founder, index) => (
+          <FounderCard key={index} founder={founder} />
+        ))}
+      </div>
+
+      <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10">
+        <div className="max-w-md">
+          <Image
+            link={"images/letter.svg"}
+            imgText={"Envelope"}
+            section={"object-cover"}
+          />
+        </div>
+        <div className="flex flex-col items-center md:items-start md:self-start">
+          <Headline titleText={"Get in touch!"} />
+          <Text text={contactUs} />
         </div>
       </div>
     </section>

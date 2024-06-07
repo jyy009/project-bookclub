@@ -2,7 +2,7 @@ import { InfoCard } from "../components/InfoCard";
 
 export const BookClub = () => {
   return (
-    <section className="flex flex-col gap-4 bg-secondary py-8 md:py-10 lg:py-36 xl:py-32">
+    <section className="flex flex-col gap-6 lg:gap-10 py-8 md:py-10 lg:py-36 xl:py-32">
       <InfoCard
         imgText={"Books and magazines on a sheet"}
         imgSrc={"/images/giulia-bertelli-y7rGTFyOzxc-unsplash.jpg"}
@@ -21,7 +21,7 @@ export const BookClub = () => {
           "As a member of our book club, you can look forward to receiving a carefully selected book each month, delivered to your doorstep. We choose from a wide range of genres to keep your reading experience fresh and exciting. Expect thrilling mysteries, heartfelt romances, thought-provoking non-fiction, and more."
         }
         button={false}
-        rowDirection={"flex-row-reverse"}
+        rowDirection={"flex-row"}
       />
       <InfoCard
         imgText={"Person holding an open book, confetti coming out of the book"}
