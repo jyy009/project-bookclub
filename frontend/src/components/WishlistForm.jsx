@@ -1,13 +1,85 @@
 import { useWishStore } from "../store/useWishStore";
+import { useUserStore } from "../store/useUserStore";
 import { TextInput } from "../atoms/TextInput";
 import { Button } from "../atoms/Button";
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 export const WishlistForm = () => {
-  const { wishlistData, handleWishlistChange, handleWishlistSubmit, setSubmissionType, submissionType, setIsChecked } = useWishStore();
-  
-  
- 
+  const { setWishlist } = useWishStore();
+
+  const { username } = useUserStore();
+  const [anon, setAnon] = useState(false);
+
+  const [wishlistData, setWishlistData] = useState({
+    title: "",
+    author: "",
+    message: "",
+    user: username,
+  });
+
+  const toggleCheckbox = () => {
+    setAnon((prevAnon) => !prevAnon);
+  };
+
+  const beAnonymous = () => {
+    if (anon) {
+      setWishlistData((prevState) => ({
+        ...prevState,
+        user: "Anonymous",
+      }));
+    } else {
+      setWishlistData((prevState) => ({
+        ...prevState,
+        user: username,
+      }));
+    }
+  };
+
+  const handleWishlistChange = (field, value) => {
+    setWishlistData((prevState) => ({ ...prevState, [field]: value }));
+  };
+
+  const handleWishlistSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(
+        "https://project-final-rvhj.onrender.com/wishlist",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            title: wishlistData.title,
+            author: wishlistData.author,
+            message: wishlistData.message,
+            user: wishlistData.user,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      const newWish = result.response;
+      console.log("post to API successful:", result);
+      setWishlist(newWish);
+    } catch (error) {
+      console.error("Error posting wish:", error);
+      return false;
+    } finally {
+      setWishlistData({
+        title: "",
+        author: "",
+        message: "",
+        user: username,
+      });
+    }
+  };
+
+  useEffect(() => {
+    beAnonymous();
+  }, [anon]);
 
   return (
     <div className="flex flex-col">
@@ -46,24 +118,14 @@ export const WishlistForm = () => {
           }
         />
         <div>
-          <label>Username
-          <input 
-            type="radio"
-            name="user"
-            value="username"
-            checked={submissionType === "username"}
-            onChange={(event) => setSubmissionType(event.target.value)}
-          />
-          </label>
-
-          <label>Anonymous
-          <input 
-            type="radio"
-            name="user"
-            value="anonymous"
-            checked={submissionType === "anonymous"}
-            onChange={(event) => setSubmissionType(event.target.value)}
-          />
+          <label>
+            Anonymous
+            <input
+              type="checkbox"
+              name="anonymous"
+              value="Anonymous"
+              onChange={toggleCheckbox}
+            />
           </label>
         </div>
         <Button type={"submit"} btnText={"Submit"} />

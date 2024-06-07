@@ -18,7 +18,7 @@ export const Wishlist = () => {
           <WishlistForm />
           <WishlistCard />
         </div>
-      ) 
+       
       
       {/* : (
         <Navigate replace to="/sign-up" />
