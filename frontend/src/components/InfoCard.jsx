@@ -10,6 +10,8 @@ export const InfoCard = ({
   titleText,
   text,
   button,
+  btnText,
+  link,
   rowDirection,
 }) => {
   return (
@@ -20,7 +22,7 @@ export const InfoCard = ({
         <Image
           imgText={imgText}
           link={imgSrc}
-          section={"object-cover w-full h-72 md:h-largeImg xl:h-96"}
+          section={"object-cover w-full h-72 md:h-largeImg object-top"}
         />
       </div>
       <div className="flex flex-col mx-4 items-center md:mx-0 md:w-1/2 md:self-start md:items-start">
@@ -28,9 +30,9 @@ export const InfoCard = ({
         <Text text={text} />
         <div className="self-center py-4 md:py-0 md:pt-4">
           {button && (
-            <Link to={"/sign-up"}>
+            <Link to={link}>
               <Button
-                btnText={"Sign Up"}
+                btnText={btnText}
                 buttonStyle={
                   "bg-tertiary px-12 py-2 text-secondary font-josefinsans rounded-md"
                 }
