@@ -60,8 +60,8 @@ export const Home = () => {
               )}
               <Route path="/*" element={<NotFound />} />
             </Routes>
+            <Footer />
           </div>
-          <Footer />
         </div>
       </BrowserRouter>
     </>
