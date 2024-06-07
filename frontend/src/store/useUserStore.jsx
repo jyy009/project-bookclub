@@ -66,8 +66,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
 
     const { signUpData } = get();
-    const constructedAddress =
-      signUpData.street + signUpData.postCode + signUpData.city;
+    const constructedAddress = `${signUpData.street} ${signUpData.postCode} ${signUpData.city}`;
 
     if (signUpData.password !== signUpData.verifyingPassword) {
       console.error("Passwords do not match");
