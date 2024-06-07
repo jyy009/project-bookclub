@@ -5,7 +5,7 @@ import { Like } from "./Like";
 import { useState, useEffect } from "react";
 
 export const WishlistCard = () => {
-  const { wishlist, fetchWishlist, handleLike } = useWishStore();
+  const { wishlist,submissionType, fetchWishlist, handleLike } = useWishStore();
 
   const username = localStorage.getItem("username");
 
@@ -14,6 +14,8 @@ export const WishlistCard = () => {
   useEffect(() => {
     fetchWishlist();
   }, []);
+
+
 
   return (
     <div className="">
@@ -25,7 +27,7 @@ export const WishlistCard = () => {
 
           {/* <Text text={`submitted by ${wish.user}`}/> */}
 
-          <Text text={wish.user ? "anonymous" : username} />
+          <Text text={wish.user} />
           <Like
             emoji="❤️"
             label="heart"
