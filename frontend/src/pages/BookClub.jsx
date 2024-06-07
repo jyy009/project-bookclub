@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { InfoCard } from "../components/InfoCard";
+import { InfoCardReverse } from "../components/InfoCardReverse";
 import { useUserStore } from "../store/useUserStore";
 import bookClubInfo from "../components/bookClubInfo.json";
 
@@ -26,9 +26,8 @@ export const BookClub = () => {
         button={isLoggedIn ? false : true}
         btnText={"Sign Up"}
         link={"/sign-up"}
-        rowDirection={"flex-row"}
       />
-      <InfoCard
+      <InfoCardReverse
         imgText={"Person sitting on top of a stack of book"}
         imgSrc={"/images/pexels-merve-bayar-158520570-10863551.jpg"}
         titleText={
@@ -42,7 +41,6 @@ export const BookClub = () => {
             : loggedOutInfo.sectionTwo.text
         }
         button={false}
-        rowDirection={"flex-row"}
       />
       <InfoCard
         imgText={"Person holding an open book, confetti coming out of the book"}
@@ -60,7 +58,6 @@ export const BookClub = () => {
         button={isLoggedIn ? true : false}
         btnText={"Wishlist"}
         link={"/wishlist"}
-        rowDirection={"flex-row"}
       />
     </section>
   );
