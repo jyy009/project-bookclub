@@ -26,7 +26,7 @@ export const InfoCard = ({
       <div className="flex flex-col mx-4 items-center md:mx-0 md:w-1/2 md:self-start md:items-start">
         <Headline titleText={titleText} />
         <Text text={text} />
-        <div className="self-center py-4 md:pt-8 lg:py-4">
+        <div className="self-center py-4 md:py-0 md:pt-4">
           {button && (
             <Link to={"/sign-up"}>
               <Button
