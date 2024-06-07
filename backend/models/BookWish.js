@@ -27,7 +27,7 @@ const bookWishSchema = new Schema({
     default: () => new Date(),
   },
   user: {
-    type: Boolean,
+    type: String,
     // required: true,
   },
 });
