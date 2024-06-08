@@ -20,7 +20,7 @@ export const WishlistCard = () => {
   return (
     <div className="">
       {wishlist.map((wish) => (
-        <div key={wish._id} className="border border-black border-solid">
+        <div key={wish._id} className="border border-orange-700">
           <Text text={wish.title} />
           <Text text={wish.author} />
           <Text text={wish.message} />

@@ -8,19 +8,26 @@ export const Wishlist = () => {
   const { isLoggedIn } = useUserStore();
 
   return (
-    <>
-      {isLoggedIn ? (
-        <div>
-          <Headline titleText={"Book Wishlist"} />
-          <Text text={"What book would you like to read next?"} />
+    <div classname={"flex flex-col items-center"}>
 
-          <WishlistForm />
-          <WishlistCard />
+      {isLoggedIn ? (
+        <div classname={"flex flex-col items-center"}>
+
+          <div className="flex flex-col items-center">
+            <Headline section={"py-0 pt-4"} titleText={"Book Wishlist"} />
+            <Text section={"pb-2"} text={"Add your book wish!"} />
+            </div>
+
+          <div >
+            <WishlistForm />
+            <WishlistCard />
+            </div>
+
         </div>
       ) : (
         <Navigate replace to="/sign-up" />
       )}
       ;
-    </>
+    </div>
   );
 };

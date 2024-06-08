@@ -9,14 +9,14 @@ export const Landing = () => {
   const { isLoggedIn } = useUserStore();
   return (
     <div className="bg-secondary flex justify-center items-center">
-        <div className="bg-secondary flex flex-col border border-black py-8 md:grid md:grid-cols-2 md:py-10 md:px-8 lg:py-36 xl:py-32 md:max-w-screen-md">
+        <div className="bg-secondary flex flex-col py-8 md:grid md:grid-cols-2 md:py-10 md:px-8 lg:py-28 xl:py-32 md:max-w-screen-md lg:w-fit">
             <Image
             link={"/images/landingImage.svg"}
             imgText={"girl reading book"}
-            section={"md:w-fit"}
+            section={"border border-black"}
           />
           
-          <div className="flex flex-col md:col-span-1 gap-6  md:px-8 lg:gap-10 text-center border border-black ">
+          <div className="flex flex-col md:col-span-1 gap-6  md:px-8 text-center">
             <Headline titleText={"Discover your next favorite book with us"} />
             <Text
               text={
