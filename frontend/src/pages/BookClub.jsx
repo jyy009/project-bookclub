@@ -1,5 +1,4 @@
 import { InfoCard } from "../components/InfoCard";
-import { InfoCardReverse } from "../components/InfoCardReverse";
 import { useUserStore } from "../store/useUserStore";
 import bookClubInfo from "../components/bookClubInfo.json";
 
@@ -24,10 +23,11 @@ export const BookClub = () => {
             : loggedOutInfo.sectionOne.text
         }
         button={isLoggedIn ? false : true}
+        mdScreen={"md:flex-row"}
         btnText={"Sign Up"}
         link={"/sign-up"}
       />
-      <InfoCardReverse
+      <InfoCard
         imgText={"Person sitting on top of a stack of book"}
         imgSrc={"/images/pexels-merve-bayar-158520570-10863551.jpg"}
         titleText={
@@ -41,6 +41,7 @@ export const BookClub = () => {
             : loggedOutInfo.sectionTwo.text
         }
         button={false}
+        mdScreen={"md:flex-row-reverse"}
       />
       <InfoCard
         imgText={"Person holding an open book, confetti coming out of the book"}
@@ -56,6 +57,7 @@ export const BookClub = () => {
             : loggedOutInfo.sectionThree.text
         }
         button={isLoggedIn ? true : false}
+        mdScreen={"md:flex-row"}
         btnText={"Wishlist"}
         link={"/wishlist"}
       />
