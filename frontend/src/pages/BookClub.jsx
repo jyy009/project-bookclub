@@ -1,5 +1,4 @@
 import { InfoCard } from "../components/InfoCard";
-import { InfoCardReverse } from "../components/InfoCardReverse";
 import { useUserStore } from "../store/useUserStore";
 import bookClubInfo from "../components/bookClubInfo.json";
 
