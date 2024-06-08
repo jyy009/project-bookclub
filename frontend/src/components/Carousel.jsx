@@ -34,7 +34,7 @@ export const Carousel = ({ children }) => {
           className="bg-primary rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
           <Image
-            link={"./public/icons/chevron-left.svg"}
+            link={"./icons/chevron-left.svg"}
             imgText={"left arrow"}
           />
         </button>
@@ -43,7 +43,7 @@ export const Carousel = ({ children }) => {
           className="bg-primary rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
           <Image
-            link={"./public/icons/chevron-right.svg"}
+            link={"./icons/chevron-right.svg"}
             imgText={"left arrow"}
           />
         </button>
