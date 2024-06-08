@@ -20,7 +20,6 @@ export const Wishlist = () => {
       ) : (
         <Navigate replace to="/sign-up" />
       )}
-      ;
     </>
   );
 };

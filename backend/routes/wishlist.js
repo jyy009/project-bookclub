@@ -1,11 +1,22 @@
-import express, { response } from "express";
+import express, { query, response } from "express";
 import BookWish from "../models/BookWish";
 
 const router = express.Router();
 
 router.get("/wishlist", async (req, res) => {
+  let page = parseInt(req.query.page, 10);
+  if (isNaN(page) || page < 1) {
+    page = 1;
+  }
+  const pageSize = parseInt(req.query.pageSize, 10) || 10;
+  const offset = (page - 1) * pageSize;
+
   try {
-    const fullWishlist = await BookWish.find().sort({ createdAt: -1 }).exec();
+    const fullWishlist = await BookWish.find()
+      .skip(offset)
+      .limit(pageSize)
+      .sort({ createdAt: -1 })
+      .exec();
     if (fullWishlist.length > 0) {
       res.json(fullWishlist);
     } else {
