@@ -22,6 +22,7 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
+  userId: "",
 
   // TODO create function that takes key and value as input and updates keys here in zustand.
   setData: (key, value) => {
@@ -75,7 +76,8 @@ export const useUserStore = create((set, get) => ({
     }
     try {
       const response = await fetch(
-        "https://project-final-rvhj.onrender.com/users",
+        //"https://project-final-rvhj.onrender.com/users",
+        "http://localhost:8080/users",
         {
           method: "POST",
           body: JSON.stringify({
@@ -93,6 +95,7 @@ export const useUserStore = create((set, get) => ({
         console.error("Backend error:", errorResponse.message || errorResponse);
       }
       const result = await response.json();
+      console.log(result);
       set((state) => ({ ...state, accessToken: result.accessToken }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().signUpData.username;
@@ -130,7 +133,8 @@ export const useUserStore = create((set, get) => ({
     const { loginData } = get();
     try {
       const response = await fetch(
-        "https://project-final-rvhj.onrender.com/users/sessions",
+        //"https://project-final-rvhj.onrender.com/users/sessions",
+        "http://localhost:8080/users/sessions",
         {
           method: "POST",
           body: JSON.stringify({
@@ -147,13 +151,12 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         accessToken: result.accessToken,
+        userId: result.userId,
         username: loginData.username,
       }));
-      const updatedAccessToken = get().accessToken;
-      const updatedUsername = get().loginData.username;
-
-      localStorage.setItem("token", updatedAccessToken);
-      localStorage.setItem("username", updatedUsername);
+      localStorage.setItem("token", result.accessToken);
+      localStorage.setItem("userId", result.userId);
+      localStorage.setItem("username", loginData.username);
       set({
         loginData: {
           username: "",
@@ -168,7 +171,8 @@ export const useUserStore = create((set, get) => ({
   validateLoggedInData: async (accessToken) => {
     try {
       const response = await fetch(
-        "https://project-final-rvhj.onrender.com/users/membership",
+        // "https://project-final-rvhj.onrender.com/users/membership",
+        "http://localhost:8080/users/membership",
         {
           method: "GET",
           headers: {
@@ -179,10 +183,17 @@ export const useUserStore = create((set, get) => ({
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      } else {
+        const result = await response.json();
+        console.log(result.isLoggedIn);
+        set((state) => ({
+          ...state,
+          isLoggedIn: result.isLoggedIn,
+          userId: result.userId,
+        }));
+        localStorage.setItem("isLoggedIn", result.isLoggedIn);
+        localStorage.setItem("userId", result.userId);
       }
-      const result = await response.json();
-      localStorage.setItem("isLoggedIn", result.isLoggedIn);
-      set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
     }

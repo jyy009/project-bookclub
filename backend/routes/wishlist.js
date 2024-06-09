@@ -1,11 +1,24 @@
-import express, { response } from "express";
+import express, { query, response } from "express";
 import BookWish from "../models/BookWish";
 
 const router = express.Router();
 
 router.get("/wishlist", async (req, res) => {
+  let page = parseInt(req.query.page, 10);
+  if (isNaN(page) || page < 1) {
+    page = 1;
+  }
+  const pageSize = parseInt(req.query.pageSize, 10) || 10;
+  const sortField = req.query.sortField || "createdAt";
+  const sortOrder = req.query.sortOrder === "asc" ? 1 : -1; // Is this needed? Or should we always have -1?
+  const offset = (page - 1) * pageSize;
+
   try {
-    const fullWishlist = await BookWish.find().sort({ createdAt: -1 }).exec();
+    const fullWishlist = await BookWish.find()
+      .skip(offset)
+      .limit(pageSize)
+      .sort({ [sortField]: sortOrder })
+      .exec();
     if (fullWishlist.length > 0) {
       res.json(fullWishlist);
     } else {

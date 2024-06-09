@@ -1,16 +1,28 @@
-import express from "express";
+import express, { response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 
 const router = express.Router();
 
 const authenticateUser = async (req, res, next) => {
-  const user = await User.findOne({ accessToken: req.header("Authorization") });
-  if (user) {
-    req.user = user;
-    next();
-  } else {
-    res.status(401).json({ loggedOut: true });
+  try {
+    const user = await User.findOne({
+      accessToken: req.header("Authorization"),
+    });
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      res
+        .status(401)
+        .json({ success: false, message: "Unauthorized, user not found" });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Bad request, user not found",
+      response: error,
+    });
   }
 };
 
@@ -56,9 +68,31 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.get("/users/membership", authenticateUser);
-router.get("/users/membership", (req, res) => {
-  res.json({ isLoggedIn: true });
+router.get("/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).send("Could not find user");
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Bad request, user not found",
+    });
+  }
+});
+
+// router.get("/users/membership", authenticateUser);
+// router.get("/users/membership", (req, res) => {
+//   res.json({ isLoggedIn: true });
+// });
+
+router.get("/users/membership", authenticateUser, (req, res) => {
+  res.json({ isLoggedIn: true, userId: req.user._id });
 });
 
 router.post("/users/sessions", async (req, res) => {

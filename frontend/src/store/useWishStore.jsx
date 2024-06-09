@@ -5,7 +5,11 @@ export const useWishStore = create((set, get) => ({
   loading: false,
 
   wishlist: [],
-  
+
+  pageSize: 5,
+  isLastpage: false,
+
+
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
 
@@ -23,7 +27,8 @@ export const useWishStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
+        //`https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
+        `http://localhost:8080/wishlist/${wishId}/like`,
         {
           method: "POST",
           body: JSON.stringify({}),
@@ -47,22 +52,26 @@ export const useWishStore = create((set, get) => ({
     }
   },
 
-  fetchWishlist: async () => {
+
+  fetchWishlist: async (page, sortField) => {
+    const { pageSize } = get();
     set({loading: true})
 
     try {
       const response = await fetch(
-        "https://project-final-rvhj.onrender.com/wishlist"
+        //"https://project-final-rvhj.onrender.com/wishlist"
+        `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
       );
 
       if (!response.ok) {
+        set({ isLastPage: true });
         throw new Error("Network reponse was not ok ");
       }
 
       const data = await response.json();
-      set({ wishlist: data });
+      set({ wishlist: data, isLastPage: false });
     } catch (error) {
-      console.error("Error posting wish:", error);
+      console.error("Error fetching wishlist:", error); 
       return false;
     } finally {
       set ({ loading: false})
