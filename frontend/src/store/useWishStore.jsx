@@ -2,13 +2,11 @@ import { create } from "zustand";
 import { Loading } from "../components/Loading";
 
 export const useWishStore = create((set, get) => ({
+  wishlistUrl: "https://project-final-rvhj.onrender.com/wishlist",
   loading: false,
-
   wishlist: [],
-
   pageSize: 5,
   isLastpage: false,
-
 
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
@@ -24,11 +22,12 @@ export const useWishStore = create((set, get) => ({
   handleLike: async (event, wishId) => {
     event.preventDefault();
     const { updateLikes } = get();
+    const { wishlistUrl } = get();
 
     try {
       const response = await fetch(
-        //`https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
-        `http://localhost:8080/wishlist/${wishId}/like`,
+        `${wishlistUrl}/${wishId}/like`,
+        // `http://localhost:8080/wishlist/${wishId}/like`,
         {
           method: "POST",
           body: JSON.stringify({}),
@@ -52,15 +51,15 @@ export const useWishStore = create((set, get) => ({
     }
   },
 
-
   fetchWishlist: async (page, sortField) => {
     const { pageSize } = get();
-    set({loading: true})
+    const { wishlistUrl } = get();
+    set({ loading: true });
 
     try {
       const response = await fetch(
-        //"https://project-final-rvhj.onrender.com/wishlist"
-        `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
+        `${wishlistUrl}`
+        // `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
       );
 
       if (!response.ok) {
@@ -71,10 +70,10 @@ export const useWishStore = create((set, get) => ({
       const data = await response.json();
       set({ wishlist: data, isLastPage: false });
     } catch (error) {
-      console.error("Error fetching wishlist:", error); 
+      console.error("Error fetching wishlist:", error);
       return false;
     } finally {
-      set ({ loading: false})
+      set({ loading: false });
     }
   },
 }));

@@ -5,7 +5,7 @@ import { Button } from "../atoms/Button";
 import { useState, useEffect } from "react";
 
 export const WishlistForm = () => {
-  const { setWishlist } = useWishStore();
+  const { wishlistUrl, setWishlist } = useWishStore();
 
   const { username } = useUserStore();
   const [anon, setAnon] = useState(false);
@@ -44,8 +44,8 @@ export const WishlistForm = () => {
 
     try {
       const response = await fetch(
-        //"https://project-final-rvhj.onrender.com/wishlist",
-        "http://localhost:8080/wishlist",
+        wishlistUrl,
+        //"http://localhost:8080/wishlist",
         {
           method: "POST",
           body: JSON.stringify({
