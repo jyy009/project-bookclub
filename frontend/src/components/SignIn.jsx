@@ -74,9 +74,9 @@ export const SignIn = () => {
             <p className="font-worksans md:mt-4">
               Not a member yet?
               <br />
-              Lets join our book club here{" "}
+              Lets join our book club and{" "}
               <Link to="/sign-up" className="italic underline underline-offset-4 cursor-pointer">
-                register
+                sign up
               </Link>
             </p>
           </div>
