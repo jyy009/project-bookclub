@@ -38,11 +38,11 @@ export const AboutUs = () => {
       </div>
 
       <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10">
-        <div className="max-w-md">
+        <div className="md:w-full">
           <Image
             link={"images/letter.svg"}
             imgText={"Envelope"}
-            section={"object-cover"}
+            section={"object-cover w-full rounded-2xl"}
           />
         </div>
         <div className="flex flex-col items-center md:items-start md:self-start">

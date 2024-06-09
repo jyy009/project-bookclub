@@ -8,7 +8,7 @@ export const Wishlist = () => {
   const { isLoggedIn } = useUserStore();
 
   return (
-    <div classname={"flex flex-col items-center"}>
+    <div className={"flex flex-col items-center"}>
       {isLoggedIn ? (
         <>
           <div className="flex flex-col border justify-center items-center">
