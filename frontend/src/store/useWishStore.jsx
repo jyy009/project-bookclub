@@ -21,7 +21,8 @@ export const useWishStore = create((set, get) => ({
 
     try {
       const response = await fetch(
-        `https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
+        //`https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
+        `http://localhost:8080/wishlist/${wishId}/like`,
         {
           method: "POST",
           body: JSON.stringify({}),
@@ -45,12 +46,12 @@ export const useWishStore = create((set, get) => ({
     }
   },
 
-  fetchWishlist: async (page) => {
+  fetchWishlist: async (page, sortField) => {
     const { pageSize } = get();
     try {
       const response = await fetch(
         //"https://project-final-rvhj.onrender.com/wishlist"
-        `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}`
+        `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
       );
 
       if (!response.ok) {
@@ -61,7 +62,7 @@ export const useWishStore = create((set, get) => ({
       const data = await response.json();
       set({ wishlist: data, isLastPage: false });
     } catch (error) {
-      console.error("Error posting wish:", error);
+      console.error("Error fetching wishlist:", error);
       return false;
     }
   },
