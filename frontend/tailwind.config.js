@@ -16,6 +16,7 @@ export default {
         tertiary: "#D33F2A", // buttons
         fourth: "#D3E0E3", //wishlist input background
         fifth: "#375D51", //Logo, navlinks, hamburger icon
+        sixth: "#A63221", //error messages
       },
       height: {
         largeImg: "500px",

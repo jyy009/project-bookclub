@@ -3,6 +3,7 @@ import { TextInput } from "../atoms/TextInput";
 import { useUserStore } from "../store/useUserStore";
 import { Loading } from "./Loading";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const SignIn = () => {
   const { loginData, handleSubmitLogin, handleLoginChange, backendError, errorMessage } = useUserStore();
@@ -22,19 +23,19 @@ export const SignIn = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className="my-6">
+    <form onSubmit={handleFormSubmit} className="flex flex-col py-8 mx-auto w-72 md:w-96">
       <div className="flex flex-col items-center text-center mb-5">
-        <p className="font-worksans">
-          Welcome back,
+        <p className="font-worksans ">
+          <span className="text-2xl md:text-3xl font-josefinsans">Welcome back,</span>
           <br />
-          let the literary adventures continue!
+          <span className="md:text-lg">let the literary adventures continue!</span>
         </p>
       </div>
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          <div>
+          <div className="md:mt-4">
             <TextInput
               label={"Username"}
               inputType={"text"}
@@ -42,8 +43,8 @@ export const SignIn = () => {
               placeholder={"Type your username"}
               value={loginData.username}
               onChange={(event) => handleLoginChange("username", event.target.value)}
-              labelStyle="font-josefinsans text-base flex flex-col mx-3 my-2"
-              inputStyle="font-worksans text-sm border-2 rounded-lg p-1"
+              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
 
             <TextInput
@@ -53,18 +54,31 @@ export const SignIn = () => {
               placeholder={"Type your password"}
               value={loginData.password}
               onChange={(event) => handleLoginChange("password", event.target.value)}
-              labelStyle="font-josefinsans text-base flex flex-col mx-3 my-2"
-              inputStyle="font-worksans text-sm border-2 rounded-lg p-1"
+              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
           </div>
-          <div className="flex justify-end mr-3 mt-3">
+          <div className="flex justify-center font-worksans text-tertiary">
+            {" "}
             {backendError && <p>{errorMessage}</p>}
+          </div>
+          <div className="flex justify-end mt-3">
             <Button
               type={"submit"}
               btnText={"Sign in"}
               disabled={isLoading}
-              buttonStyle="font-josefinsans bg-jeans text-cream px-6 py-1 flex rounded lg"
+              buttonStyle="font-josefinsans bg-tertiary text-white px-8 py-1 flex rounded lg md:text-lg"
             />
+          </div>
+          <div className="mt-8">
+            <p className="font-worksans md:mt-4">
+              Not a member yet?
+              <br />
+              Lets join our book club here{" "}
+              <Link to="/sign-up" className="italic underline underline-offset-4 cursor-pointer">
+                register
+              </Link>
+            </p>
           </div>
         </>
       )}
