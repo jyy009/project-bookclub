@@ -89,7 +89,7 @@ export const WishlistForm = () => {
       placeholder={placeholder}
       value={wishlistData[name]}
       onChange={(event) => handleWishlistChange(name, event.target.value)}
-      inputStyle="pl-2 bg-fourth placeholder-gray-500"
+      inputStyle="pl-2 bg-fourth placeholder-gray-500 rounded-lg"
       labelStyle="flex flex-col"
     />
   );
@@ -97,7 +97,7 @@ export const WishlistForm = () => {
   return (
     <div className="justify-center border border-black ">
       <form
-        className="flex flex-col  gap-2 px-3 border border-black"
+        className="flex flex-col  gap-2  border border-black pb-4"
         onSubmit={handleWishlistSubmit}
       >
         <div className={"flex flex-col gap-2 border border-blue-500"}>

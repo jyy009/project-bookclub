@@ -16,7 +16,7 @@ export const Wishlist = () => {
             <Text section={"pb-2"} text={"Add your book wish!"} />
           </div>
 
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto p-2">
             <WishlistForm />
             <WishlistCard />
           </div>

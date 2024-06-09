@@ -5,6 +5,7 @@ export const useWishStore = create((set, get) => ({
   loading: false,
 
   wishlist: [],
+  
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
 
