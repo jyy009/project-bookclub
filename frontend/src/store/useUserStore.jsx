@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+const backend_url = import.meta.env.BACKEND_URL || "http://localhost:8080";
+
 export const useUserStore = create((set, get) => ({
   // TODO Breakout this to a useEffect in the sign-up component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   signUpData: {
@@ -76,8 +78,7 @@ export const useUserStore = create((set, get) => ({
       return false;
     }
     try {
-      //const response = await fetch("https://project-final-rvhj.onrender.com/users", {
-      const response = await fetch("http://localhost:8080/users", {
+      const response = await fetch(`${backend_url}/users`, {
         method: "POST",
         body: JSON.stringify({
           name: signUpData.name,
@@ -162,8 +163,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
     const { loginData } = get();
     try {
-      //const response = await fetch("https://project-final-rvhj.onrender.com/users/sessions", {
-      const response = await fetch("http://localhost:8080/users/sessions", {
+      const response = await fetch(`${backend_url}/users/sessions`, {
         method: "POST",
         body: JSON.stringify({
           username: loginData.username,
@@ -210,7 +210,7 @@ export const useUserStore = create((set, get) => ({
 
   validateLoggedInData: async (accessToken) => {
     try {
-      const response = await fetch("https://project-final-rvhj.onrender.com/users/membership", {
+      const response = await fetch(`${backend_url}/users/membership`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -218,7 +218,7 @@ export const useUserStore = create((set, get) => ({
         },
       });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const result = await response.json();
       }
       const result = await response.json();
       localStorage.setItem("isLoggedIn", result.isLoggedIn);
