@@ -62,7 +62,6 @@ export const Wishlist = () => {
       ) : (
         <Navigate replace to="/sign-up" /> // This doesn't appear to work. Navigates to "/"
       )}
-    </>
-
+    </div>
   );
 };
