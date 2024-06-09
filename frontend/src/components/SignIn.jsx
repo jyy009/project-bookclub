@@ -5,7 +5,7 @@ import { Loading } from "./Loading";
 import { useState, useEffect } from "react";
 
 export const SignIn = () => {
-  const { loginData, handleSubmitLogin, handleLoginChange, loginError, errorMessage } = useUserStore();
+  const { loginData, handleSubmitLogin, handleLoginChange, backendError, errorMessage } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
@@ -58,7 +58,7 @@ export const SignIn = () => {
             />
           </div>
           <div className="flex justify-end mr-3 mt-3">
-            {loginError && <p>{errorMessage}</p>}
+            {backendError && <p>{errorMessage}</p>}
             <Button
               type={"submit"}
               btnText={"Sign in"}

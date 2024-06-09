@@ -22,10 +22,7 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
-  passwordError: false,
-  usernameError: false,
-  emailError: false,
-  loginError: false,
+  backendError: false,
   errorMessage: "",
 
   // TODO create function that takes key and value as input and updates keys here in zustand.
@@ -96,7 +93,7 @@ export const useUserStore = create((set, get) => ({
         if (errorResponse.errorType === "password") {
           set((state) => ({
             ...state,
-            passwordError: true,
+            backendError: true,
             errorMessage: "Password must be at least 8 characters long",
           }));
         }
@@ -104,14 +101,14 @@ export const useUserStore = create((set, get) => ({
           if (errorResponse.message === "username") {
             set((state) => ({
               ...state,
-              usernameError: true,
+              backendError: true,
               errorMessage: "An account with that username already exists",
             }));
           }
           if (errorResponse.message === "email") {
             set((state) => ({
               ...state,
-              emailError: true,
+              backendError: true,
               errorMessage: "An account with that email already exists",
             }));
           }
@@ -134,7 +131,11 @@ export const useUserStore = create((set, get) => ({
         return true;
       }
     } catch (error) {
-      console.error("Error adding new user:", error);
+      set((state) => ({
+        ...state,
+        backendError: true,
+        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+      }));
       return false;
     }
   },
@@ -173,7 +174,7 @@ export const useUserStore = create((set, get) => ({
       if (!response.ok) {
         set((state) => ({
           ...state,
-          loginError: true,
+          backendError: true,
           errorMessage: "Incorrect username or password",
         }));
         return false;
@@ -198,7 +199,12 @@ export const useUserStore = create((set, get) => ({
         return true;
       }
     } catch (error) {
-      console.error("Error logging in", error);
+      set((state) => ({
+        ...state,
+        backendError: true,
+        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+      }));
+      return false;
     }
   },
 

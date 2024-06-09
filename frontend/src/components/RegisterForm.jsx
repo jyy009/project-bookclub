@@ -4,8 +4,7 @@ import { TextInput } from "../atoms/TextInput";
 import { useState } from "react";
 
 export const RegisterForm = () => {
-  const { signUpData, handleSubmitForm, handleSignUpChange, usernameError, passwordError, emailError, errorMessage } =
-    useUserStore();
+  const { signUpData, handleSubmitForm, handleSignUpChange, backendError, errorMessage } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
@@ -98,7 +97,7 @@ export const RegisterForm = () => {
         value={signUpData.verifyingPassword}
         onChange={(event) => handleSignUpChange("verifyingPassword", event.target.value)}
       />
-      {(passwordError || usernameError || emailError) && <p>{errorMessage}</p>}
+      {backendError && <p>{errorMessage}</p>}
       <Button type={"submit"} btnText={"Sign up"} disabled={isLoading} />
     </form>
   );
