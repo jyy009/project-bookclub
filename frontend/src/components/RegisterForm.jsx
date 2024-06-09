@@ -4,21 +4,19 @@ import { TextInput } from "../atoms/TextInput";
 import { useState } from "react";
 
 export const RegisterForm = () => {
-  const { signUpData, handleSubmitForm, handleSignUpChange } = useUserStore();
+  const { signUpData, handleSubmitForm, handleSignUpChange, usernameError, passwordError, emailError, errorMessage } =
+    useUserStore();
   const [isLoading, setIsLoading] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    console.log(event);
 
     const success = await handleSubmitForm(event);
     if (success) {
       window.location.href = "/";
     } else {
       console.error("Error logging in");
-      setPasswordError(true);
       setIsLoading(false);
     }
   };
@@ -100,7 +98,7 @@ export const RegisterForm = () => {
         value={signUpData.verifyingPassword}
         onChange={(event) => handleSignUpChange("verifyingPassword", event.target.value)}
       />
-      {passwordError && <p>Passwords do not match</p>}
+      {(passwordError || usernameError || emailError) && <p>{errorMessage}</p>}
       <Button type={"submit"} btnText={"Sign up"} disabled={isLoading} />
     </form>
   );

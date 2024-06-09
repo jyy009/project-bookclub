@@ -5,19 +5,18 @@ import { Loading } from "./Loading";
 import { useState, useEffect } from "react";
 
 export const SignIn = () => {
-  const { loginData, handleSubmitLogin, handleLoginChange } = useUserStore();
+  const { loginData, handleSubmitLogin, handleLoginChange, loginError, errorMessage } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
 
-    try {
-      await handleSubmitLogin(event);
-      // Redirect to landing-page after successful login
+    const success = await handleSubmitLogin(event);
+    if (success) {
       window.location.href = "/";
-    } catch (error) {
-      console.error("Error logging in", error);
+    } else {
+      console.error("Error logging in");
       setIsLoading(false);
     }
   };
@@ -59,6 +58,7 @@ export const SignIn = () => {
             />
           </div>
           <div className="flex justify-end mr-3 mt-3">
+            {loginError && <p>{errorMessage}</p>}
             <Button
               type={"submit"}
               btnText={"Sign in"}
