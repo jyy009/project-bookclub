@@ -38,7 +38,7 @@ export const Home = () => {
   return (
     <>
       <BrowserRouter>
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow overflow-auto bg-secondary">
             <Routes>
@@ -62,8 +62,8 @@ export const Home = () => {
               )}
               <Route path="/*" element={<NotFound />} />
             </Routes>
-            <Footer />
           </div>
+          <Footer />
         </div>
       </BrowserRouter>
     </>

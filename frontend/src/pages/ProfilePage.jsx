@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUserStore } from "../store/useUserStore";
+import { Headline } from "../atoms/Headline";
+import { Text } from "../atoms/Text";
 
 export const ProfilePage = () => {
   const { username, userUrl } = useUserStore();
@@ -21,14 +23,16 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     fetchProfile(userId);
-  }, [userId]);
+  }, []);
 
   return (
-    <div>
-      This is {username}'s profile page
-      <p>Name: {userData.name}</p>
-      <p>Email: {userData.email}</p>
-      <p>Address: {userData.address}</p>
+    <div className="mx-4 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
+      <Headline titleText={`${username}`} />
+      <div className="flex flex-col gap-2 p-6 shadow">
+        <Text text={`Name: ${userData.name}`} />
+        <Text text={`Email: ${userData.email}`} />
+        <Text text={`Address: ${userData.address}`} />
+      </div>
     </div>
   );
 };

@@ -86,6 +86,35 @@ router.get("/users/:userId", async (req, res) => {
   }
 });
 
+router.patch("/users/:userId/update", async (req, res) => {
+  const { userId } = req.params;
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const updateUsername = await User.findByIdAndUpdate(
+      userId,
+      { username },
+      { new: true }
+    );
+
+    res.json({ success: true, username: updateUsername.username });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Could not update username",
+    });
+  }
+});
+
 // router.get("/users/membership", authenticateUser);
 // router.get("/users/membership", (req, res) => {
 //   res.json({ isLoggedIn: true });
