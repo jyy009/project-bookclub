@@ -62,7 +62,7 @@ export const useWishStore = create((set, get) => ({
       const data = await response.json();
       set({ wishlist: data, isLastPage: false });
     } catch (error) {
-      console.error("Error fetching wishlist:", error);
+      console.error("Error fetching wishlist:", error); 
       return false;
     }
   },
