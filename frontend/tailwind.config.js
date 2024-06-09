@@ -14,6 +14,7 @@ export default {
         primary: "#8DACB1", // footer, nav-links
         secondary: "#F5F5F5", // background
         tertiary: "#D33F2A", // buttons
+        fourth: "#D3E0E3" //wishlist input background
       },
       height: {
         largeImg: "500px",

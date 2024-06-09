@@ -1,6 +1,6 @@
-export const Headline = ({ titleText }) => {
+export const Headline = ({ section, titleText }) => {
   return (
-    <h1 className="font-josefinsans lg:text-2xl text-xl py-4 lg:py-6">
+    <h1 className={`${section} font-josefinsans text-xl lg:text-2xl py-4 lg:py-6`}>
       {titleText}
     </h1>
   );
