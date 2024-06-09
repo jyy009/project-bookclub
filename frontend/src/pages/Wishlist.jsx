@@ -26,7 +26,7 @@ export const Wishlist = () => {
   }, [currentPage, sortField]);
 
   return (
-    <>
+    <div className={"flex flex-col items-center"}>
       {isLoggedIn ? (
         <div>
           <Headline titleText={"Book Wishlist"} />
@@ -63,5 +63,6 @@ export const Wishlist = () => {
         <Navigate replace to="/sign-up" /> // This doesn't appear to work. Navigates to "/"
       )}
     </>
+
   );
 };

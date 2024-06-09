@@ -54,6 +54,7 @@ export const useUserStore = create((set, get) => ({
 
   // removes accesstoken and username from localstorage and resets/empties the data in zustand when the user sign out.
   signOut: () => {
+    console.log('Signing out...');
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     set({
@@ -101,7 +102,6 @@ export const useUserStore = create((set, get) => ({
       localStorage.setItem("token", JSON.stringify(updatedAccessToken));
       localStorage.setItem("username", JSON.stringify(updatedUsername));
 
-      // set({ username: updatedUsername })
 
       return true;
     } catch (error) {
