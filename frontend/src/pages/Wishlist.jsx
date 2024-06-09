@@ -9,25 +9,21 @@ export const Wishlist = () => {
 
   return (
     <div classname={"flex flex-col items-center"}>
-
       {isLoggedIn ? (
-        <div classname={"flex flex-col items-center"}>
-
-          <div className="flex flex-col items-center">
+        <>
+          <div className="flex flex-col border justify-center items-center">
             <Headline section={"py-0 pt-4"} titleText={"Book Wishlist"} />
             <Text section={"pb-2"} text={"Add your book wish!"} />
-            </div>
+          </div>
 
-          <div >
+          <div className="max-w-md mx-auto">
             <WishlistForm />
             <WishlistCard />
-            </div>
-
-        </div>
+          </div>
+        </>
       ) : (
         <Navigate replace to="/sign-up" />
       )}
-      ;
     </div>
   );
 };

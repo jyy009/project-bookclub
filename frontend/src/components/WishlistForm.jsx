@@ -95,75 +95,39 @@ export const WishlistForm = () => {
   );
 
   return (
-    // <div className="flex flex-col border border-black">
-    <form
-      className="flex flex-col gap-2 px-3 border border-black"
-      onSubmit={handleWishlistSubmit}
-    >
-      <div className={"flex flex-col gap-2 border border-blue-500 "}>
-        {/* <TextInput
-              label={"Title"}
-              inputType={"text"}
-              inputName={"title"}
-              placeholder={"Book title..."}
-              value={wishlistData.title}
-              onChange={(event) =>
-                handleWishlistChange("title", event.target.value)
-              }
-              inputStyle={"pl-2 bg-fourth placeholder-gray-500"}
-              labelStyle={"flex flex-col"}
-            />
-            <TextInput
-              label={"Author"}
-              inputType={"text"}
-              inputName={"author"}
-              placeholder={"Book author..."}
-              value={wishlistData.author}
-              onChange={(event) =>
-                handleWishlistChange("author", event.target.value)
-              }
-              inputStyle={"pl-2 bg-fourth placeholder-gray-500"}
-              labelStyle={"flex flex-col"}
-            />
-            <TextInput
-              label={"Message"}
-              inputType={"text"}
-              inputName={"message"}
-              placeholder={"Message..."}
-              value={wishlistData.message}
-              onChange={(event) =>
-                handleWishlistChange("message", event.target.value)
-              }
-              inputStyle={"pl-2 bg-fourth placeholder-gray-500"}
-              labelStyle={"flex flex-col"}
-            /> */}
-        {renderTextInput("Title", "title", "Book title...")}
-        {renderTextInput("Author", "author", "Book author...")}
-        {renderTextInput("Message", "message", "Message...")}
-      </div>
+    <div className="justify-center border border-black ">
+      <form
+        className="flex flex-col  gap-2 px-3 border border-black"
+        onSubmit={handleWishlistSubmit}
+      >
+        <div className={"flex flex-col gap-2 border border-blue-500"}>
+          {renderTextInput("Title", "title", "Book title...")}
+          {renderTextInput("Author", "author", "Book author...")}
+          {renderTextInput("Message", "message", "Message...")}
+        </div>
 
-      <div className={"border border-red-600"}>
-        <label>
-          Anonymous
-          <input
-            type="checkbox"
-            name="anonymous"
-            value="Anonymous"
-            onChange={toggleCheckbox}
+        <div className={"mx-auto border border-red-600"}>
+          <label>
+            Anonymous
+            <input
+              type="checkbox"
+              name="anonymous"
+              value="Anonymous"
+              onChange={toggleCheckbox}
+            />
+          </label>
+        </div>
+
+        <div className={"border border-green-600 mx-auto"}>
+          <Button
+            buttonStyle={
+              "bg-tertiary px-12 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
+            }
+            type={"submit"}
+            btnText={"Submit"}
           />
-        </label>
-      </div>
-
-      <div className={"border border-red-600"}>
-        <Button
-          buttonStyle={
-            "bg-tertiary px-12 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
-          }
-          type={"submit"}
-          btnText={"Submit"}
-        />
-      </div>
-    </form>
-    // </div>
+        </div>
+      </form>
+    </div>
   );
 };

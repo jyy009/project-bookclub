@@ -1,6 +1,9 @@
 import { create } from "zustand";
+import { Loading } from "../components/Loading";
 
 export const useWishStore = create((set, get) => ({
+  loading: false,
+
   wishlist: [],
   setWishlist: (newWish) =>
     set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
@@ -44,6 +47,8 @@ export const useWishStore = create((set, get) => ({
   },
 
   fetchWishlist: async () => {
+    set({loading: true})
+
     try {
       const response = await fetch(
         "https://project-final-rvhj.onrender.com/wishlist"
@@ -58,6 +63,8 @@ export const useWishStore = create((set, get) => ({
     } catch (error) {
       console.error("Error posting wish:", error);
       return false;
+    } finally {
+      set ({ loading: false})
     }
   },
 }));
