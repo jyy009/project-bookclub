@@ -22,6 +22,7 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
+  userId: "",
 
   // TODO create function that takes key and value as input and updates keys here in zustand.
   setData: (key, value) => {
@@ -93,6 +94,7 @@ export const useUserStore = create((set, get) => ({
         console.error("Backend error:", errorResponse.message || errorResponse);
       }
       const result = await response.json();
+      console.log(result);
       set((state) => ({ ...state, accessToken: result.accessToken }));
       const updatedAccessToken = get().accessToken;
       const updatedUsername = get().signUpData.username;
@@ -149,13 +151,12 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         accessToken: result.accessToken,
+        userId: result.userId,
         username: loginData.username,
       }));
-      const updatedAccessToken = get().accessToken;
-      const updatedUsername = get().loginData.username;
-
-      localStorage.setItem("token", updatedAccessToken);
-      localStorage.setItem("username", updatedUsername);
+      localStorage.setItem("token", result.accessToken);
+      localStorage.setItem("userId", result.userId);
+      localStorage.setItem("username", loginData.username);
       set({
         loginData: {
           username: "",
@@ -185,8 +186,13 @@ export const useUserStore = create((set, get) => ({
       } else {
         const result = await response.json();
         console.log(result.isLoggedIn);
-        set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
+        set((state) => ({
+          ...state,
+          isLoggedIn: result.isLoggedIn,
+          userId: result.userId,
+        }));
         localStorage.setItem("isLoggedIn", result.isLoggedIn);
+        localStorage.setItem("userId", result.userId);
       }
     } catch (error) {
       console.error("Error fetching data:", error);

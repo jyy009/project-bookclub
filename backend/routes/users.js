@@ -5,12 +5,24 @@ import User from "../models/User";
 const router = express.Router();
 
 const authenticateUser = async (req, res, next) => {
-  const user = await User.findOne({ accessToken: req.header("Authorization") });
-  if (user) {
-    req.user = user;
-    next();
-  } else {
-    res.status(401).json({ loggedOut: true });
+  try {
+    const user = await User.findOne({
+      accessToken: req.header("Authorization"),
+    });
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      res
+        .status(401)
+        .json({ success: false, message: "Unauthorized, user not found" });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Bad request, user not found",
+      response: error,
+    });
   }
 };
 
@@ -80,7 +92,7 @@ router.get("/users/:userId", async (req, res) => {
 // });
 
 router.get("/users/membership", authenticateUser, (req, res) => {
-  res.json({ isLoggedIn: true });
+  res.json({ isLoggedIn: true, userId: req.user._id });
 });
 
 router.post("/users/sessions", async (req, res) => {

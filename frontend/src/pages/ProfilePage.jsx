@@ -1,7 +1,7 @@
 import { useUserStore } from "../store/useUserStore";
 
 export const ProfilePage = () => {
-  const { username, userId } = useUserStore();
-  console.log(userId);
+  const { username, isLoggedIn, userId } = useUserStore();
+  console.log(isLoggedIn, "userId:", userId);
   return <div>This is {username}'s profile page</div>;
 };
