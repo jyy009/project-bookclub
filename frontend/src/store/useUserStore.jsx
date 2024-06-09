@@ -182,10 +182,12 @@ export const useUserStore = create((set, get) => ({
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      } else {
+        const result = await response.json();
+        console.log(result.isLoggedIn);
+        set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
+        localStorage.setItem("isLoggedIn", result.isLoggedIn);
       }
-      const result = await response.json();
-      localStorage.setItem("isLoggedIn", result.isLoggedIn);
-      set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
     }

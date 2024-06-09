@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 
@@ -56,8 +56,30 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.get("/users/membership", authenticateUser);
-router.get("/users/membership", (req, res) => {
+router.get("/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).send("Could not find user");
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Bad request, user not found",
+    });
+  }
+});
+
+// router.get("/users/membership", authenticateUser);
+// router.get("/users/membership", (req, res) => {
+//   res.json({ isLoggedIn: true });
+// });
+
+router.get("/users/membership", authenticateUser, (req, res) => {
   res.json({ isLoggedIn: true });
 });
 
