@@ -1,7 +1,7 @@
 import { Navbar } from "./Navbar";
 import { Link } from "react-router-dom";
-import MobileLogo from "/icons/OMC.png";
-import TabletLogo from "/icons/OMC-MobileLogo2.png";
+import MobileLogo from "/icons/mobile-logo-omc.png";
+import TabletLogo from "/icons/tablet-logo-omc.png";
 import { useUserStore } from "../store/useUserStore";
 
 export const Header = () => {
@@ -21,9 +21,7 @@ export const Header = () => {
         </div>
         {isLoggedIn ? (
           <div className="flex justify-center mt-3 mb-1 sm:hidden">
-            <p className="font-worksans text-jeans">
-              Welcome {username}, happy reading!
-            </p>
+            <p className="font-worksans text-jeans">Welcome {username}, happy reading!</p>
           </div>
         ) : (
           ""
@@ -32,17 +30,11 @@ export const Header = () => {
       <header className="hidden sm:flex flex-col mt-5 mb-2 mx-5">
         <div className="flex justify-between">
           <Link to="/" className="cursor-pointer">
-            <img
-              src={TabletLogo}
-              alt="OMC Book Club"
-              className="hidden sm:flex"
-            />
+            <img src={TabletLogo} alt="OMC Book Club" className="hidden sm:flex" />
           </Link>
           {isLoggedIn ? (
             <div className="flex justify-center my-3 sm:flex">
-              <p className="font-worksans text-jeans">
-                Welcome {username}, happy reading!
-              </p>
+              <p className="font-worksans text-jeans">Welcome {username}, happy reading!</p>
             </div>
           ) : (
             ""

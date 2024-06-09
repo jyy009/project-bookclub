@@ -41,9 +41,12 @@ export const Navbar = () => {
                 Wishlist
               </NavLink>
               <NavLink
-                to="/sign-out"
+                to="/"
                 className={"cursor-pointer [&.active]:underline underline-offset-4"}
-                onClick={toggleMenu}>
+                onClick={() => {
+                  toggleMenu();
+                  signOut();
+                }}>
                 Sign out
               </NavLink>
             </>
@@ -95,7 +98,7 @@ export const Navbar = () => {
               to="/"
               className={"cursor-pointer [&.active]:underline underline-offset-4"}
               onClick={() => {
-                toggleMenu;
+                toggleMenu();
                 signOut();
               }}>
               Sign out
