@@ -11,10 +11,11 @@ export default {
         heroSand: "#F4F0EC", // hero section background
         warmOrange: "#EEAD59", // our orange
         plum: "#683651",
-        primary: "#8DACB1", // footer, nav-links
+        primary: "#8DACB1", // footer
         secondary: "#F5F5F5", // background
         tertiary: "#D33F2A", // buttons
-        fourth: "#D3E0E3" //wishlist input background
+        fourth: "#D3E0E3", //wishlist input background
+        fifth: "#375D51", //Logo, navlinks, hamburger icon
       },
       height: {
         largeImg: "500px",

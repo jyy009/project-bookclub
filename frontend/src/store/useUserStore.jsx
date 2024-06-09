@@ -3,7 +3,6 @@ import { create } from "zustand";
 const backend_url = import.meta.env.BACKEND_URL || "http://localhost:8080";
 
 export const useUserStore = create((set, get) => ({
-  // TODO Breakout this to a useEffect in the sign-up component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   signUpData: {
     name: "",
     email: "",
@@ -15,7 +14,6 @@ export const useUserStore = create((set, get) => ({
     verifyingPassword: "",
   },
 
-  // TODO Breakout this to a useEffect in the sign-in component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   loginData: {
     username: "",
     password: "",
@@ -27,7 +25,6 @@ export const useUserStore = create((set, get) => ({
   backendError: false,
   errorMessage: "",
 
-  // TODO create function that takes key and value as input and updates keys here in zustand.
   setData: (key, value) => {
     set({ [key]: value });
   },

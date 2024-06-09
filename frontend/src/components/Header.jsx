@@ -8,11 +8,12 @@ export const Header = () => {
   const { isLoggedIn, username } = useUserStore();
   return (
     <>
-      <header className="bg-cream px-2 py-3 sticky top-0 z-50 sm:hidden">
-        <div className="flex justify-between sm:flex-col">
-          <div className="flex items-center sm:items-start">
+      {/* Mobile header layout */}
+      <header className="px-4 py-4 sticky top-0 z-50 md:hidden">
+        <div className="flex justify-between ">
+          <div className="flex items-center items-start">
             <Link to="/" className="cursor-pointer">
-              <img src={MobileLogo} alt="OMC Book Club" className="sm:hidden" />
+              <img src={MobileLogo} alt="OMC Book Club" className="md:hidden" />
             </Link>
           </div>
           <div>
@@ -20,27 +21,28 @@ export const Header = () => {
           </div>
         </div>
         {isLoggedIn ? (
-          <div className="flex justify-center mt-3 mb-1 sm:hidden">
-            <p className="font-worksans text-jeans">Welcome {username}, happy reading!</p>
+          <div className="flex justify-center mt-3 md:hidden">
+            <p className="font-worksans text-fifth">Welcome {username}, happy reading!</p>
           </div>
         ) : (
           ""
         )}
       </header>
-      <header className="hidden sm:flex flex-col mt-5 mb-2 mx-5">
+      {/* Tablet and desktop header layout */}
+      <header className="hidden md:flex flex-col px-8 py-5 lg:px-32 xl:px-56">
         <div className="flex justify-between">
           <Link to="/" className="cursor-pointer">
-            <img src={TabletLogo} alt="OMC Book Club" className="hidden sm:flex" />
+            <img src={TabletLogo} alt="OMC Book Club" className="hidden md:flex" />
           </Link>
           {isLoggedIn ? (
-            <div className="flex justify-center my-3 sm:flex">
-              <p className="font-worksans text-jeans">Welcome {username}, happy reading!</p>
+            <div className="flex justify-center my-3 hidden md:flex">
+              <p className="font-worksans text-fifth text-lg">Welcome {username}, happy reading!</p>
             </div>
           ) : (
             ""
           )}
         </div>
-        <div className="mt-6">
+        <div className="mt-8">
           <Navbar />
         </div>
       </header>

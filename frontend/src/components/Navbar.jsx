@@ -12,11 +12,11 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="sm:hidden ">
+      <div className="md:hidden ">
         <nav
           className={
             showMenu
-              ? "fixed translate-y-14 transition duration-200 inset-y-0 inset-x-0 z-99 bg-cream text-jeans list-none pt-8 flex flex-col items-center gap-5 font-josefinsans text-lg"
+              ? "fixed translate-y-14 transition duration-200 inset-y-0 inset-x-0 z-99 bg-white text-fifth list-none pt-8 flex flex-col items-center gap-5 font-josefinsans text-xl"
               : "hidden"
           }>
           <NavLink
@@ -67,12 +67,14 @@ export const Navbar = () => {
             </>
           )}
         </nav>
+
         <button onClick={toggleMenu} className="flex cursor-pointer">
-          <i className={showMenu ? "hidden" : "menuIcon material-icons text-4xl text-jeans"}>menu</i>
-          <i className={showMenu ? "closeIcon material-icons text-4xl text-jeans" : "hidden"}>close</i>
+          <i className={showMenu ? "hidden" : "menuIcon material-icons text-4xl text-fifth"}>menu</i>
+          <i className={showMenu ? "closeIcon material-icons text-4xl text-fifth" : "hidden"}>close</i>
         </button>
       </div>
-      <nav className="hidden sm:flex justify-around text-jeans font-josefinsans text-xl">
+
+      <nav className="hidden md:flex justify-between text-fifth font-josefinsans text-xl">
         <NavLink
           to="/about-us"
           className={"cursor-pointer [&.active]:underline underline-offset-4"}
