@@ -44,7 +44,6 @@ export const WishlistForm = () => {
 
     try {
       const response = await fetch(
-
         "https://project-final-rvhj.onrender.com/wishlist",
 
         //"http://localhost:8080/wishlist",
@@ -84,34 +83,41 @@ export const WishlistForm = () => {
     beAnonymous();
   }, [anon]);
 
-  const renderTextInput = (label, name, placeholder) => (
+  const renderTextInput = (
+    label,
+    inputType,
+    name,
+    placeholder,
+    rows = null
+  ) => (
     <TextInput
       label={label}
-      inputType="text"
+      inputType={inputType}
       inputName={name}
       placeholder={placeholder}
       value={wishlistData[name]}
       onChange={(event) => handleWishlistChange(name, event.target.value)}
       inputStyle="pl-2 bg-fourth placeholder-gray-500 rounded-lg"
       labelStyle="flex flex-col"
+      {...(inputType === "textarea" && { rows })}
     />
   );
 
   return (
     <div className="justify-center border border-black ">
       <form
-        className="flex flex-col  gap-2  border border-black pb-4"
+        className="flex flex-col gap-2 border border-black pb-4"
         onSubmit={handleWishlistSubmit}
       >
         <div className={"flex flex-col gap-2 border border-blue-500"}>
-          {renderTextInput("Title", "title", "Book title...")}
-          {renderTextInput("Author", "author", "Book author...")}
-          {renderTextInput("Message", "message", "Message...")}
+          {renderTextInput("Title", "text", "title", "Book title...")}
+          {renderTextInput("Author", "text", "author", "Book author...")}
+          {renderTextInput("Message", "textarea", "message", "Message...", 3)}
         </div>
 
         <div className={"mx-auto border border-red-600"}>
-          <label>
-            Anonymous
+          <label className="flex items-center space-x-2">
+            <span>Anonymous</span>
             <input
               type="checkbox"
               name="anonymous"
@@ -124,7 +130,7 @@ export const WishlistForm = () => {
         <div className={"border border-green-600 mx-auto"}>
           <Button
             buttonStyle={
-              "bg-tertiary px-12 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
+              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20"
             }
             type={"submit"}
             btnText={"Submit"}

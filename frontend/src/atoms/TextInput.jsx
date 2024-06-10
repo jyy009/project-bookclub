@@ -1,9 +1,11 @@
-export const TextInput = ({ inputType, inputName, placeholder, label, value, onChange, labelStyle, inputStyle }) => {
+export const TextInput = ({ inputType, inputName, placeholder, label, value, onChange, labelStyle, inputStyle, rows }) => {
+  const InputElement = inputType === "textarea"? "textarea" : "input";
+
   return (
     <>
       <label className={labelStyle}>
         {label}
-        <input
+        <InputElement
           type={inputType}
           placeholder={placeholder}
           name={inputName}
@@ -11,7 +13,8 @@ export const TextInput = ({ inputType, inputName, placeholder, label, value, onC
           value={value}
           onChange={onChange}
           className={inputStyle}
-        />
+          rows={inputType === "textarea"? rows : undefined}        
+          />
       </label>
     </>
   );

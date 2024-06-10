@@ -6,7 +6,26 @@ import { useWishStore } from "../store/useWishStore";
 export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
   const { isLastPage } = useWishStore();
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col justify-center items-center border border-black">
+      
+      <div className="border border-red-500 mx-auto">
+        <Text text={"Sort by:"} section="text-center"/>
+        <Button
+          onClick={() => sortWishes("createdAt")}
+          btnText={"Newest"}
+          buttonStyle={
+            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md mr-2 w-20"
+          }
+        />
+        <Button
+          onClick={() => sortWishes("likes")}
+          btnText={"Likes"}
+          buttonStyle={
+            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md w-20"
+          }
+        />
+      </div>
+
       <div className="flex">
         <Button
           onClick={() => navigatePage(currentPage - 1)}
@@ -30,23 +49,7 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
           } 
         />
       </div>
-      <div className="">
-        <Text text={"Sort by:"} />
-        <Button
-          onClick={() => sortWishes("createdAt")}
-          btnText={"Newest"}
-          buttonStyle={
-            "bg-tertiary px-4 py-1 text-secondary font-josefinsans rounded-md mr-2"
-          }
-        />
-        <Button
-          onClick={() => sortWishes("likes")}
-          btnText={"Likes"}
-          buttonStyle={
-            "bg-tertiary px-4 py-1 text-secondary font-josefinsans rounded-md"
-          }
-        />
-      </div>
+      
     </div>
   );
 };

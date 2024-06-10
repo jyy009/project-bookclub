@@ -6,9 +6,8 @@ export const WishlistCard = ({ id, title, author, message, user, likes }) => {
   const { handleLike } = useWishStore();
 
   return (
-
-    <div className="border border-orange-700 bg-fourth rounded-lg">
-
+    <div className="flex flex-col border border-orange-700 bg-fourth rounded-lg w-full">
+<div className="">
       <Text text={title} />
       <Text text={author} />
       <Text text={message} />
@@ -23,6 +22,7 @@ export const WishlistCard = ({ id, title, author, message, user, likes }) => {
         onClick={(event) => handleLike(event, id)}
         likes={likes}
       />
+      </div>
     </div>
   );
 };
