@@ -3,7 +3,7 @@ import { useUserStore } from "../store/useUserStore";
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
 
-const backend_url = import.meta.env.VITE_BACKEND_URL;
+const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
 export const ProfilePage = () => {
   const { username } = useUserStore();
@@ -12,7 +12,7 @@ export const ProfilePage = () => {
 
   const fetchProfile = async (id) => {
     try {
-      const response = await fetch(`${backend_url}/${id}`);
+      const response = await fetch(`${backend_url}/users/${id}`);
       if (!response.ok) {
         throw new Error("Profile response was not ok");
       }

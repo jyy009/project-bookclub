@@ -54,7 +54,6 @@ export const useUserStore = create((set, get) => ({
 
   // removes accesstoken and username from localstorage and resets/empties the data in zustand when the user sign out.
   signOut: () => {
-    console.log("Signing out...");
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     set({
@@ -132,8 +131,7 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage:
-          "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -182,12 +180,15 @@ export const useUserStore = create((set, get) => ({
           ...state,
           accessToken: result.accessToken,
           username: loginData.username,
+          userId: result.userId,
         }));
         const updatedAccessToken = get().accessToken;
         const updatedUsername = get().loginData.username;
+        const updatedUserId = get().userId;
 
         localStorage.setItem("token", updatedAccessToken);
         localStorage.setItem("username", updatedUsername);
+        localStorage.setItem("userId", updatedUserId);
         set({
           loginData: {
             username: "",
@@ -200,8 +201,7 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage:
-          "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -218,10 +218,11 @@ export const useUserStore = create((set, get) => ({
       });
       if (!response.ok) {
         const result = await response.json();
+      } else {
+        const result = await response.json();
+        localStorage.setItem("isLoggedIn", result.isLoggedIn);
+        set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
       }
-      const result = await response.json();
-      localStorage.setItem("isLoggedIn", result.isLoggedIn);
-      set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
