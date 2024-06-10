@@ -74,8 +74,8 @@ export const useUserStore = create((set, get) => ({
     }
     try {
       const response = await fetch(
-        //"https://project-final-rvhj.onrender.com/users",
-        "http://localhost:8080/users",
+        "https://project-final-rvhj.onrender.com/users",
+        //"http://localhost:8080/users",
         {
           method: "POST",
           body: JSON.stringify({
@@ -131,8 +131,8 @@ export const useUserStore = create((set, get) => ({
     const { loginData } = get();
     try {
       const response = await fetch(
-        //"https://project-final-rvhj.onrender.com/users/sessions",
-        "http://localhost:8080/users/sessions",
+        "https://project-final-rvhj.onrender.com/users/sessions",
+        //"http://localhost:8080/users/sessions",
         {
           method: "POST",
           body: JSON.stringify({
@@ -170,8 +170,8 @@ export const useUserStore = create((set, get) => ({
   validateLoggedInData: async (accessToken) => {
     try {
       const response = await fetch(
-        // "https://project-final-rvhj.onrender.com/users/membership",
-        "http://localhost:8080/users/membership",
+        "https://project-final-rvhj.onrender.com/users/membership",
+        // "http://localhost:8080/users/membership",
         {
           method: "GET",
           headers: {
