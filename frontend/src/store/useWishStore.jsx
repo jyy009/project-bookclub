@@ -1,10 +1,14 @@
 import { create } from "zustand";
 import { Loading } from "../components/Loading";
 
+const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+
 export const useWishStore = create((set, get) => ({
   wishlistUrl: "https://project-final-rvhj.onrender.com/wishlist",
   loading: false,
   wishlist: [],
+
+
   pageSize: 5,
   isLastpage: false,
 
@@ -25,15 +29,12 @@ export const useWishStore = create((set, get) => ({
     const { wishlistUrl } = get();
 
     try {
-      const response = await fetch(
-        `${wishlistUrl}/${wishId}/like`,
-        // `http://localhost:8080/wishlist/${wishId}/like`,
-        {
-          method: "POST",
-          body: JSON.stringify({}),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+
+      const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
+        method: "POST",
+        body: JSON.stringify({}),
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -52,14 +53,14 @@ export const useWishStore = create((set, get) => ({
   },
 
   fetchWishlist: async (page, sortField) => {
-    const { pageSize } = get();
-    const { wishlistUrl } = get();
+
     set({ loading: true });
+    const { pageSize } = get();
 
     try {
       const response = await fetch(
-        `${wishlistUrl}`
-        // `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
+        `${backend_url}/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
+
       );
 
       if (!response.ok) {

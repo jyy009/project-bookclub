@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-export const useUserStore = create((set, get) => ({
-  // TODO Breakout this to a useEffect in the sign-up component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 
-  userUrl: "http://localhost:8080/users", //"https://project-final-rvhj.onrender.com/users",
+export const useUserStore = create((set, get) => ({
+
   signUpData: {
     name: "",
     email: "",
@@ -15,7 +15,6 @@ export const useUserStore = create((set, get) => ({
     verifyingPassword: "",
   },
 
-  // TODO Breakout this to a useEffect in the sign-in component, this is so that we dont accidentally expose the username/password from any other page/component in the frontend
   loginData: {
     username: "",
     password: "",
@@ -24,9 +23,13 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
+
   userId: "", // can't get this to work, will use localStorage
 
-  // TODO create function that takes key and value as input and updates keys here in zustand.
+  backendError: false,
+  errorMessage: "",
+
+
   setData: (key, value) => {
     set({ [key]: value });
   },
@@ -78,36 +81,70 @@ export const useUserStore = create((set, get) => ({
       return false;
     }
     try {
-      const response = await fetch(
-        userUrl,
-        // "http://localhost:8080/users",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            name: signUpData.name,
-            username: signUpData.username,
-            email: signUpData.email,
-            password: signUpData.password,
-            address: constructedAddress,
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+
+      const response = await fetch(`${backend_url}/users`, {
+        method: "POST",
+        body: JSON.stringify({
+          name: signUpData.name,
+          username: signUpData.username,
+          email: signUpData.email,
+          password: signUpData.password,
+          address: constructedAddress,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+
       if (!response.ok) {
         const errorResponse = await response.json();
-        console.error("Backend error:", errorResponse.message || errorResponse);
-      }
-      const result = await response.json();
-      console.log(result);
-      set((state) => ({ ...state, accessToken: result.accessToken }));
-      const updatedAccessToken = get().accessToken;
-      const updatedUsername = get().signUpData.username;
-      localStorage.setItem("token", JSON.stringify(updatedAccessToken));
-      localStorage.setItem("username", JSON.stringify(updatedUsername));
+        if (errorResponse.errorType === "password") {
+          set((state) => ({
+            ...state,
+            backendError: true,
+            errorMessage: "Password must be at least 8 characters long",
+          }));
+        }
+        if (errorResponse.errorType === "duplication") {
+          if (errorResponse.message === "username") {
+            set((state) => ({
+              ...state,
+              backendError: true,
+              errorMessage: "An account with that username already exists",
+            }));
+          }
+          if (errorResponse.message === "email") {
+            set((state) => ({
+              ...state,
+              backendError: true,
+              errorMessage: "An account with that email already exists",
+            }));
+          }
+        }
+        return false;
+      } else {
+        const result = await response.json();
+        console.log(result);
+        set((state) => ({
+          ...state,
+          accessToken: result.accessToken,
+          username: signUpData.username,
+        }));
+        const updatedAccessToken = get().accessToken;
+        const updatedUsername = get().signUpData.username;
 
-      return true;
+        localStorage.setItem("token", updatedAccessToken);
+        localStorage.setItem("username", updatedUsername);
+        console.log(result.message);
+
+        return true;
+      }
+
     } catch (error) {
-      console.error("Error adding new user:", error);
+      set((state) => ({
+        ...state,
+        backendError: true,
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
+      }));
       return false;
     }
   },
@@ -135,21 +172,44 @@ export const useUserStore = create((set, get) => ({
     const { loginData, userUrl, userId } = get();
 
     try {
-      const response = await fetch(
-        `${userUrl}/sessions`,
-        // "http://localhost:8080/users/sessions",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            username: loginData.username,
-            password: loginData.password,
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+
+      const response = await fetch(`${backend_url}/users/sessions`, {
+        method: "POST",
+        body: JSON.stringify({
+          username: loginData.username,
+          password: loginData.password,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        set((state) => ({
+          ...state,
+          backendError: true,
+          errorMessage: "Incorrect username or password",
+        }));
+        return false;
+      } else {
+        const result = await response.json();
+        set((state) => ({
+          ...state,
+          accessToken: result.accessToken,
+          username: loginData.username,
+        }));
+        const updatedAccessToken = get().accessToken;
+        const updatedUsername = get().loginData.username;
+
+        localStorage.setItem("token", updatedAccessToken);
+        localStorage.setItem("username", updatedUsername);
+        set({
+          loginData: {
+            username: "",
+            password: "",
+          },
+        });
+        return true;
       }
+
       const result = await response.json();
       console.log(result);
       set((state) => ({
@@ -170,24 +230,29 @@ export const useUserStore = create((set, get) => ({
         },
       });
     } catch (error) {
-      console.error("Error logging in", error);
+      set((state) => ({
+        ...state,
+        backendError: true,
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
+      }));
+      return false;
+
     }
   },
 
   validateLoggedInData: async (accessToken) => {
     const { userUrl } = get();
     try {
-      const response = await fetch(
-        `${userUrl}/membership`,
-        // "http://localhost:8080/users/membership",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: accessToken,
-          },
-        }
-      );
+
+    
+      const response = await fetch(`${backend_url}/users/membership`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+      });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       } else {
@@ -201,6 +266,7 @@ export const useUserStore = create((set, get) => ({
         // console.log("validation Id", result.userId);
         // localStorage.setItem("isLoggedIn", result.isLoggedIn);
         // localStorage.setItem("userId", result.userId);
+
       }
     } catch (error) {
       console.error("Error fetching data:", error);

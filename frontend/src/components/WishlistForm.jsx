@@ -44,7 +44,9 @@ export const WishlistForm = () => {
 
     try {
       const response = await fetch(
-        wishlistUrl,
+
+        "https://project-final-rvhj.onrender.com/wishlist",
+
         //"http://localhost:8080/wishlist",
         {
           method: "POST",
