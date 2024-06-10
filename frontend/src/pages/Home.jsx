@@ -10,6 +10,7 @@ import { Wishlist } from "./Wishlist";
 import { Register } from "./Register";
 import { SignIn } from "../components/SignIn";
 import { NotFound } from "./NotFound";
+import { ProfilePage } from "./ProfilePage";
 
 export const Home = () => {
   const { setData, validateLoggedInData, isLoggedIn } = useUserStore();
@@ -37,7 +38,7 @@ export const Home = () => {
   return (
     <>
       <BrowserRouter>
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow overflow-auto bg-secondary">
             <Routes>
@@ -50,6 +51,7 @@ export const Home = () => {
                   <Route path="/sign-up" element={<Navigate to="/" />} />
                   <Route path="/sign-in" element={<Navigate to="/" />} />
                   <Route path="/wishlist" element={<Wishlist />} />
+                  <Route path="/my-profile" element={<ProfilePage />} />
                 </>
               ) : (
                 <>
@@ -60,8 +62,8 @@ export const Home = () => {
               )}
               <Route path="/*" element={<NotFound />} />
             </Routes>
-            <Footer />
           </div>
+          <Footer />
         </div>
       </BrowserRouter>
     </>

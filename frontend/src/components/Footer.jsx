@@ -3,7 +3,7 @@ import { Image } from "../atoms/Image";
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center bg-primary text-black h-28 md:h-32 gap-2">
+    <footer className="flex flex-col items-center justify-center bg-primary text-black h-20 md:h-28 gap-2">
       <Text text={"omcbookclub@omc.omc"} />
       <div className="flex gap-5">
         <a className="cursor-pointer" href="">

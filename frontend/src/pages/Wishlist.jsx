@@ -28,6 +28,7 @@ export const Wishlist = () => {
   return (
     <div className={"flex flex-col items-center"}>
       {isLoggedIn ? (
+
         <>
           <div className="flex flex-col border justify-center items-center">
             <Headline section={"py-0 pt-4"} titleText={"Book Wishlist"} />

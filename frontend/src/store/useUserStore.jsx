@@ -3,6 +3,7 @@ import { create } from "zustand";
 const backend_url = import.meta.env.VITE_BACKEND_URL;
 
 export const useUserStore = create((set, get) => ({
+
   signUpData: {
     name: "",
     email: "",
@@ -22,8 +23,12 @@ export const useUserStore = create((set, get) => ({
   accessToken: "",
   username: "",
   isLoggedIn: false,
+
+  userId: "", // can't get this to work, will use localStorage
+
   backendError: false,
   errorMessage: "",
+
 
   setData: (key, value) => {
     set({ [key]: value });
@@ -68,6 +73,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
 
     const { signUpData } = get();
+    const { userUrl } = get();
     const constructedAddress = `${signUpData.street} ${signUpData.postCode} ${signUpData.city}`;
 
     if (signUpData.password !== signUpData.verifyingPassword) {
@@ -75,6 +81,7 @@ export const useUserStore = create((set, get) => ({
       return false;
     }
     try {
+
       const response = await fetch(`${backend_url}/users`, {
         method: "POST",
         body: JSON.stringify({
@@ -86,6 +93,7 @@ export const useUserStore = create((set, get) => ({
         }),
         headers: { "Content-Type": "application/json" },
       });
+
       if (!response.ok) {
         const errorResponse = await response.json();
         if (errorResponse.errorType === "password") {
@@ -114,6 +122,7 @@ export const useUserStore = create((set, get) => ({
         return false;
       } else {
         const result = await response.json();
+        console.log(result);
         set((state) => ({
           ...state,
           accessToken: result.accessToken,
@@ -128,6 +137,7 @@ export const useUserStore = create((set, get) => ({
 
         return true;
       }
+
     } catch (error) {
       set((state) => ({
         ...state,
@@ -159,8 +169,10 @@ export const useUserStore = create((set, get) => ({
 
   handleSubmitLogin: async (event) => {
     event.preventDefault();
-    const { loginData } = get();
+    const { loginData, userUrl, userId } = get();
+
     try {
+
       const response = await fetch(`${backend_url}/users/sessions`, {
         method: "POST",
         body: JSON.stringify({
@@ -169,7 +181,7 @@ export const useUserStore = create((set, get) => ({
         }),
         headers: { "Content-Type": "application/json" },
       });
-
+      
       if (!response.ok) {
         set((state) => ({
           ...state,
@@ -197,6 +209,26 @@ export const useUserStore = create((set, get) => ({
         });
         return true;
       }
+
+      const result = await response.json();
+      console.log(result);
+      set((state) => ({
+        ...state,
+        accessToken: result.accessToken,
+        userId: result.userId,
+        username: loginData.username,
+      }));
+      console.log("login Id", result.userId);
+      localStorage.setItem("token", result.accessToken);
+      localStorage.setItem("userId", result.userId);
+      localStorage.setItem("username", loginData.username);
+      console.log(userId);
+      set({
+        loginData: {
+          username: "",
+          password: "",
+        },
+      });
     } catch (error) {
       set((state) => ({
         ...state,
@@ -205,11 +237,15 @@ export const useUserStore = create((set, get) => ({
           "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
+
     }
   },
 
   validateLoggedInData: async (accessToken) => {
+    const { userUrl } = get();
     try {
+
+    
       const response = await fetch(`${backend_url}/users/membership`, {
         method: "GET",
         headers: {
@@ -217,13 +253,21 @@ export const useUserStore = create((set, get) => ({
           Authorization: accessToken,
         },
       });
-
       if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
         const result = await response.json();
+        console.log(result.isLoggedIn);
+        // set((state) => ({
+        //   ...state,
+        //   isLoggedIn: result.isLoggedIn,
+        //   userId: result.userId,
+        // }));
+        // console.log("validation Id", result.userId);
+        // localStorage.setItem("isLoggedIn", result.isLoggedIn);
+        // localStorage.setItem("userId", result.userId);
+
       }
-      const result = await response.json();
-      localStorage.setItem("isLoggedIn", result.isLoggedIn);
-      set((state) => ({ ...state, isLoggedIn: result.isLoggedIn }));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
