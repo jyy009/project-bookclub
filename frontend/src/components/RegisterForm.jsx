@@ -114,7 +114,12 @@ export const RegisterForm = () => {
         inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       {backendError && <p>{errorMessage}</p>}
-      <Button type={"submit"} btnText={"Sign up"} disabled={isLoading} />
+      <Button
+        type={"submit"}
+        btnText={"Sign up"}
+        disabled={isLoading}
+        buttonStyle="font-josefinsans bg-tertiary text-white px-8 py-1 flex rounded lg md:text-lg w-32"
+      />
     </form>
   );
 };
