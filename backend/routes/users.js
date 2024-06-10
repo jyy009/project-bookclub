@@ -6,16 +6,12 @@ const router = express.Router();
 
 const authenticateUser = async (req, res, next) => {
   try {
-    const user = await User.findOne({
-      accessToken: req.header("Authorization"),
-    });
+    const user = await User.findOne({ accessToken: req.header("Authorization") });
     if (user) {
       req.user = user;
       next();
     } else {
-      res
-        .status(401)
-        .json({ success: false, message: "Unauthorized, user not found" });
+      res.status(401).json({ success: false, message: "Unauthorized, user not found" });
     }
   } catch (error) {
     res.status(400).json({
@@ -78,55 +74,6 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.get("/users/:userId", async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const user = await User.findOne({ _id: userId });
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).send("Could not find user");
-    }
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      response: error,
-      message: "Bad request, user not found",
-    });
-  }
-});
-
-router.patch("/users/:userId/update", async (req, res) => {
-  const { userId } = req.params;
-  const { username } = req.body;
-  try {
-    const user = await User.findOne({ _id: userId });
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-    const updateUsername = await User.findByIdAndUpdate(
-      userId,
-      { username },
-      { new: true }
-    );
-    res.json({ success: true, username: updateUsername.username });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      response: error,
-      message: "Could not update username",
-    });
-  }
-});
-
-// router.get("/users/membership", authenticateUser);
-// router.get("/users/membership", (req, res) => {
-//   res.json({ isLoggedIn: true });
-// });
-
 router.get("/users/membership", authenticateUser, (req, res) => {
   res.json({ isLoggedIn: true, userId: req.user._id });
 });
@@ -148,6 +95,46 @@ router.post("/users/sessions", async (req, res) => {
       success: false,
       errorType: "login",
       message: "Login failed. Incorrect username or password",
+    });
+  }
+});
+
+router.get("/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).send("Could not find user");
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Bad request, user not found",
+    });
+  }
+});
+
+router.patch("/users/:userId/update", async (req, res) => {
+  const { userId } = req.params;
+  const { username } = req.body;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const updateUsername = await User.findByIdAndUpdate(userId, { username }, { new: true });
+    res.json({ success: true, username: updateUsername.username });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Could not update username",
     });
   }
 });
