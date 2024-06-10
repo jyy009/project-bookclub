@@ -1,19 +1,18 @@
 import { create } from "zustand";
 import { Loading } from "../components/Loading";
 
+const backend_url = import.meta.env.BACKEND_URL || "http://localhost:8080";
+
 export const useWishStore = create((set, get) => ({
   loading: false,
 
   wishlist: [],
-  
-  setWishlist: (newWish) =>
-    set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
+
+  setWishlist: (newWish) => set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
 
   updateLikes: (likesData, wishId) => {
     set((state) => ({
-      wishlist: state.wishlist.map((wish) =>
-        wish._id === wishId ? { ...wish, likes: likesData } : wish
-      ),
+      wishlist: state.wishlist.map((wish) => (wish._id === wishId ? { ...wish, likes: likesData } : wish)),
     }));
   },
 
@@ -22,14 +21,11 @@ export const useWishStore = create((set, get) => ({
     const { updateLikes } = get();
 
     try {
-      const response = await fetch(
-        `https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
-        {
-          method: "POST",
-          body: JSON.stringify({}),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
+        method: "POST",
+        body: JSON.stringify({}),
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -48,12 +44,10 @@ export const useWishStore = create((set, get) => ({
   },
 
   fetchWishlist: async () => {
-    set({loading: true})
+    set({ loading: true });
 
     try {
-      const response = await fetch(
-        "https://project-final-rvhj.onrender.com/wishlist"
-      );
+      const response = await fetch(`${backend_url}/wishlist`);
 
       if (!response.ok) {
         throw new Error("Network reponse was not ok ");
@@ -65,7 +59,7 @@ export const useWishStore = create((set, get) => ({
       console.error("Error posting wish:", error);
       return false;
     } finally {
-      set ({ loading: false})
+      set({ loading: false });
     }
   },
 }));
