@@ -8,7 +8,10 @@ export const useWishStore = create((set, get) => ({
 
   wishlist: [],
 
+  pageSize: 5,
+  isLastpage: false,
   setWishlist: (newWish) => set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
+
 
   updateLikes: (likesData, wishId) => {
     set((state) => ({
@@ -21,6 +24,7 @@ export const useWishStore = create((set, get) => ({
     const { updateLikes } = get();
 
     try {
+
       const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
         method: "POST",
         body: JSON.stringify({}),
@@ -43,20 +47,23 @@ export const useWishStore = create((set, get) => ({
     }
   },
 
-  fetchWishlist: async () => {
+
+  fetchWishlist: async (page, sortField) => {
     set({ loading: true });
+    const { pageSize } = get();
 
     try {
-      const response = await fetch(`${backend_url}/wishlist`);
+      const response = await fetch(`${backend_url}/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`);
 
       if (!response.ok) {
+        set({ isLastPage: true });
         throw new Error("Network reponse was not ok ");
       }
 
       const data = await response.json();
-      set({ wishlist: data });
+      set({ wishlist: data, isLastPage: false });
     } catch (error) {
-      console.error("Error posting wish:", error);
+      console.error("Error fetching wishlist:", error);
       return false;
     } finally {
       set({ loading: false });

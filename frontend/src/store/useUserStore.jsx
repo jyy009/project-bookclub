@@ -75,6 +75,7 @@ export const useUserStore = create((set, get) => ({
       return false;
     }
     try {
+
       const response = await fetch(`${backend_url}/users`, {
         method: "POST",
         body: JSON.stringify({
@@ -160,6 +161,7 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
     const { loginData } = get();
     try {
+
       const response = await fetch(`${backend_url}/users/sessions`, {
         method: "POST",
         body: JSON.stringify({
@@ -168,6 +170,7 @@ export const useUserStore = create((set, get) => ({
         }),
         headers: { "Content-Type": "application/json" },
       });
+
       if (!response.ok) {
         set((state) => ({
           ...state,
@@ -207,6 +210,7 @@ export const useUserStore = create((set, get) => ({
 
   validateLoggedInData: async (accessToken) => {
     try {
+
       const response = await fetch(`${backend_url}/users/membership`, {
         method: "GET",
         headers: {
@@ -214,6 +218,7 @@ export const useUserStore = create((set, get) => ({
           Authorization: accessToken,
         },
       });
+
       if (!response.ok) {
         const result = await response.json();
       }
