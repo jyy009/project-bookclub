@@ -3,14 +3,16 @@ import { useUserStore } from "../store/useUserStore";
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
 
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+
 export const ProfilePage = () => {
-  const { username, userUrl } = useUserStore();
+  const { username } = useUserStore();
   const userId = localStorage.getItem("userId");
   const [userData, setUserData] = useState({});
 
   const fetchProfile = async (id) => {
     try {
-      const response = await fetch(`${userUrl}/${id}`);
+      const response = await fetch(`${backend_url}/${id}`);
       if (!response.ok) {
         throw new Error("Profile response was not ok");
       }
