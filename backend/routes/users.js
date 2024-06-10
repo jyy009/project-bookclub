@@ -29,6 +29,7 @@ router.post("/users", async (req, res) => {
     if (!password || password.length < 8) {
       return res.status(400).json({
         success: false,
+        errorType: "password",
         message: "Password must be at least 8 characters long",
       });
     }
@@ -48,10 +49,19 @@ router.post("/users", async (req, res) => {
       message: "User created",
     });
   } catch (error) {
-    res.status(400).json({
+    // Check if the error is due to a duplicate key (e.g., username or email)
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        errorType: "duplication",
+        message: Object.keys(error.keyValue)[0],
+      });
+    }
+    // For other types of errors, just send the error message
+    return res.status(500).json({
       success: false,
-      errors: error.message,
-      message: "Could not create user",
+      errorType: "general",
+      message: error.message,
     });
   }
 });
@@ -63,10 +73,22 @@ router.get("/users/membership", (req, res) => {
 
 router.post("/users/sessions", async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
-  if (user && bcrypt.compareSync(req.body.password, user.password)) {
-    res.json({ userId: user._id, accessToken: user.accessToken });
+  if (user) {
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      res.json({ userId: user._id, accessToken: user.accessToken });
+    } else {
+      return res.status(400).json({
+        success: false,
+        errorType: "login",
+        message: "Login failed. Incorrect username or password",
+      });
+    }
   } else {
-    res.json({ notFound: true });
+    return res.status(400).json({
+      success: false,
+      errorType: "login",
+      message: "Login failed. Incorrect username or password",
+    });
   }
 });
 

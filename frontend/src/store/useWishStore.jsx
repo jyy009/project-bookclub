@@ -1,17 +1,21 @@
 import { create } from "zustand";
+import { Loading } from "../components/Loading";
+
+const backend_url = import.meta.env.BACKEND_URL || "http://localhost:8080";
 
 export const useWishStore = create((set, get) => ({
+  loading: false,
+
   wishlist: [],
+
   pageSize: 5,
   isLastpage: false,
-  setWishlist: (newWish) =>
-    set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
+  setWishlist: (newWish) => set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
+
 
   updateLikes: (likesData, wishId) => {
     set((state) => ({
-      wishlist: state.wishlist.map((wish) =>
-        wish._id === wishId ? { ...wish, likes: likesData } : wish
-      ),
+      wishlist: state.wishlist.map((wish) => (wish._id === wishId ? { ...wish, likes: likesData } : wish)),
     }));
   },
 
@@ -20,15 +24,12 @@ export const useWishStore = create((set, get) => ({
     const { updateLikes } = get();
 
     try {
-      const response = await fetch(
-        `https://project-final-rvhj.onrender.com/wishlist/${wishId}/like`,
-        //`http://localhost:8080/wishlist/${wishId}/like`,
-        {
-          method: "POST",
-          body: JSON.stringify({}),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+
+      const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
+        method: "POST",
+        body: JSON.stringify({}),
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -46,12 +47,13 @@ export const useWishStore = create((set, get) => ({
     }
   },
 
+
   fetchWishlist: async (page, sortField) => {
+    set({ loading: true });
     const { pageSize } = get();
+
     try {
-      const response = await fetch();
-      `https://project-final-rvhj.onrender.com/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`;
-      // `http://localhost:8080/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
+      const response = await fetch(`${backend_url}/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`);
 
       if (!response.ok) {
         set({ isLastPage: true });
@@ -63,6 +65,8 @@ export const useWishStore = create((set, get) => ({
     } catch (error) {
       console.error("Error fetching wishlist:", error);
       return false;
+    } finally {
+      set({ loading: false });
     }
   },
 }));

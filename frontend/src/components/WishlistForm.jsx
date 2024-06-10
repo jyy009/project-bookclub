@@ -82,43 +82,32 @@ export const WishlistForm = () => {
     beAnonymous();
   }, [anon]);
 
+  const renderTextInput = (label, name, placeholder) => (
+    <TextInput
+      label={label}
+      inputType="text"
+      inputName={name}
+      placeholder={placeholder}
+      value={wishlistData[name]}
+      onChange={(event) => handleWishlistChange(name, event.target.value)}
+      inputStyle="pl-2 bg-fourth placeholder-gray-500 rounded-lg"
+      labelStyle="flex flex-col"
+    />
+  );
+
   return (
-    <div className="flex flex-col">
+    <div className="justify-center border border-black ">
       <form
-        className="flex flex-col gap-2 items-center"
+        className="flex flex-col  gap-2  border border-black pb-4"
         onSubmit={handleWishlistSubmit}
       >
-        <TextInput
-          label={"Book title"}
-          inputType={"text"}
-          inputName={"title"}
-          placeholder={"Book title..."}
-          value={wishlistData.title}
-          onChange={(event) =>
-            handleWishlistChange("title", event.target.value)
-          }
-        />
-        <TextInput
-          label={"Book author"}
-          inputType={"text"}
-          inputName={"author"}
-          placeholder={"Book author..."}
-          value={wishlistData.author}
-          onChange={(event) =>
-            handleWishlistChange("author", event.target.value)
-          }
-        />
-        <TextInput
-          label={"Message"}
-          inputType={"text"}
-          inputName={"message"}
-          placeholder={"Message..."}
-          value={wishlistData.message}
-          onChange={(event) =>
-            handleWishlistChange("message", event.target.value)
-          }
-        />
-        <div>
+        <div className={"flex flex-col gap-2 border border-blue-500"}>
+          {renderTextInput("Title", "title", "Book title...")}
+          {renderTextInput("Author", "author", "Book author...")}
+          {renderTextInput("Message", "message", "Message...")}
+        </div>
+
+        <div className={"mx-auto border border-red-600"}>
           <label>
             Anonymous
             <input
@@ -129,7 +118,16 @@ export const WishlistForm = () => {
             />
           </label>
         </div>
-        <Button type={"submit"} btnText={"Submit"} />
+
+        <div className={"border border-green-600 mx-auto"}>
+          <Button
+            buttonStyle={
+              "bg-tertiary px-12 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
+            }
+            type={"submit"}
+            btnText={"Submit"}
+          />
+        </div>
       </form>
     </div>
   );

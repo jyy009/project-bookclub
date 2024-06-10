@@ -7,7 +7,7 @@ import { Button } from "../atoms/Button";
 
 export const NotFound = () => {
   const { isLoggedIn } = useUserStore();
-  console.log(isLoggedIn);
+  console.log("is logged in:", isLoggedIn);
 
   return (
     <section className="h-full">

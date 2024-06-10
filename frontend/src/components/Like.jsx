@@ -1,4 +1,4 @@
-export const Like = ({ emoji, label, onClick, likes, time }) => {
+export const Like = ({ imageUrl, label, onClick, likes, time }) => {
   return (
     <div
       className="heart-container"
@@ -7,10 +7,14 @@ export const Like = ({ emoji, label, onClick, likes, time }) => {
       aria-hidden={label ? "false" : "true"}
     >
       <div className="heart-likes">
+
         <button className="heart-button" type="submit" onClick={onClick}>
-          {emoji}
+
+        <img src={imageUrl} alt="like" className="inline-block h-5 w-5 mr-2" />
+          
         </button>
-        <p>x{likes}</p>
+
+        <span>x{likes}</span>
       </div>
       <p className="time">{time}</p>
     </div>
