@@ -13,12 +13,13 @@ export const WishlistCard = ({ id, title, author, message, user, likes }) => {
 
       <Text text={user} />
       <Like
-                imageUrl={wish.likes > 0 ? "../icons/heartred.svg" : "../icons/heartblue.svg"}
-                label="heart"
-                onClick={(event) => handleLike(event, wish._id)}
-                likes={wish.likes}
-              />
+        imageUrl={
+          likes > 0 ? "../icons/heartred.svg" : "../icons/heartblue.svg"
+        }
+        label="heart"
+        onClick={(event) => handleLike(event, id)}
+        likes={likes}
+      />
     </div>
-
   );
 };

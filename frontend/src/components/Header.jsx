@@ -11,7 +11,7 @@ export const Header = () => {
       {/* Mobile header layout */}
       <header className="px-4 py-4 sticky top-0 z-50 md:hidden">
         <div className="flex justify-between ">
-          <div className="flex items-center items-start">
+          <div className="flex items-center">
             <Link to="/" className="cursor-pointer">
               <img src={MobileLogo} alt="OMC Book Club" className="md:hidden" />
             </Link>
@@ -35,7 +35,7 @@ export const Header = () => {
             <img src={TabletLogo} alt="OMC Book Club" className="hidden md:flex" />
           </Link>
           {isLoggedIn ? (
-            <div className="flex justify-center my-3 hidden md:flex">
+            <div className="justify-center my-3 hidden md:flex">
               <p className="font-worksans text-fifth text-lg">Welcome {username}, happy reading!</p>
             </div>
           ) : (

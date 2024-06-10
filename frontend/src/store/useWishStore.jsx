@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Loading } from "../components/Loading";
 
-const backend_url = import.meta.env.BACKEND_URL || "http://localhost:8080";
+const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
 export const useWishStore = create((set, get) => ({
   loading: false,
@@ -10,12 +10,14 @@ export const useWishStore = create((set, get) => ({
 
   pageSize: 5,
   isLastpage: false,
-  setWishlist: (newWish) => set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
-
+  setWishlist: (newWish) =>
+    set((state) => ({ ...state, wishlist: [newWish, ...state.wishlist] })),
 
   updateLikes: (likesData, wishId) => {
     set((state) => ({
-      wishlist: state.wishlist.map((wish) => (wish._id === wishId ? { ...wish, likes: likesData } : wish)),
+      wishlist: state.wishlist.map((wish) =>
+        wish._id === wishId ? { ...wish, likes: likesData } : wish
+      ),
     }));
   },
 
@@ -24,7 +26,6 @@ export const useWishStore = create((set, get) => ({
     const { updateLikes } = get();
 
     try {
-
       const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
         method: "POST",
         body: JSON.stringify({}),
@@ -47,13 +48,14 @@ export const useWishStore = create((set, get) => ({
     }
   },
 
-
   fetchWishlist: async (page, sortField) => {
     set({ loading: true });
     const { pageSize } = get();
 
     try {
-      const response = await fetch(`${backend_url}/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`);
+      const response = await fetch(
+        `${backend_url}/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
+      );
 
       if (!response.ok) {
         set({ isLastPage: true });
