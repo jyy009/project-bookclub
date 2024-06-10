@@ -75,7 +75,6 @@ export const useUserStore = create((set, get) => ({
       return false;
     }
     try {
-
       const response = await fetch(`${backend_url}/users`, {
         method: "POST",
         body: JSON.stringify({
@@ -133,7 +132,8 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -161,7 +161,6 @@ export const useUserStore = create((set, get) => ({
     event.preventDefault();
     const { loginData } = get();
     try {
-
       const response = await fetch(`${backend_url}/users/sessions`, {
         method: "POST",
         body: JSON.stringify({
@@ -202,7 +201,8 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -210,7 +210,6 @@ export const useUserStore = create((set, get) => ({
 
   validateLoggedInData: async (accessToken) => {
     try {
-
       const response = await fetch(`${backend_url}/users/membership`, {
         method: "GET",
         headers: {
