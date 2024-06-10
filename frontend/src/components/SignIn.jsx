@@ -76,7 +76,7 @@ export const SignIn = () => {
               <br />
               Lets join our book club and{" "}
               <Link to="/sign-up" className="italic underline underline-offset-4 cursor-pointer">
-                sign up
+                sign up.
               </Link>
             </p>
           </div>

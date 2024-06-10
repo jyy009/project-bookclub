@@ -21,7 +21,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className="flex flex-col py-4 mx-auto w-3/4 md:w-1/2 lg:w-2/5">
       <TextInput
         label={"Full name"}
         inputType={"text"}
@@ -29,6 +29,8 @@ export const RegisterForm = () => {
         placeholder={"Type your full name"}
         value={signUpData.name}
         onChange={(event) => handleSignUpChange("name", event.target.value)}
+        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <TextInput
         label={"E-mail"}
@@ -37,6 +39,8 @@ export const RegisterForm = () => {
         placeholder={"Type your e-mail"}
         value={signUpData.email}
         onChange={(event) => handleSignUpChange("email", event.target.value)}
+        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <fieldset>
         <legend>Address</legend>
@@ -47,10 +51,12 @@ export const RegisterForm = () => {
           placeholder={"Type your street"}
           value={signUpData.street}
           onChange={(event) => handleSignUpChange("street", event.target.value)}
+          labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+          inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
         />
 
-        <div className="input-tablet-desktop">
-          <div className="postcode-box">
+        <div className="md:flex md:flex-row md:justify-between">
+          <div className="md:w-32">
             <TextInput
               label={"Post code"}
               inputType={"text"}
@@ -58,10 +64,12 @@ export const RegisterForm = () => {
               placeholder={"xxx xx"}
               value={signUpData.postCode.toString()}
               onChange={(event) => handleSignUpChange("postCode", event.target.value)}
+              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
           </div>
 
-          <div className="city-box">
+          <div className="md:w-64 xl:w-80">
             <TextInput
               label={"City"}
               inputType={"text"}
@@ -69,6 +77,8 @@ export const RegisterForm = () => {
               placeholder={"Type your city"}
               value={signUpData.city}
               onChange={(event) => handleSignUpChange("city", event.target.value)}
+              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
           </div>
         </div>
@@ -80,6 +90,8 @@ export const RegisterForm = () => {
         placeholder={"Type your username"}
         value={signUpData.username}
         onChange={(event) => handleSignUpChange("username", event.target.value)}
+        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <TextInput
         label={"Password"}
@@ -88,6 +100,8 @@ export const RegisterForm = () => {
         placeholder={"Type your password"}
         value={signUpData.password}
         onChange={(event) => handleSignUpChange("password", event.target.value)}
+        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <TextInput
         label={"Verifying password"}
@@ -96,6 +110,8 @@ export const RegisterForm = () => {
         placeholder={"Re-enter your password"}
         value={signUpData.verifyingPassword}
         onChange={(event) => handleSignUpChange("verifyingPassword", event.target.value)}
+        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
+        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       {backendError && <p>{errorMessage}</p>}
       <Button type={"submit"} btnText={"Sign up"} disabled={isLoading} />
