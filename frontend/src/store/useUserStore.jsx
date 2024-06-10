@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
-const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+//const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+const backend_url = "http://localhost:8080";
 
 export const useUserStore = create((set, get) => ({
   signUpData: {
@@ -56,6 +57,8 @@ export const useUserStore = create((set, get) => ({
   signOut: () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isLoggedIn");
     set({
       accessToken: "",
       username: "",
@@ -117,12 +120,14 @@ export const useUserStore = create((set, get) => ({
           ...state,
           accessToken: result.accessToken,
           username: signUpData.username,
+          userId: result.userId,
         }));
         const updatedAccessToken = get().accessToken;
         const updatedUsername = get().signUpData.username;
-
+        const updatedUserId = get().userId;
         localStorage.setItem("token", updatedAccessToken);
         localStorage.setItem("username", updatedUsername);
+        localStorage.setItem("userId", updatedUserId);
         console.log(result.message);
 
         return true;
@@ -131,7 +136,8 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -201,7 +207,8 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }

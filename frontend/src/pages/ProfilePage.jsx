@@ -3,12 +3,16 @@ import { useUserStore } from "../store/useUserStore";
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
 
-const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+//const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+
+const backend_url = "http://localhost:8080";
 
 export const ProfilePage = () => {
   const { username } = useUserStore();
   const userId = localStorage.getItem("userId");
   const [userData, setUserData] = useState({});
+  const [newEmail, setNewEmail] = useState("tommy@me.com"); // add input fields that lets you setNewEmail/newAddress
+  const [updateCount, setUpdateCount] = useState(0);
 
   const fetchProfile = async (id) => {
     try {
@@ -23,18 +27,42 @@ export const ProfilePage = () => {
     }
   };
 
+  const updateEmail = async (id, newEmail) => {
+    try {
+      const response = await fetch(`${backend_url}/users/${id}/update`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          email: newEmail,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) {
+        throw new Error("Patching response was not ok");
+      } else {
+        const result = await response.json();
+        setUpdateCount((prevCount) => prevCount + 1);
+        console.log(result);
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+
   useEffect(() => {
     fetchProfile(userId);
-  }, []);
+  }, [userId, updateCount]);
 
   return (
     <div className="mx-4 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
       <Headline titleText={`${username}`} />
-      <div className="flex flex-col gap-2 p-6 shadow">
+      <div className="flex flex-col gap-2 p-6 shadow bg-blue-300">
         <Text text={`Name: ${userData.name}`} />
         <Text text={`Email: ${userData.email}`} />
         <Text text={`Address: ${userData.address}`} />
       </div>
+      <button onClick={() => updateEmail(userId, newEmail)}>
+        Change email
+      </button>
     </div>
   );
 };

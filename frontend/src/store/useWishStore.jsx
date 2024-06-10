@@ -1,14 +1,11 @@
 import { create } from "zustand";
-import { Loading } from "../components/Loading";
 
-const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+// const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+const backend_url = "http://localhost:8080";
 
 export const useWishStore = create((set, get) => ({
-  wishlistUrl: "https://project-final-rvhj.onrender.com/wishlist",
   loading: false,
   wishlist: [],
-
-
   pageSize: 5,
   isLastpage: false,
 
@@ -26,10 +23,8 @@ export const useWishStore = create((set, get) => ({
   handleLike: async (event, wishId) => {
     event.preventDefault();
     const { updateLikes } = get();
-    const { wishlistUrl } = get();
 
     try {
-
       const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
         method: "POST",
         body: JSON.stringify({}),
@@ -53,14 +48,12 @@ export const useWishStore = create((set, get) => ({
   },
 
   fetchWishlist: async (page, sortField) => {
-
     set({ loading: true });
     const { pageSize } = get();
 
     try {
       const response = await fetch(
         `${backend_url}/wishlist?page=${page}&pageSize=${pageSize}&sortField=${sortField}`
-
       );
 
       if (!response.ok) {
