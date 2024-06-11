@@ -6,12 +6,16 @@ const router = express.Router();
 
 const authenticateUser = async (req, res, next) => {
   try {
-    const user = await User.findOne({ accessToken: req.header("Authorization") });
+    const user = await User.findOne({
+      accessToken: req.header("Authorization"),
+    });
     if (user) {
       req.user = user;
       next();
     } else {
-      res.status(401).json({ success: false, message: "Unauthorized, user not found" });
+      res
+        .status(401)
+        .json({ success: false, message: "Unauthorized, user not found" });
     }
   } catch (error) {
     res.status(400).json({
@@ -119,7 +123,7 @@ router.get("/users/:userId", async (req, res) => {
 
 router.patch("/users/:userId/update", async (req, res) => {
   const { userId } = req.params;
-  const { username } = req.body;
+  const { address } = req.body;
   try {
     const user = await User.findById(userId);
     if (!user) {
@@ -128,13 +132,17 @@ router.patch("/users/:userId/update", async (req, res) => {
         message: "User not found",
       });
     }
-    const updateUsername = await User.findByIdAndUpdate(userId, { username }, { new: true });
-    res.json({ success: true, username: updateUsername.username });
+    const updateAddress = await User.findByIdAndUpdate(
+      userId,
+      { address },
+      { new: true }
+    );
+    res.json({ success: true, address: updateAddress.address });
   } catch (error) {
     res.status(400).json({
       success: false,
       response: error,
-      message: "Could not update username",
+      message: "Could not update email",
     });
   }
 });
