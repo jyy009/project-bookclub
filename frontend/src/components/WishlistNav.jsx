@@ -6,9 +6,9 @@ import { useWishStore } from "../store/useWishStore";
 export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
   const { isLastPage } = useWishStore();
   return (
-    <div className="flex flex-col justify-center items-center border border-black">
+    <div className="flex flex-col gap-4 justify-center items-center pt-8">
       
-      <div className="border border-red-500 mx-auto">
+      <div className="mx-auto">
         <Text text={"Sort by:"} section="text-center"/>
         <Button
           onClick={() => sortWishes("createdAt")}

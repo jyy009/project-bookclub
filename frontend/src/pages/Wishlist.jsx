@@ -27,14 +27,15 @@ export const Wishlist = () => {
   }, [currentPage, sortField]);
 
   return (
-    <div className={"flex flex-col items-center"}>
+    <>
       {isLoggedIn ? (
-        <>
+        <div className={"flex flex-col items-center mx-auto pb-8"}>
           <div className="flex flex-col justify-center items-center">
             <Headline section={"py-0 pt-4"} titleText={"Book Wishlist"} />
             <Text section={"pb-2"} text={"Add your book wish!"} />
           </div>
 
+          <div className="w-full max-w-sm mx-auto p-2">
           <WishlistForm />
 
           <WishlistNav
@@ -42,8 +43,9 @@ export const Wishlist = () => {
             navigatePage={navigatePage}
             currentPage={currentPage}
           />
+          </div>
 
-          <div className="max-w-md mx-auto p-2">
+          <div className="w-full max-w-sm mx-auto p-2">
             {isLastPage && (
               <div className="text-center p-12">
                 <Text
@@ -53,6 +55,7 @@ export const Wishlist = () => {
                 />
               </div>
             )}
+
             <div className="flex flex-col gap-2">
               {!isLastPage && !loading ? (
                 wishlist.map((wish) => (
@@ -71,10 +74,10 @@ export const Wishlist = () => {
               )}
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <Navigate replace to="/sign-up" /> // This doesn't appear to work. Navigates to "/"
       )}
-    </div>
+    </>
   );
 };

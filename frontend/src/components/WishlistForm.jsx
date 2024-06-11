@@ -97,27 +97,27 @@ export const WishlistForm = () => {
       placeholder={placeholder}
       value={wishlistData[name]}
       onChange={(event) => handleWishlistChange(name, event.target.value)}
-      inputStyle="pl-2 bg-fourth placeholder-gray-500 rounded-lg"
+      inputStyle="pl-2 bg-fourth placeholder-gray-500 rounded-md"
       labelStyle="flex flex-col"
       {...(inputType === "textarea" && { rows })}
     />
   );
 
   return (
-    <div className="justify-center border border-black ">
+    <div className="justify-center">
       <form
-        className="flex flex-col gap-2 border border-black pb-4"
+        className="flex flex-col gap-2 pb-4"
         onSubmit={handleWishlistSubmit}
       >
-        <div className={"flex flex-col gap-2 border border-blue-500"}>
+        <div className={"flex flex-col gap-2"}>
           {renderTextInput("Title", "text", "title", "Book title...")}
           {renderTextInput("Author", "text", "author", "Book author...")}
           {renderTextInput("Message", "textarea", "message", "Message...", 3)}
         </div>
 
-        <div className={"mx-auto border border-red-600"}>
-          <label className="flex items-center space-x-2">
-            <span>Anonymous</span>
+        <div className={"self-end"}>
+          <label className="flex justify-center items-center space-x-2">
+            <span className="">Anonymous</span>
             <input
               type="checkbox"
               name="anonymous"
@@ -127,7 +127,7 @@ export const WishlistForm = () => {
           </label>
         </div>
 
-        <div className={"border border-green-600 mx-auto"}>
+        <div className={"self-end"}>
           <Button
             buttonStyle={
               "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20"
