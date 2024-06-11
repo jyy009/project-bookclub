@@ -121,9 +121,9 @@ router.get("/users/:userId", async (req, res) => {
   }
 });
 
-router.patch("/users/:userId/update", async (req, res) => {
+router.patch("/update/:userId/", async (req, res) => {
   const { userId } = req.params;
-  const { email } = req.body;
+  const { address } = req.body;
   try {
     const user = await User.findById(userId);
     if (!user) {
@@ -132,12 +132,12 @@ router.patch("/users/:userId/update", async (req, res) => {
         message: "User not found",
       });
     }
-    const updateEmail = await User.findByIdAndUpdate(
+    const updateAddress = await User.findByIdAndUpdate(
       userId,
-      { email },
+      { address },
       { new: true }
     );
-    res.json({ success: true, email: updateEmail.email });
+    res.json({ success: true, address: updateAddress.address });
   } catch (error) {
     res.status(400).json({
       success: false,
