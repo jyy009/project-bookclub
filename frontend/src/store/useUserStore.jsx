@@ -56,6 +56,8 @@ export const useUserStore = create((set, get) => ({
   signOut: () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isLoggedIn");
     set({
       accessToken: "",
       username: "",
@@ -117,12 +119,14 @@ export const useUserStore = create((set, get) => ({
           ...state,
           accessToken: result.accessToken,
           username: signUpData.username,
+          userId: result.userId,
         }));
         const updatedAccessToken = get().accessToken;
         const updatedUsername = get().signUpData.username;
-
+        const updatedUserId = get().userId;
         localStorage.setItem("token", updatedAccessToken);
         localStorage.setItem("username", updatedUsername);
+        localStorage.setItem("userId", updatedUserId);
         console.log(result.message);
 
         return true;
