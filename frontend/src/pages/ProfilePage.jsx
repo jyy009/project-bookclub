@@ -6,9 +6,7 @@ import { Button } from "../atoms/Button";
 import { TextInput } from "../atoms/TextInput";
 import { ProfileCard } from "../components/ProfileCard";
 
-//const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
-
-const backend_url = "http://localhost:8080";
+const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
 export const ProfilePage = () => {
   const { username } = useUserStore();
