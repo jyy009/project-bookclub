@@ -1,6 +1,7 @@
 import express, { response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -149,10 +150,17 @@ router.patch("/users/:userId/update", async (req, res) => {
 
 router.delete("/users/delete/:userId", async (req, res) => {
   const { userId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid user ID",
+    });
+  }
   try {
     console.log(req.params)
 
-    const deletedUser = await User.findOneAndDelete({ _id: userId})
+    const deletedUser = await User.findByIdAndDelete({ _id: userId})
     console.log(deletedUser)
     if (!deletedUser) {
       return res.status(400).json({

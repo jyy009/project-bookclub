@@ -180,18 +180,7 @@ export const ProfilePage = () => {
       <div>
         <Button
           btnText={"delete"}
-          onClick={(event) => handleDelete(event)}
-          type="submit"
-          buttonStyle={
-            "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-          }
-        />
-      </div>
-
-      <div>
-        <Button
-          btnText={"delete"}
-          onClick={(event) => handleDelete(event)}
+          onClick={(event) => handleDelete(event, userId)}
           type="submit"
           buttonStyle={
             "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
