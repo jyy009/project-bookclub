@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserStore } from "../store/useUserStore";
 import { Headline } from "../atoms/Headline";
 import { Text } from "../atoms/Text";
+import { Button } from "../atoms/Button"
 
 const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
@@ -34,6 +35,16 @@ export const ProfilePage = () => {
         <Text text={`Name: ${userData.name}`} />
         <Text text={`Email: ${userData.email}`} />
         <Text text={`Address: ${userData.address}`} />
+      </div>
+
+      <div>
+        <Button 
+        btnText={"delete"}
+        onClick={null}
+        type="submit"
+        buttonStyle={
+              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"}
+        />
       </div>
     </div>
   );

@@ -139,4 +139,23 @@ router.patch("/users/:userId/update", async (req, res) => {
   }
 });
 
+router.delete("/users/:userId/delete", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const deletedUser = await User.findOneAndDelete({ _id: userId})
+    if (!deletedUser) {
+      return res.status(400).json({
+        success: false,
+        message: "could not find user",
+      });
+    }
+    console.log(`User with ${userId} has been deleted`)
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      response: error,
+      message: "Could not delete username",
+    })  }
+})
+
 export default router;
