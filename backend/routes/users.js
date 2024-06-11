@@ -121,7 +121,7 @@ router.get("/users/:userId", async (req, res) => {
   }
 });
 
-router.patch("/update/:userId/", async (req, res) => {
+router.patch("/users/:userId/update", async (req, res) => {
   const { userId } = req.params;
   const { address } = req.body;
   try {
