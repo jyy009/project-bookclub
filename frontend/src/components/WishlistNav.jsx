@@ -14,14 +14,14 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
           onClick={() => sortWishes("createdAt")}
           btnText={"Newest"}
           buttonStyle={
-            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md mr-2 w-20"
+            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md mr-2 w-20 md:text-xl md:w-24"
           }
         />
         <Button
           onClick={() => sortWishes("likes")}
           btnText={"Likes"}
           buttonStyle={
-            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md w-20"
+            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md w-20 md:text-xl md:w-24"
           }
         />
       </div>

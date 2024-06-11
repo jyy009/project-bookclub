@@ -30,12 +30,12 @@ export const Wishlist = () => {
     <>
       {isLoggedIn ? (
         <div className={"flex flex-col items-center mx-auto pb-8"}>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center ">
             <Headline section={"py-0 pt-4"} titleText={"Book Wishlist"} />
             <Text section={"pb-2"} text={"Add your book wish!"} />
           </div>
 
-          <div className="w-full max-w-sm mx-auto p-2">
+          <div className="w-full max-w-sm mx-auto p-2 md:max-w-lg lg:max-w-3xl">
           <WishlistForm />
 
           <WishlistNav
@@ -45,7 +45,7 @@ export const Wishlist = () => {
           />
           </div>
 
-          <div className="w-full max-w-sm mx-auto p-2">
+          <div className="w-full max-w-sm mx-auto p-2 md:max-w-lg lg:max-w-3xl">
             {isLastPage && (
               <div className="text-center p-12">
                 <Text

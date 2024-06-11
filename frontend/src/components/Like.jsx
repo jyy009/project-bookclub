@@ -7,10 +7,10 @@ export const Like = ({ imageUrl, label, onClick, likes, time }) => {
       className="flex flex-row"
     >
       <button className="" type="submit" onClick={onClick}>
-        <img src={imageUrl} alt="like" className="inline-block h-5 w-5 mr-2" />
+        <img src={imageUrl} alt="like" className="h-5 w-5 mr-2 lg:h-6 lg:w-6" />
       </button>
 
-      <span>x{likes}</span>
+      <span className="md:text-lg lg:text-xl">x{likes}</span>
       {/* <p className="time">{time}</p> */}
     </div>
   );

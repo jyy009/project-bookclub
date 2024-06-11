@@ -130,7 +130,7 @@ export const WishlistForm = () => {
         <div className={"self-end"}>
           <Button
             buttonStyle={
-              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20"
+              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
             }
             type={"submit"}
             btnText={"Submit"}
