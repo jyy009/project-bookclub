@@ -40,7 +40,7 @@ export const Home = () => {
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
           <Header />
-          <div className="flex-grow overflow-auto bg-white">
+          <div className="flex-grow overflow-auto bg-secondary">
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/about-us" element={<AboutUs />} />

@@ -64,6 +64,8 @@ export const useWishStore = create((set, get) => ({
       set({ wishlist: data, isLastPage: false });
     } catch (error) {
       console.error("Error fetching wishlist:", error);
+      set({ isLastPage: true });
+
       return false;
     } finally {
       set({ loading: false });

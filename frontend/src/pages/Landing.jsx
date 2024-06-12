@@ -9,11 +9,10 @@ export const Landing = () => {
   const { isLoggedIn } = useUserStore();
   return (
     <div className="bg-secondary flex justify-center items-center">
-        <div className="bg-secondary flex flex-col py-8 md:grid md:grid-cols-2 md:py-10 md:px-8 lg:py-28 xl:py-32 md:max-w-screen-md lg:w-fit">
+        <div className="bg-secondary flex flex-col py-8 md:grid md:grid-cols-2 md:px-8  md:max-w-screen-md lg:w-fit">
             <Image
-            link={"/images/landingImage.svg"}
+            link={"/images/landing-image.jpg"}
             imgText={"girl reading book"}
-            section={"border border-black"}
           />
           
           <div className="flex flex-col md:col-span-1 gap-6  md:px-8 text-center">

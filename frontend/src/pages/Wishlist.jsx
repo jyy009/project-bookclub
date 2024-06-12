@@ -36,13 +36,13 @@ export const Wishlist = () => {
           </div>
 
           <div className="w-full max-w-sm mx-auto p-2 md:max-w-lg lg:max-w-3xl">
-          <WishlistForm />
+            <WishlistForm />
 
-          <WishlistNav
-            sortWishes={sortWishes}
-            navigatePage={navigatePage}
-            currentPage={currentPage}
-          />
+            <WishlistNav
+              sortWishes={sortWishes}
+              navigatePage={navigatePage}
+              currentPage={currentPage}
+            />
           </div>
 
           <div className="w-full max-w-sm mx-auto p-2 md:max-w-lg lg:max-w-3xl">
@@ -69,9 +69,10 @@ export const Wishlist = () => {
                     likes={wish.likes}
                   />
                 ))
-              ) : (
+              ) : ""}
+              {loading ? (
                 <Loading />
-              )}
+              ) : ""}
             </div>
           </div>
         </div>

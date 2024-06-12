@@ -17,7 +17,7 @@ export const Navbar = () => {
         <nav
           className={
             showMenu
-              ? "fixed translate-y-14 transition duration-200 inset-y-0 inset-x-0 z-99 bg-white text-fifth list-none pt-8 flex flex-col items-center gap-5 font-josefinsans text-xl"
+              ? "fixed translate-y-14 transition duration-200 inset-y-0 inset-x-0 z-99 bg-secondary text-fifth list-none pt-8 flex flex-col items-center gap-5 font-josefinsans text-xl"
               : "hidden"
           }
         >

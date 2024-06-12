@@ -194,16 +194,7 @@ export const ProfilePage = () => {
         <div>
           <Text text={"Pause or delete your account"} />
         </div>
-        <div>
-          <Button
-            btnText={"pause"}
-            onClick={null}
-            type="submit"
-            buttonStyle={
-              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-            }
-          />
-        </div>
+      
 
         {!deleteUser && (
           <>

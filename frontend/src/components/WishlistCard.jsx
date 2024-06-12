@@ -13,20 +13,17 @@ export const WishlistCard = ({ id, title, author, message, user, likes }) => {
         <Text text={message} />
 
         <div className="flex flex-row pt-4 justify-between place-items-start">
-          {/* <div className=""> */}
-            <Text text={`by ${user}`} section="" />
-          {/* </div> */}
-          {/* <div className="border border-green-600 "> */}
-            <Like
-              imageUrl={
-                likes > 0 ? "../icons/heartred.svg" : "../icons/heartblue.svg"
-              }
-              label="heart"
-              onClick={(event) => handleLike(event, id)}
-              likes={likes}
-              className=" border-black"
-            />
-          {/* </div> */}
+          <Text text={`by ${user}`} section="" />
+
+          <Like
+            imageUrl={
+              likes > 0 ? "../icons/heartred.svg" : "../icons/heartblue.svg"
+            }
+            label="heart"
+            onClick={(event) => handleLike(event, id)}
+            likes={likes}
+            className=" border-black"
+          />
         </div>
       </div>
     </div>

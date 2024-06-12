@@ -4,6 +4,8 @@ import { TextInput } from "../atoms/TextInput";
 import { Button } from "../atoms/Button";
 import { useState, useEffect } from "react";
 
+const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+
 export const WishlistForm = () => {
   const { setWishlist } = useWishStore();
 
@@ -44,7 +46,7 @@ export const WishlistForm = () => {
 
     try {
       const response = await fetch(
-        "https://project-final-rvhj.onrender.com/wishlist",
+        `${backend_url}`,
 
         {
           method: "POST",

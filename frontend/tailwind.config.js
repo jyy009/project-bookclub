@@ -6,11 +6,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: "#FFFCF5", // main background
-        jeans: "#093D5D", // footer and text
-        heroSand: "#F4F0EC", // hero section background
-        warmOrange: "#EEAD59", // our orange
-        plum: "#683651",
         primary: "#8DACB1", // footer
         secondary: "#F5F5F5", // background
         tertiary: "#D33F2A", // buttons
