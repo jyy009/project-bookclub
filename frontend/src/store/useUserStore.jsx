@@ -223,7 +223,7 @@ export const useUserStore = create((set, get) => ({
         },
       });
       if (!response.ok) {
-        const result = await response.json();
+        throw new Error("Network response was not ok");      
       } else {
         const result = await response.json();
         localStorage.setItem("isLoggedIn", result.isLoggedIn);
