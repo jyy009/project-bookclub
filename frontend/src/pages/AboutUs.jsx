@@ -17,7 +17,7 @@ export const AboutUs = () => {
   const ourFounders = founders;
 
   return (
-    <section className="mx-4 md:mx-8 lg:mx-32 xl:mx-56 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
+    <section className="mx-4 md:mx-8 lg:mx-32 xl:mx-56 py-12 flex flex-col gap-4 items-center">
       <Headline titleText={"Our Story"} />
       <Text text={introParaOne} />
       <Text text={introParaTwo} />

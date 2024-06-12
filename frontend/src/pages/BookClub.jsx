@@ -8,7 +8,7 @@ export const BookClub = () => {
   const loggedInInfo = bookClubInfo[0].loggedInInfo;
 
   return (
-    <section className="flex flex-col gap-6 lg:gap-10 py-8 md:py-10 lg:py-36 xl:py-32">
+    <section className="flex flex-col gap-6 lg:gap-10 py-12">
       <InfoCard
         imgText={"Books and magazines on a sheet"}
         imgSrc={"/images/giulia-bertelli-y7rGTFyOzxc-unsplash.jpg"}
