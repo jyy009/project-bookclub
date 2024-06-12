@@ -104,10 +104,11 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto p-2 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center border border-black min-h-screen">
+    <div className="flex flex-col max-w-sm mx-auto p-2 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 gap-4 justify-center items-center min-h-screen md:max-w-md border border-black">
+
       <Headline titleText={`${username}`} />
 
-      <div className="p-6 bg-fourth rounded-md">
+      <div className="p-8 mb-4 bg-fourth rounded-md">
         <ProfileCard
           name={userData.name}
           email={userData.email}
@@ -115,24 +116,24 @@ export const ProfilePage = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <Text
+      <div className="">
+        {/* <Text
           text={
             "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
           }
-        />
+        /> */}
         <Button
           onClick={toggleHidden}
           btnText={"Update address"}
           buttonStyle={
-            "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center"
+            "bg-tertiary px-7 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center "
           }
         />
         {!hidden && (
-          <div>
-            <form onSubmit={submitUpdateAddress}>
-              <fieldset>
-                <legend>Address</legend>
+          <div className="mt-6">
+            <form onSubmit={submitUpdateAddress} className="flex flex-col gap-4">
+              <fieldset className="">
+                {/* <legend>Address</legend> */}
                 <TextInput
                   label={"Street"}
                   inputType={"text"}
@@ -146,7 +147,6 @@ export const ProfilePage = () => {
                   inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
                 />
 
-                <div className="md:flex md:flex-row md:justify-between">
                   <div className="md:w-32">
                     <TextInput
                       label={"Post code"}
@@ -176,13 +176,12 @@ export const ProfilePage = () => {
                       inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
                     />
                   </div>
-                </div>
               </fieldset>
               <Button
                 type={"submit"}
                 btnText={"Update"}
                 buttonStyle={
-                  "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
+                  "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md "
                 }
               />
             </form>
@@ -192,31 +191,27 @@ export const ProfilePage = () => {
 
       <div className="flex flex-col border border-black gap-4 mt-auto justify-center items-center">
         <div>
-          <Text text={"Pause or delete your account"} />
+          <Text text={"Delete account"} />
         </div>
       
 
         {!deleteUser && (
-          <>
-            <div className="">
-              <Button
-                btnText={"delete"}
-                onClick={(event) => confirmDelete(event)}
-                type="submit"
-                buttonStyle={
-                  "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                }
-              />
-            </div>
-
+          <>            
+            <Button
+              btnText={"Delete"}
+              onClick={(event) => confirmDelete(event)}
+              type="submit"
+              buttonStyle={
+                "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
+              }
+            />
+          
             {showConfirmation && (
-              <div className="flex flex-col items-center">
+              <div className="">
                 <Text 
                 section="text-center" 
                 text={confirmationMessage} 
                 />
-
-                <div className="flex flex-row gap-4">
                   <Button
                     onClick={() => setShowConfirmation(false)}
                     btnText="No"
@@ -231,7 +226,6 @@ export const ProfilePage = () => {
                       "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
                     }
                   />
-                </div>
               </div>
             )}
           </>
