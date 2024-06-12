@@ -5,6 +5,7 @@ import { Text } from "../atoms/Text";
 import { Button } from "../atoms/Button";
 import { TextInput } from "../atoms/TextInput";
 import { ProfileCard } from "../components/ProfileCard";
+import { useNavigate } from "react-router-dom";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
@@ -19,6 +20,11 @@ export const ProfilePage = () => {
     postCode: "",
     city: "",
   });
+
+  const [deleteUser, setDeleteUser] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const navigate = useNavigate();
 
   const fetchProfile = async (id) => {
     try {
@@ -72,23 +78,29 @@ export const ProfilePage = () => {
   }, [userId, updateCount]);
 
   const handleDelete = async (event, userId) => {
-    event.preventDefault();
     try {
-      const response = await fetch(`${backend_url}/users/delete/${userId}`,
-        {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      const response = await fetch(`${backend_url}/users/delete/${userId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
       if (!response.ok) {
         throw new Error("delete response failed");
       }
       const data = await response.json();
       console.log("user deleted", data);
+      setDeleteUser(true);
       signOut();
+      navigate("/");
     } catch (error) {
       console.error("Error deleting profile", error);
     }
+  };
+
+  const confirmDelete = () => {
+    setShowConfirmation(true);
+    setConfirmationMessage(
+      "Are you sure you want to delete your subscription?"
+    );
   };
 
   return (
@@ -179,14 +191,37 @@ export const ProfilePage = () => {
 
       <div>
         <Button
-          btnText={"delete"}
-          onClick={(event) => handleDelete(event, userId)}
+          btnText={"pause"}
+          onClick={null}
           type="submit"
           buttonStyle={
             "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
           }
         />
       </div>
+
+      {!deleteUser && (
+        <div>
+          <Button
+            btnText={"delete"}
+            onClick={(event) => confirmDelete(event)}
+            type="submit"
+            buttonStyle={
+              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
+            }
+          />
+
+          {showConfirmation && (
+            <div>
+              <p>{confirmationMessage}</p>
+              <button onClick={() => setShowConfirmation(false)}>No</button>
+              <button onClick={(event) => handleDelete(event, userId)}>
+                Yes
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
