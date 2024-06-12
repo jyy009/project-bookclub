@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <>
       {/* Mobile header layout */}
-      <header className="px-4 py-4 sticky top-0 z-50 md:hidden">
+      <header className="px-4 py-4 sticky top-0 z-50 md:hidden bg-white">
         <div className="flex justify-between ">
           <div className="flex items-center">
             <Link to="/" className="cursor-pointer">
@@ -29,7 +29,7 @@ export const Header = () => {
         )}
       </header>
       {/* Tablet and desktop header layout */}
-      <header className="hidden md:flex flex-col px-8 py-5 lg:px-32 xl:px-56">
+      <header className="hidden md:sticky md:top-0 md:z-50 md:bg-white md:flex flex-col px-8 py-5 lg:px-32 xl:px-56">
         <div className="flex justify-between">
           <Link to="/" className="cursor-pointer">
             <img src={TabletLogo} alt="OMC Book Club" className="hidden md:flex" />
