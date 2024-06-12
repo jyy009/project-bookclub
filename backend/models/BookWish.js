@@ -28,8 +28,9 @@ const bookWishSchema = new Schema({
   },
   user: {
     type: String,
-    required: true
+    required: true,
   },
+  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 // Model

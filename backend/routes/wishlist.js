@@ -1,5 +1,7 @@
 import express, { query, response } from "express";
 import BookWish from "../models/BookWish";
+import User from "../models/User";
+import authenticateUser from "../authMiddleware";
 
 const router = express.Router();
 
@@ -54,8 +56,10 @@ router.post("/wishlist", async (req, res) => {
   }
 });
 
-router.post("/wishlist/:wishId/like", async (req, res) => {
+router.post("/wishlist/:wishId/like", authenticateUser, async (req, res) => {
   const { wishId } = req.params;
+  const userId = req.user._id;
+
   try {
     const wish = await BookWish.findById(wishId);
 
@@ -66,9 +70,16 @@ router.post("/wishlist/:wishId/like", async (req, res) => {
       });
     }
 
+    if (wish.likedBy.includes(userId)) {
+      return res.status(400).json({
+        success: false,
+        message: "You have already liked this post",
+      });
+    }
+
     const incrementLike = await BookWish.findByIdAndUpdate(
       wishId,
-      { $inc: { likes: 1 } },
+      { $inc: { likes: 1 }, $push: { likedBy: userId } },
       { new: true }
     );
 

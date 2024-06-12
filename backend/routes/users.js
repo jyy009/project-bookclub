@@ -1,31 +1,10 @@
 import express, { response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
-const mongoose = require('mongoose');
+import authenticateUser from "../authMiddleware";
+const mongoose = require("mongoose");
 
 const router = express.Router();
-
-const authenticateUser = async (req, res, next) => {
-  try {
-    const user = await User.findOne({
-      accessToken: req.header("Authorization"),
-    });
-    if (user) {
-      req.user = user;
-      next();
-    } else {
-      res
-        .status(401)
-        .json({ success: false, message: "Unauthorized, user not found" });
-    }
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "Bad request, user not found",
-      response: error,
-    });
-  }
-};
 
 router.get("/users", async (req, res) => {
   const allUsers = await User.find().exec();
@@ -158,27 +137,29 @@ router.delete("/users/delete/:userId", async (req, res) => {
     });
   }
   try {
-    console.log(req.params)
+    console.log(req.params);
 
-    const deletedUser = await User.findByIdAndDelete({ _id: userId})
-    console.log(deletedUser)
+    const deletedUser = await User.findByIdAndDelete({ _id: userId });
+    console.log(deletedUser);
     if (!deletedUser) {
       return res.status(400).json({
         success: false,
         message: "could not find user",
       });
     } else {
-    res.status(200).json({
-      success: true,
-      message: `User with ID ${userId} has been deleted`
-    })}
+      res.status(200).json({
+        success: true,
+        message: `User with ID ${userId} has been deleted`,
+      });
+    }
   } catch (error) {
-    console.error("Error deleting user:", error)
+    console.error("Error deleting user:", error);
     res.status(500).json({
       success: false,
       response: error,
       message: "Could not delete username",
-    })  }
-})
+    });
+  }
+});
 
 export default router;
