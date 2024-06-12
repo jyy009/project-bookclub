@@ -104,9 +104,10 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="mx-4 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
+    <div className="w-full max-w-sm mx-auto p-2 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center border border-black min-h-screen">
       <Headline titleText={`${username}`} />
-      <div className="p-6 border-2 border-black">
+
+      <div className="p-6 bg-fourth rounded-md">
         <ProfileCard
           name={userData.name}
           email={userData.email}
@@ -114,7 +115,7 @@ export const ProfilePage = () => {
         />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-2">
         <Text
           text={
             "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
@@ -124,7 +125,7 @@ export const ProfilePage = () => {
           onClick={toggleHidden}
           btnText={"Update address"}
           buttonStyle={
-            "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
+            "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center"
           }
         />
         {!hidden && (
@@ -189,39 +190,62 @@ export const ProfilePage = () => {
         )}
       </div>
 
-      <div>
-        <Button
-          btnText={"pause"}
-          onClick={null}
-          type="submit"
-          buttonStyle={
-            "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-          }
-        />
-      </div>
-
-      {!deleteUser && (
+      <div className="flex flex-col border border-black gap-4 mt-auto justify-center items-center">
+        <div>
+          <Text text={"Pause or delete your account"} />
+        </div>
         <div>
           <Button
-            btnText={"delete"}
-            onClick={(event) => confirmDelete(event)}
+            btnText={"pause"}
+            onClick={null}
             type="submit"
             buttonStyle={
               "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
             }
           />
-
-          {showConfirmation && (
-            <div>
-              <p>{confirmationMessage}</p>
-              <button onClick={() => setShowConfirmation(false)}>No</button>
-              <button onClick={(event) => handleDelete(event, userId)}>
-                Yes
-              </button>
-            </div>
-          )}
         </div>
-      )}
+
+        {!deleteUser && (
+          <>
+            <div className="">
+              <Button
+                btnText={"delete"}
+                onClick={(event) => confirmDelete(event)}
+                type="submit"
+                buttonStyle={
+                  "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
+                }
+              />
+            </div>
+
+            {showConfirmation && (
+              <div className="flex flex-col items-center">
+                <Text 
+                section="text-center" 
+                text={confirmationMessage} 
+                />
+
+                <div className="flex flex-row gap-4">
+                  <Button
+                    onClick={() => setShowConfirmation(false)}
+                    btnText="No"
+                    buttonStyle={
+                      "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
+                    }
+                  />
+                  <Button
+                    onClick={(event) => handleDelete(event, userId)}
+                    btnText="Yes"
+                    buttonStyle={
+                      "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
+                    }
+                  />
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
