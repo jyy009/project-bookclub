@@ -22,16 +22,26 @@ export const useWishStore = create((set, get) => ({
   handleLike: async (event, wishId) => {
     event.preventDefault();
     const { updateLikes } = get();
+    const userId = localStorage.getItem("userId");
+    const accessToken = localStorage.getItem("token");
 
     try {
       const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
         method: "POST",
-        body: JSON.stringify({}),
-        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorMessage = await response.json();
+        if (response.status === 400) {
+          throw new Error(errorMessage.message);
+        } else {
+          throw new Error("Network response was not ok");
+        }
       }
 
       const result = await response.json();
@@ -42,7 +52,10 @@ export const useWishStore = create((set, get) => ({
       console.log("updated wishlist with like:", get().wishlist);
     } catch (error) {
       console.error("Error posting like:", error);
-      return false;
+      return {
+        success: false,
+        message: error.message || "Failed to like post.",
+      };
     }
   },
 
