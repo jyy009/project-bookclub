@@ -17,7 +17,7 @@ export const AboutUs = () => {
   const ourFounders = founders;
 
   return (
-    <section className="mx-4 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
+    <section className="mx-4 md:mx-8 lg:mx-32 xl:mx-56 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center">
       <Headline titleText={"Our Story"} />
       <Text text={introParaOne} />
       <Text text={introParaTwo} />
@@ -37,13 +37,9 @@ export const AboutUs = () => {
         ))}
       </div>
 
-      <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10">
+      <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10 mt-16">
         <div className="md:w-full">
-          <Image
-            link={"images/letter.svg"}
-            imgText={"Envelope"}
-            section={"object-cover w-full rounded-2xl"}
-          />
+          <Image link={"images/letter.svg"} imgText={"Envelope"} section={"object-cover w-full rounded-2xl"} />
         </div>
         <div className="flex flex-col items-center md:items-start md:self-start">
           <Headline titleText={"Get in touch!"} />
