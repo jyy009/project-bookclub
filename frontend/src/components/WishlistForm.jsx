@@ -46,7 +46,7 @@ export const WishlistForm = () => {
 
     try {
       const response = await fetch(
-        `${backend_url}`,
+        `${backend_url}/wishlist`,
 
         {
           method: "POST",
