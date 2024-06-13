@@ -10,10 +10,10 @@ export const Landing = () => {
 
   return (
     <div className="bg-secondary flex justify-center items-center">
-      <div className="bg-secondary flex flex-col py-8 md:grid md:grid-cols-2 md:px-8  md:max-w-screen-md lg:w-fit">
+      <div className="flex flex-col py-8 md:grid md:grid-cols-2 md:px-8 lg:px-0 md:max-w-screen-md xl:max-w-3xl 2xl:max-w-4xl">
         <Image link={"/images/landing-image.jpg"} imgText={"girl reading book"} />
 
-        <div className="flex flex-col md:col-span-1 gap-6  md:px-8 text-center">
+        <div className="flex flex-col md:col-span-1 gap-6  md:px-8 text-center px-2">
           <Headline titleText={"Discover your next favorite book with us"} />
           {!isLoggedIn ? (
             <>
