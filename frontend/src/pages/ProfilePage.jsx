@@ -104,10 +104,10 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto p-2 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center border border-black min-h-screen">
-      <Headline titleText={`${username}`} />
+    <div className="flex flex-col max-w-sm mx-auto p-2 justify-center items-center min-h-screen py-8 gap-6 lg:gap-10 md:max-w-md  lg:max-w-2xl md:py-10 lg:py-36 ">
+      <Headline titleText={`${username}`} section="" />
 
-      <div className="p-6 bg-fourth rounded-md">
+      <div className="p-8 mb-4 bg-fourth rounded-md">
         <ProfileCard
           name={userData.name}
           email={userData.email}
@@ -115,24 +115,24 @@ export const ProfilePage = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <Text
+      <div className="flex flex-col gap-6 lg:gap-10">
+        {/* <Text
           text={
             "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
           }
-        />
+        /> */}
         <Button
           onClick={toggleHidden}
           btnText={"Update address"}
           buttonStyle={
-            "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center"
+            "bg-tertiary px-7 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center "
           }
         />
         {!hidden && (
-          <div>
-            <form onSubmit={submitUpdateAddress}>
-              <fieldset>
-                <legend>Address</legend>
+          <form onSubmit={submitUpdateAddress} className=" md:w-64 xl:w-80">
+            <fieldset className="flex flex-col gap-6">
+              {/* <legend>Address</legend> */}
+              <div className=" ">
                 <TextInput
                   label={"Street"}
                   inputType={"text"}
@@ -142,97 +142,86 @@ export const ProfilePage = () => {
                   onChange={(event) =>
                     handleUpdateChange("street", event.target.value)
                   }
-                  labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-                  inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
+                  labelStyle="font-josefinsans text-base md:text-lg lg:text-xl flex flex-col"
+                  inputStyle="font-worksans  border-2 rounded-lg p-2 "
                 />
+              </div>
+              <div className="md:w-32">
+                <TextInput
+                  label={"Post code"}
+                  inputType={"text"}
+                  inputName={"postcode"}
+                  placeholder={"xxx xx"}
+                  value={updateData.postCode}
+                  onChange={(event) =>
+                    handleUpdateChange("postCode", event.target.value)
+                  }
+                  labelStyle="font-josefinsans text-base md:text-lg lg:text-xl flex flex-col"
+                  inputStyle="font-worksans  border-2 rounded-lg p-2"
+                />
+              </div>
 
-                <div className="md:flex md:flex-row md:justify-between">
-                  <div className="md:w-32">
-                    <TextInput
-                      label={"Post code"}
-                      inputType={"text"}
-                      inputName={"postcode"}
-                      placeholder={"xxx xx"}
-                      value={updateData.postCode}
-                      onChange={(event) =>
-                        handleUpdateChange("postCode", event.target.value)
-                      }
-                      labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-                      inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
-                    />
-                  </div>
+                <TextInput
+                  label={"City"}
+                  inputType={"text"}
+                  inputName={"city"}
+                  placeholder={"Type your city"}
+                  value={updateData.city}
+                  onChange={(event) =>
+                    handleUpdateChange("city", event.target.value)
+                  }
+                  labelStyle="font-josefinsans text-base md:text-lg lg:text-xl flex flex-col"
+                  inputStyle="font-worksans border-2 rounded-lg p-2"
+                />
+            </fieldset>
 
-                  <div className="md:w-64 xl:w-80">
-                    <TextInput
-                      label={"City"}
-                      inputType={"text"}
-                      inputName={"city"}
-                      placeholder={"Type your city"}
-                      value={updateData.city}
-                      onChange={(event) =>
-                        handleUpdateChange("city", event.target.value)
-                      }
-                      labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-                      inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
-                    />
-                  </div>
-                </div>
-              </fieldset>
-              <Button
-                type={"submit"}
-                btnText={"Update"}
-                buttonStyle={
-                  "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
-                }
-              />
-            </form>
-          </div>
+            <div className="flex flex-row justify-center mt-6 lg:mt-10">
+            <Button
+              type={"submit"}
+              btnText={"Update"}
+              buttonStyle={
+                "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md "
+              }
+            />
+            </div>
+          </form>
         )}
       </div>
 
-      <div className="flex flex-col border border-black gap-4 mt-auto justify-center items-center">
-        <div>
-          <Text text={"Pause or delete your account"} />
-        </div>
-      
+      <div className="flex flex-col gap-6 lg:gap-10 mt-auto justify-center items-center">
+        <Text text={"Delete account"} />
 
         {!deleteUser && (
           <>
-            <div className="">
-              <Button
-                btnText={"delete"}
-                onClick={(event) => confirmDelete(event)}
-                type="submit"
-                buttonStyle={
-                  "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                }
-              />
-            </div>
+            <Button
+              btnText={"Delete"}
+              onClick={(event) => confirmDelete(event)}
+              type="submit"
+              buttonStyle={
+                "bg-tertiary px-4 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
+              }
+            />
 
             {showConfirmation && (
-              <div className="flex flex-col items-center">
-                <Text 
-                section="text-center" 
-                text={confirmationMessage} 
+              <>
+                <Text section="text-center" text={confirmationMessage} />
+                <div className="flex flex-row">
+                <Button
+                  onClick={() => setShowConfirmation(false)}
+                  btnText="No"
+                  buttonStyle={
+                    "bg-tertiary px-4 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24 mr-2 lg:mr-4"
+                  }
                 />
-
-                <div className="flex flex-row gap-4">
-                  <Button
-                    onClick={() => setShowConfirmation(false)}
-                    btnText="No"
-                    buttonStyle={
-                      "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                    }
-                  />
-                  <Button
-                    onClick={(event) => handleDelete(event, userId)}
-                    btnText="Yes"
-                    buttonStyle={
-                      "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                    }
-                  />
+                <Button
+                  onClick={(event) => handleDelete(event, userId)}
+                  btnText="Yes"
+                  buttonStyle={
+                    "bg-tertiary px-4 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24 ml-2 lg:ml-4"
+                  }
+                />
                 </div>
-              </div>
+              </>
             )}
           </>
         )}

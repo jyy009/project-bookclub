@@ -15,7 +15,7 @@ export const Landing = () => {
             imgText={"girl reading book"}
           />
           
-          <div className="flex flex-col md:col-span-1 gap-6  md:px-8 text-center">
+          <div className="flex flex-col md:col-span-1 gap-6  md:px-8 text-center px-2">
             <Headline titleText={"Discover your next favorite book with us"} />
             <Text
               text={
