@@ -98,7 +98,9 @@ export const ProfilePage = () => {
 
   const confirmDelete = () => {
     setShowConfirmation(true);
-    setConfirmationMessage("Are you sure you want to delete your subscription?");
+    setConfirmationMessage(
+      "Are you sure you want to delete your subscription?"
+    );
   };
 
   return (
@@ -106,7 +108,11 @@ export const ProfilePage = () => {
       <Headline titleText={`${username}`} section="" />
       <div className="flex flex-col">
         <div className="mb-4 rounded-md py-6 bg-fourth p-2">
-          <ProfileCard name={userData.name} email={userData.email} address={userData.address} />
+          <ProfileCard
+            name={userData.name}
+            email={userData.email}
+            address={userData.address}
+          />
         </div>
 
         <div className="flex flex-col items-center md:items-start gap-4 lg:gap-6">
@@ -116,7 +122,11 @@ export const ProfilePage = () => {
             }
             section="text-center md:text-left"
           />
-          <Button onClick={toggleHidden} btnText={"Update address"} width={"w-40 md:w-44"} />
+          <Button
+            onClick={toggleHidden}
+            btnText={"Update address"}
+            width={"w-40 md:w-44"}
+          />
           {!hidden && (
             <form onSubmit={submitUpdateAddress} className=" md:w-64 xl:w-80">
               <fieldset className="flex flex-col gap-6">
@@ -127,7 +137,9 @@ export const ProfilePage = () => {
                     inputName={"street"}
                     placeholder={"Type your street"}
                     value={updateData.street}
-                    onChange={(event) => handleUpdateChange("street", event.target.value)}
+                    onChange={(event) =>
+                      handleUpdateChange("street", event.target.value)
+                    }
                   />
 
                   <div className="md:flex md:flex-row md:justify-between">
@@ -138,7 +150,9 @@ export const ProfilePage = () => {
                         inputName={"postcode"}
                         placeholder={"xxx xx"}
                         value={updateData.postCode}
-                        onChange={(event) => handleUpdateChange("postCode", event.target.value)}
+                        onChange={(event) =>
+                          handleUpdateChange("postCode", event.target.value)
+                        }
                       />
                     </div>
 
@@ -149,7 +163,9 @@ export const ProfilePage = () => {
                         inputName={"city"}
                         placeholder={"Type your city"}
                         value={updateData.city}
-                        onChange={(event) => handleUpdateChange("city", event.target.value)}
+                        onChange={(event) =>
+                          handleUpdateChange("city", event.target.value)
+                        }
                       />
                     </div>
                   </div>
@@ -162,21 +178,36 @@ export const ProfilePage = () => {
           )}
         </div>
 
-        <div className="flex flex-col items-center md:items-start gap-6 mt-10 ">
+        <div className="flex flex-col items-center md:items-start gap-6 mt-16">
           <>
             <div className="flex flex-col gap-4">
               <Text text={"Delete account?"} />
-              <Button btnText={"Delete"} onClick={(event) => confirmDelete(event)} type="submit" />
+              <Button
+                btnText={"Delete"}
+                onClick={(event) => confirmDelete(event)}
+                type="submit"
+              />
             </div>
 
             {showConfirmation && (
               <>
                 <div className="flex flex-col items-center md:items-start gap-4">
-                  <Text section="text-center md:text-left" text={confirmationMessage} />
+                  <Text
+                    section="text-center md:text-left"
+                    text={confirmationMessage}
+                  />
 
                   <div className="flex flex-row gap-4">
-                    <Button onClick={() => setShowConfirmation(false)} btnText="No" width={"w-13"} />
-                    <Button onClick={(event) => handleDelete(event, userId)} btnText="Yes" width={"w-13"} />
+                    <Button
+                      onClick={() => setShowConfirmation(false)}
+                      btnText="No"
+                      width={"w-13"}
+                    />
+                    <Button
+                      onClick={(event) => handleDelete(event, userId)}
+                      btnText="Yes"
+                      width={"w-13"}
+                    />
                   </div>
                 </div>
               </>
