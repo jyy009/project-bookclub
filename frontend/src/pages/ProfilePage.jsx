@@ -102,79 +102,77 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="flex flex-col max-w-sm mx-auto p-2 justify-center items-center min-h-screen py-8 gap-6 lg:gap-10 md:max-w-md  lg:max-w-2xl md:py-10 lg:py-36 ">
+    <div className="flex flex-col max-w-sm mx-auto p-2 items-center pb-8 gap-6 lg:gap-4 md:max-w-md lg:max-w-2xl md:pb-10 lg:pb-36">
       <Headline titleText={`${username}`} section="" />
+      <div className="flex flex-col">
+        <div className="mb-4 rounded-md py-6 bg-fourth p-2">
+          <ProfileCard name={userData.name} email={userData.email} address={userData.address} />
+        </div>
 
-      <div className="p-8 mb-4 bg-fourth rounded-md">
-        <ProfileCard name={userData.name} email={userData.email} address={userData.address} />
-      </div>
+        <div className="flex flex-col items-center md:items-start gap-4 lg:gap-6">
+          <Text
+            text={
+              "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
+            }
+            section="text-center md:text-left"
+          />
+          <Button onClick={toggleHidden} btnText={"Update address"} width={"w-40 md:w-44"} />
+          {!hidden && (
+            <form onSubmit={submitUpdateAddress} className=" md:w-64 xl:w-80">
+              <fieldset className="flex flex-col gap-6">
+                <div>
+                  <TextInput
+                    label={"Street"}
+                    inputType={"text"}
+                    inputName={"street"}
+                    placeholder={"Type your street"}
+                    value={updateData.street}
+                    onChange={(event) => handleUpdateChange("street", event.target.value)}
+                  />
 
-      <div className="flex flex-col gap-6 lg:gap-10">
-        <Text
-          text={
-            "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
-          }
-        />
-        <Button onClick={toggleHidden} btnText={"Update address"} width={"w-40 md:w-44"} />
-        {!hidden && (
-          <form onSubmit={submitUpdateAddress} className=" md:w-64 xl:w-80">
-            <fieldset className="flex flex-col gap-6">
-              {/* <legend>Address</legend> */}
-              <div className=" ">
-                <TextInput
-                  label={"Street"}
-                  inputType={"text"}
-                  inputName={"street"}
-                  placeholder={"Type your street"}
-                  value={updateData.street}
-                  onChange={(event) => handleUpdateChange("street", event.target.value)}
-                />
+                  <div className="md:flex md:flex-row md:justify-between">
+                    <div className="md:w-32">
+                      <TextInput
+                        label={"Post code"}
+                        inputType={"text"}
+                        inputName={"postcode"}
+                        placeholder={"xxx xx"}
+                        value={updateData.postCode}
+                        onChange={(event) => handleUpdateChange("postCode", event.target.value)}
+                      />
+                    </div>
 
-                <div className="md:flex md:flex-row md:justify-between">
-                  <div className="md:w-32">
-                    <TextInput
-                      label={"Post code"}
-                      inputType={"text"}
-                      inputName={"postcode"}
-                      placeholder={"xxx xx"}
-                      value={updateData.postCode}
-                      onChange={(event) => handleUpdateChange("postCode", event.target.value)}
-                    />
-                  </div>
-
-                  <div className="md:w-64 xl:w-80">
-                    <TextInput
-                      label={"City"}
-                      inputType={"text"}
-                      inputName={"city"}
-                      placeholder={"Type your city"}
-                      value={updateData.city}
-                      onChange={(event) => handleUpdateChange("city", event.target.value)}
-                    />
+                    <div className="md:w-64 xl:w-80">
+                      <TextInput
+                        label={"City"}
+                        inputType={"text"}
+                        inputName={"city"}
+                        placeholder={"Type your city"}
+                        value={updateData.city}
+                        onChange={(event) => handleUpdateChange("city", event.target.value)}
+                      />
+                    </div>
                   </div>
                 </div>
+              </fieldset>
+              <div className="flex justify-center mt-4 md:justify-start">
+                <Button type={"submit"} btnText={"Update"} />
               </div>
-            </fieldset>
-            <div className="flex justify-center">
-              <Button type={"submit"} btnText={"Update"} />
-            </div>
-          </form>
-        )}
-      </div>
+            </form>
+          )}
+        </div>
 
-      <div className="flex flex-col gap-6 lg:gap-10 mt-auto justify-center items-center">
-        <Text text={"Delete account"} />
-
-        {!deleteUser && (
+        <div className="flex flex-col items-center md:items-start gap-6 mt-10 ">
           <>
-            <div className="">
-              <Button btnText={"delete"} onClick={(event) => confirmDelete(event)} type="submit" />
+            <div className="flex flex-col gap-4">
+              <Text text={"Delete account?"} />
+              <Button btnText={"Delete"} onClick={(event) => confirmDelete(event)} type="submit" />
             </div>
 
             {showConfirmation && (
               <>
-                <div className="flex flex-col items-center">
-                  <Text section="text-center" text={confirmationMessage} />
+                <div className="flex flex-col items-center md:items-start gap-4">
+                  <Text section="text-center md:text-left" text={confirmationMessage} />
 
                   <div className="flex flex-row gap-4">
                     <Button onClick={() => setShowConfirmation(false)} btnText="No" width={"w-13"} />
@@ -184,7 +182,7 @@ export const ProfilePage = () => {
               </>
             )}
           </>
-        )}
+        </div>
       </div>
     </div>
   );
