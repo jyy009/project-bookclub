@@ -3,15 +3,9 @@ import { Link } from "react-router-dom";
 import MobileLogo from "/icons/mobile-logo-omc.png";
 import TabletLogo from "/icons/tablet-logo-omc.png";
 import { useUserStore } from "../store/useUserStore";
-import { useState } from "react";
 
 export const Header = () => {
-  const { isLoggedIn, username } = useUserStore();
-  const [showMenu, setShowMenu] = useState(false);
-
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
+  const { isLoggedIn, username, toggleMenu, showMenu } = useUserStore();
 
   return (
     <>
