@@ -38,9 +38,8 @@ export const AboutUs = () => {
       </div>
 
       <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10 mt-16">
-        <div className="md:w-full">
-          <Image link={"images/mail-letter.jpg"} imgText={"Envelope"} section={"object-cover w-full rounded-lg"} />
-        </div>
+        <Image link={"images/mail-letter.jpg"} imgText={"Envelope"} section={"rounded-lg"} />
+
         <div className="flex flex-col items-center md:items-start md:self-start">
           <Headline titleText={"Get in touch!"} />
           <Text text={contactUs} />
