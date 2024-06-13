@@ -7,49 +7,26 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
   const { isLastPage } = useWishStore();
   return (
     <div className="flex flex-col gap-4 justify-center items-center pt-8">
-      
       <div className="mx-auto">
-        <Text text={"Sort by:"} section="text-center"/>
-        <Button
-          onClick={() => sortWishes("createdAt")}
-          btnText={"Newest"}
-          buttonStyle={
-            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md mr-2 w-20 md:text-xl md:w-24"
-          }
-        />
-        <Button
-          onClick={() => sortWishes("likes")}
-          btnText={"Likes"}
-          buttonStyle={
-            "bg-tertiary px-2 py-1 text-secondary font-josefinsans rounded-md w-20 md:text-xl md:w-24"
-          }
-        />
+        <Text text={"Sort by:"} section="text-center" />
+        <Button onClick={() => sortWishes("createdAt")} btnText={"Newest"} width={"w-20 md:w24"} />
+        <Button onClick={() => sortWishes("likes")} btnText={"Likes"} width={"w-20 md:w24"} />
       </div>
 
       <div className="flex">
         <Button
           onClick={() => navigatePage(currentPage - 1)}
           disabled={currentPage === 1}
-          btnText={
-            <Image
-              link={"./public/icons/chevron-left.svg"}
-              imgText={"left arrow"}
-            />
-          }x
+          btnText={<Image link={"./public/icons/chevron-left.svg"} imgText={"left arrow"} />}
+          x
         />
         <Text text={`Page ${currentPage}`} />
         <Button
           onClick={() => navigatePage(currentPage + 1)}
           disabled={isLastPage}
-          btnText={
-            <Image
-              link={"./public/icons/chevron-right.svg"}
-              imgText={"right arrow"}
-            />
-          } 
+          btnText={<Image link={"./public/icons/chevron-right.svg"} imgText={"right arrow"} />}
         />
       </div>
-      
     </div>
   );
 };

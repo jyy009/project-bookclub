@@ -98,9 +98,7 @@ export const ProfilePage = () => {
 
   const confirmDelete = () => {
     setShowConfirmation(true);
-    setConfirmationMessage(
-      "Are you sure you want to delete your subscription?"
-    );
+    setConfirmationMessage("Are you sure you want to delete your subscription?");
   };
 
   return (
@@ -108,11 +106,7 @@ export const ProfilePage = () => {
       <Headline titleText={`${username}`} />
 
       <div className="p-6 bg-fourth rounded-md">
-        <ProfileCard
-          name={userData.name}
-          email={userData.email}
-          address={userData.address}
-        />
+        <ProfileCard name={userData.name} email={userData.email} address={userData.address} />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -124,9 +118,7 @@ export const ProfilePage = () => {
         <Button
           onClick={toggleHidden}
           btnText={"Update address"}
-          buttonStyle={
-            "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center"
-          }
+          buttonStyle={"bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center"}
         />
         {!hidden && (
           <div>
@@ -139,11 +131,7 @@ export const ProfilePage = () => {
                   inputName={"street"}
                   placeholder={"Type your street"}
                   value={updateData.street}
-                  onChange={(event) =>
-                    handleUpdateChange("street", event.target.value)
-                  }
-                  labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-                  inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
+                  onChange={(event) => handleUpdateChange("street", event.target.value)}
                 />
 
                 <div className="md:flex md:flex-row md:justify-between">
@@ -154,11 +142,7 @@ export const ProfilePage = () => {
                       inputName={"postcode"}
                       placeholder={"xxx xx"}
                       value={updateData.postCode}
-                      onChange={(event) =>
-                        handleUpdateChange("postCode", event.target.value)
-                      }
-                      labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-                      inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
+                      onChange={(event) => handleUpdateChange("postCode", event.target.value)}
                     />
                   </div>
 
@@ -169,11 +153,7 @@ export const ProfilePage = () => {
                       inputName={"city"}
                       placeholder={"Type your city"}
                       value={updateData.city}
-                      onChange={(event) =>
-                        handleUpdateChange("city", event.target.value)
-                      }
-                      labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-                      inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
+                      onChange={(event) => handleUpdateChange("city", event.target.value)}
                     />
                   </div>
                 </div>
@@ -181,9 +161,7 @@ export const ProfilePage = () => {
               <Button
                 type={"submit"}
                 btnText={"Update"}
-                buttonStyle={
-                  "bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md"
-                }
+                buttonStyle={"bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md"}
               />
             </form>
           </div>
@@ -194,7 +172,6 @@ export const ProfilePage = () => {
         <div>
           <Text text={"Pause or delete your account"} />
         </div>
-      
 
         {!deleteUser && (
           <>
@@ -203,18 +180,13 @@ export const ProfilePage = () => {
                 btnText={"delete"}
                 onClick={(event) => confirmDelete(event)}
                 type="submit"
-                buttonStyle={
-                  "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                }
+                buttonStyle={"bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"}
               />
             </div>
 
             {showConfirmation && (
               <div className="flex flex-col items-center">
-                <Text 
-                section="text-center" 
-                text={confirmationMessage} 
-                />
+                <Text section="text-center" text={confirmationMessage} />
 
                 <div className="flex flex-row gap-4">
                   <Button
