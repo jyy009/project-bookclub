@@ -1,6 +1,6 @@
 export const ProfileCard = ({ name, email, address }) => {
   return (
-    <table className="text-left font-worksans">
+    <table className="text-left font-worksans md:text-lg lg:text-xl">
       <tbody>
         <tr>
           <th>Name:</th>

@@ -102,14 +102,14 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto p-2 md:mx-8 lg:mx-32 py-7 md:py-10 lg:py-36 flex flex-col gap-4 items-center border border-black min-h-screen">
-      <Headline titleText={`${username}`} />
+    <div className="flex flex-col max-w-sm mx-auto p-2 justify-center items-center min-h-screen py-8 gap-6 lg:gap-10 md:max-w-md  lg:max-w-2xl md:py-10 lg:py-36 ">
+      <Headline titleText={`${username}`} section="" />
 
-      <div className="p-6 bg-fourth rounded-md">
+      <div className="p-8 mb-4 bg-fourth rounded-md">
         <ProfileCard name={userData.name} email={userData.email} address={userData.address} />
       </div>
 
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-6 lg:gap-10">
         <Text
           text={
             "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
@@ -117,10 +117,10 @@ export const ProfilePage = () => {
         />
         <Button onClick={toggleHidden} btnText={"Update address"} width={"w-40 md:w-44"} />
         {!hidden && (
-          <div>
-            <form onSubmit={submitUpdateAddress}>
-              <fieldset>
-                <legend className="font-josefinsans md:text-lg">Address</legend>
+          <form onSubmit={submitUpdateAddress} className=" md:w-64 xl:w-80">
+            <fieldset className="flex flex-col gap-6">
+              {/* <legend>Address</legend> */}
+              <div className=" ">
                 <TextInput
                   label={"Street"}
                   inputType={"text"}
@@ -153,19 +153,17 @@ export const ProfilePage = () => {
                     />
                   </div>
                 </div>
-              </fieldset>
-              <div className="flex justify-center">
-                <Button type={"submit"} btnText={"Update"} />
               </div>
-            </form>
-          </div>
+            </fieldset>
+            <div className="flex justify-center">
+              <Button type={"submit"} btnText={"Update"} />
+            </div>
+          </form>
         )}
       </div>
 
-      <div className="flex flex-col border border-black gap-4 mt-auto justify-center items-center">
-        <div>
-          <Text text={"Pause or delete your account"} />
-        </div>
+      <div className="flex flex-col gap-6 lg:gap-10 mt-auto justify-center items-center">
+        <Text text={"Delete account"} />
 
         {!deleteUser && (
           <>
@@ -174,14 +172,16 @@ export const ProfilePage = () => {
             </div>
 
             {showConfirmation && (
-              <div className="flex flex-col items-center">
-                <Text section="text-center" text={confirmationMessage} />
+              <>
+                <div className="flex flex-col items-center">
+                  <Text section="text-center" text={confirmationMessage} />
 
-                <div className="flex flex-row gap-4">
-                  <Button onClick={() => setShowConfirmation(false)} btnText="No" width={"w-13"} />
-                  <Button onClick={(event) => handleDelete(event, userId)} btnText="Yes" width={"w-13"} />
+                  <div className="flex flex-row gap-4">
+                    <Button onClick={() => setShowConfirmation(false)} btnText="No" width={"w-13"} />
+                    <Button onClick={(event) => handleDelete(event, userId)} btnText="Yes" width={"w-13"} />
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </>
         )}
