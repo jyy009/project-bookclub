@@ -37,16 +37,14 @@ export const AboutUs = () => {
         ))}
       </div>
 
-      <div className="flex flex-col md:grid md:grid-cols-2 items-center mt-8 md:gap-6 lg:gap-10 border border-black">
-        <div className="md:col-span-1 border border-red-600 ">
-          <Image link={"images/mail-letter.jpg"} imgText={"Envelope"} section={"object-contain w-full rounded-lg "} />
-        </div>
-        <div className="flex flex-col items-center md:items-start md:col-span-1 border border-blue-600">
-          <Headline titleText={"Get in touch!"} section=""/>
+      <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10 mt-16">
+        <Image link={"images/mail-letter.jpg"} imgText={"Envelope"} section={"rounded-lg"} />
+
+        <div className="flex flex-col items-center md:items-start md:self-start">
+          <Headline titleText={"Get in touch!"} />
           <Text text={contactUs} />
         </div>
       </div>
-      
     </section>
   );
 };

@@ -5,7 +5,8 @@ import TabletLogo from "/icons/tablet-logo-omc.png";
 import { useUserStore } from "../store/useUserStore";
 
 export const Header = () => {
-  const { isLoggedIn, username } = useUserStore();
+  const { isLoggedIn, username, toggleMenu, showMenu } = useUserStore();
+
   return (
     <>
       {/* Mobile header layout */}
@@ -13,18 +14,16 @@ export const Header = () => {
         <div className="flex justify-between ">
           <div className="flex items-center">
             <Link to="/" className="cursor-pointer">
-              <img src={MobileLogo} alt="OMC Book Club" className="md:hidden" />
+              <img src={MobileLogo} alt="OMC Book Club" className="md:hidden" onClick={toggleMenu} />
             </Link>
           </div>
           <div>
-            <Navbar />
+            <Navbar toggleMenu={toggleMenu} showMenu={showMenu} />
           </div>
         </div>
         {isLoggedIn ? (
           <div className="flex justify-center mt-3 md:hidden">
-            <p className="font-worksans text-fifth">
-              Welcome {username}, happy reading!
-            </p>
+            <p className="font-worksans text-fifth">Welcome {username}, happy reading!</p>
           </div>
         ) : (
           ""
@@ -34,17 +33,11 @@ export const Header = () => {
       <header className="hidden md:sticky md:top-0 md:z-50 md:bg-secondary md:flex flex-col px-8 py-5 lg:px-32 xl:px-56">
         <div className="flex justify-between">
           <Link to="/" className="cursor-pointer">
-            <img
-              src={TabletLogo}
-              alt="OMC Book Club"
-              className="hidden md:flex"
-            />
+            <img src={TabletLogo} alt="OMC Book Club" className="hidden md:flex" />
           </Link>
           {isLoggedIn ? (
             <div className="justify-center my-3 hidden md:flex">
-              <p className="font-worksans text-fifth text-lg">
-                Welcome {username}, happy reading!
-              </p>
+              <p className="font-worksans text-fifth text-lg">Welcome {username}, happy reading!</p>
             </div>
           ) : (
             ""

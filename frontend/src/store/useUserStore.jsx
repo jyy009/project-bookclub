@@ -24,6 +24,9 @@ export const useUserStore = create((set, get) => ({
   isLoggedIn: false,
   backendError: false,
   errorMessage: "",
+  showMenu: false,
+
+  toggleMenu: () => set((state) => ({ showMenu: !state.showMenu })),
 
   setData: (key, value) => {
     set({ [key]: value });
@@ -135,8 +138,7 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage:
-          "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -206,8 +208,7 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage:
-          "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
