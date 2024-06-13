@@ -38,7 +38,7 @@ export const Like = ({ label, likes, id }) => {
         )}
         <button onClick={handleClick}>
           <img
-            src={isClicked ? "../icons/heartred.svg" : "../icons/heartblue.svg"}
+            src={isClicked ? "../icons/red-like.svg" : "../icons/blue-like.svg"}
             alt="like"
             className="h-5 w-5 mr-2 lg:h-6 lg:w-6"
           />
