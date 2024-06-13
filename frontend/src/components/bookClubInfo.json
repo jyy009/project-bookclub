@@ -2,16 +2,16 @@
   {
     "loggedInInfo": {
       "sectionOne": {
-        "imageText": "Books and magazines on a sheet",
-        "imgSrc": "/images/giulia-bertelli-y7rGTFyOzxc-unsplash.jpg",
-        "heading": "Book of the Month: Echoes of the Forgotten Realm by ChatGPT",
-        "text": "Summary: Lyra, a young woman with a rare gift, discovers an ancient artifact that awakens forgotten magic. As dark forces seek to reclaim this power, she must navigate a world of mythical creatures and hidden secrets. Joined by a rogue sorcerer and a loyal guardian, Lyra embarks on a quest to save both her world and the Forgotten Realm."
+        "imageText": "Midnight Library by Matt Haig",
+        "imgSrc": "/images/midnight-library-1.jpg",
+        "heading": "Book of the Month: Midnight Library by Matt Haig",
+        "text": "Nora's life has been going from bad to worse. Then at the stroke of midnight on her last day on earth she finds herself transported to a library. There she is given the chance to undo her regrets and try out each of the other lives she might have lived. Which raises the ultimate question: which infinite choices, what is the best way to live?"
       },
       "sectionTwo": {
-        "imageText": "Person sitting on top of a stack of book",
-        "imgSrc": "/images/pexels-merve-bayar-158520570-10863551.jpg",
-        "heading": "Next month's book: Waves of Adventure by ChatGPT ",
-        "text": "Twenty-year-old Jake Turner heads to Costa Rica for a summer break, expecting relaxation but finding the adventure of a lifetime. Exploring rainforests, surfing wild waves, and uncovering hidden caves with daring locals, Jake faces thrilling challenges and discovers his true self. When a crisis threatens his new friends, he must rise to the occasion and prove his courage."
+        "imageText": "1984 by George Orwell",
+        "imgSrc": "/images/1984-1.jpg",
+        "heading": "Next month's book: 1984 by George Orwell",
+        "text": "In 1984, London is a grim city in the totalitarian state of Oceania, where Big Brother is always watching you and the Thought Police can prctically read your mind. Winston Smith is a man in grave danger for the simple reason that his memory still functions. Drawn into a forbidden love affair, Winston finds the courage to join a secret revolutionary organization called The Brotherhood, dedicated to the destruction of the Party. Together with his beloved Julia, he hazards his life in a deadly match against the powers that be."
       },
       "sectionThree": {
         "imageText": "Person holding an open book, confetti coming out of the book",
