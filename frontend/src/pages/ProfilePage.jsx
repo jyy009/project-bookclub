@@ -109,22 +109,18 @@ export const ProfilePage = () => {
         <ProfileCard name={userData.name} email={userData.email} address={userData.address} />
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 items-center">
         <Text
           text={
             "Have you recently moved and are worried the books won't reach you at your new place? Don't worry! Click here to update your address."
           }
         />
-        <Button
-          onClick={toggleHidden}
-          btnText={"Update address"}
-          buttonStyle={"bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md w-max self-center"}
-        />
+        <Button onClick={toggleHidden} btnText={"Update address"} width={"w-40 md:w-44"} />
         {!hidden && (
           <div>
             <form onSubmit={submitUpdateAddress}>
               <fieldset>
-                <legend>Address</legend>
+                <legend className="font-josefinsans md:text-lg">Address</legend>
                 <TextInput
                   label={"Street"}
                   inputType={"text"}
@@ -158,11 +154,9 @@ export const ProfilePage = () => {
                   </div>
                 </div>
               </fieldset>
-              <Button
-                type={"submit"}
-                btnText={"Update"}
-                buttonStyle={"bg-tertiary px-8 py-2 text-secondary font-josefinsans md:text-xl rounded-md"}
-              />
+              <div className="flex justify-center">
+                <Button type={"submit"} btnText={"Update"} />
+              </div>
             </form>
           </div>
         )}
@@ -176,12 +170,7 @@ export const ProfilePage = () => {
         {!deleteUser && (
           <>
             <div className="">
-              <Button
-                btnText={"delete"}
-                onClick={(event) => confirmDelete(event)}
-                type="submit"
-                buttonStyle={"bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"}
-              />
+              <Button btnText={"delete"} onClick={(event) => confirmDelete(event)} type="submit" />
             </div>
 
             {showConfirmation && (
@@ -189,20 +178,8 @@ export const ProfilePage = () => {
                 <Text section="text-center" text={confirmationMessage} />
 
                 <div className="flex flex-row gap-4">
-                  <Button
-                    onClick={() => setShowConfirmation(false)}
-                    btnText="No"
-                    buttonStyle={
-                      "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                    }
-                  />
-                  <Button
-                    onClick={(event) => handleDelete(event, userId)}
-                    btnText="Yes"
-                    buttonStyle={
-                      "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-                    }
-                  />
+                  <Button onClick={() => setShowConfirmation(false)} btnText="No" width={"w-13"} />
+                  <Button onClick={(event) => handleDelete(event, userId)} btnText="Yes" width={"w-13"} />
                 </div>
               </div>
             )}
