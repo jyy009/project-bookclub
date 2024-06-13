@@ -29,8 +29,6 @@ export const RegisterForm = () => {
         placeholder={"Type your full name"}
         value={signUpData.name}
         onChange={(event) => handleSignUpChange("name", event.target.value)}
-        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <TextInput
         label={"E-mail"}
@@ -39,11 +37,9 @@ export const RegisterForm = () => {
         placeholder={"Type your e-mail"}
         value={signUpData.email}
         onChange={(event) => handleSignUpChange("email", event.target.value)}
-        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <fieldset>
-        <legend>Address</legend>
+        <legend className="font-josefinsans md:text-lg">Address</legend>
         <TextInput
           label={"Street"}
           inputType={"text"}
@@ -51,8 +47,6 @@ export const RegisterForm = () => {
           placeholder={"Type your street"}
           value={signUpData.street}
           onChange={(event) => handleSignUpChange("street", event.target.value)}
-          labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-          inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
         />
 
         <div className="md:flex md:flex-row md:justify-between">
@@ -64,8 +58,6 @@ export const RegisterForm = () => {
               placeholder={"xxx xx"}
               value={signUpData.postCode.toString()}
               onChange={(event) => handleSignUpChange("postCode", event.target.value)}
-              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
           </div>
 
@@ -77,8 +69,6 @@ export const RegisterForm = () => {
               placeholder={"Type your city"}
               value={signUpData.city}
               onChange={(event) => handleSignUpChange("city", event.target.value)}
-              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
           </div>
         </div>
@@ -90,8 +80,6 @@ export const RegisterForm = () => {
         placeholder={"Type your username"}
         value={signUpData.username}
         onChange={(event) => handleSignUpChange("username", event.target.value)}
-        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <TextInput
         label={"Password"}
@@ -100,8 +88,6 @@ export const RegisterForm = () => {
         placeholder={"Type your password"}
         value={signUpData.password}
         onChange={(event) => handleSignUpChange("password", event.target.value)}
-        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       <TextInput
         label={"Verifying password"}
@@ -110,8 +96,6 @@ export const RegisterForm = () => {
         placeholder={"Re-enter your password"}
         value={signUpData.verifyingPassword}
         onChange={(event) => handleSignUpChange("verifyingPassword", event.target.value)}
-        labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-        inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
       />
       {backendError && <p>{errorMessage}</p>}
       <div className="flex justify-end mt-4">

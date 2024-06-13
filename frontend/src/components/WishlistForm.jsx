@@ -84,13 +84,7 @@ export const WishlistForm = () => {
     beAnonymous();
   }, [anon]);
 
-  const renderTextInput = (
-    label,
-    inputType,
-    name,
-    placeholder,
-    rows = null
-  ) => (
+  const renderTextInput = (label, inputType, name, placeholder, rows = null) => (
     <TextInput
       label={label}
       inputType={inputType}
@@ -98,19 +92,15 @@ export const WishlistForm = () => {
       placeholder={placeholder}
       value={wishlistData[name]}
       onChange={(event) => handleWishlistChange(name, event.target.value)}
-      inputStyle="pl-2 bg-fourth placeholder-gray-500 rounded-md"
-      labelStyle="flex flex-col"
+      backgroundColor="bg-fourth"
       {...(inputType === "textarea" && { rows })}
     />
   );
 
   return (
     <div className="justify-center">
-      <form
-        className="flex flex-col gap-2 pb-4"
-        onSubmit={handleWishlistSubmit}
-      >
-        <div className={"flex flex-col gap-2"}>
+      <form className="flex flex-col gap-2 pb-4" onSubmit={handleWishlistSubmit}>
+        <div className={"flex flex-col"}>
           {renderTextInput("Title", "text", "title", "Book title...")}
           {renderTextInput("Author", "text", "author", "Book author...")}
           {renderTextInput("Message", "textarea", "message", "Message...", 3)}
@@ -119,20 +109,13 @@ export const WishlistForm = () => {
         <div className={"self-end"}>
           <label className="flex justify-center items-center space-x-2">
             <span className="">Anonymous</span>
-            <input
-              type="checkbox"
-              name="anonymous"
-              value="Anonymous"
-              onChange={toggleCheckbox}
-            />
+            <input type="checkbox" name="anonymous" value="Anonymous" onChange={toggleCheckbox} />
           </label>
         </div>
 
         <div className={"self-end"}>
           <Button
-            buttonStyle={
-              "bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"
-            }
+            buttonStyle={"bg-tertiary px-4 py-1 text-secondary font-josefinsans md:text-xl rounded-md w-20 md:w-24"}
             type={"submit"}
             btnText={"Submit"}
           />

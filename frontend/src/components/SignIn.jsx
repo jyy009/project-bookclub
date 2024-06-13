@@ -43,8 +43,6 @@ export const SignIn = () => {
               placeholder={"Type your username"}
               value={loginData.username}
               onChange={(event) => handleLoginChange("username", event.target.value)}
-              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
 
             <TextInput
@@ -54,8 +52,6 @@ export const SignIn = () => {
               placeholder={"Type your password"}
               value={loginData.password}
               onChange={(event) => handleLoginChange("password", event.target.value)}
-              labelStyle="font-josefinsans text-base md:text-lg flex flex-col my-3"
-              inputStyle="font-worksans text-sm border-2 rounded-lg p-2"
             />
           </div>
           <div className="flex justify-center font-worksans text-tertiary">
