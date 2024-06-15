@@ -2,6 +2,8 @@ import { create } from "zustand";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
+// "https://project-final-rvhj.onrender.com"
+
 export const useWishStore = create((set, get) => ({
   loading: false,
   wishlist: [],
@@ -26,7 +28,7 @@ export const useWishStore = create((set, get) => ({
     const accessToken = localStorage.getItem("token");
 
     try {
-      const response = await fetch(`${backend_url}/wishlist/${wishId}/like`, {
+      const response = await fetch(`${backend_url}/wishlist/like/${wishId}`, {
         method: "POST",
         body: JSON.stringify({ userId }),
         headers: {
@@ -55,6 +57,49 @@ export const useWishStore = create((set, get) => ({
       return {
         success: false,
         message: error.message || "Failed to like post.",
+      };
+    }
+  },
+
+  handleDislike: async (event, wishId) => {
+    event.preventDefault();
+    const { updateLikes } = get();
+    const userId = localStorage.getItem("userId");
+    const accessToken = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(
+        `${backend_url}/wishlist/dislike/${wishId}`,
+        {
+          method: "POST",
+          body: JSON.stringify({ userId }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        if (response.status === 400) {
+          throw new Error(errorMessage.message);
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      }
+
+      const result = await response.json();
+      const likesData = result.likes;
+      console.log("likes data:", likesData);
+
+      updateLikes(likesData, wishId);
+      console.log("updated wishlist with dislike:", get().wishlist);
+    } catch (error) {
+      console.error("Error posting dislike:", error);
+      return {
+        success: false,
+        message: error.message || "Failed to dislike post.",
       };
     }
   },

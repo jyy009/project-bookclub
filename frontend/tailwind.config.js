@@ -12,6 +12,7 @@ export default {
         fourth: "#D3E0E3", //wishlist input background
         fifth: "#375D51", //Logo, navlinks, hamburger icon
         sixth: "#A63221", //error messages
+        seventh: "#E74130", // button hover
       },
       height: {
         largeImg: "500px",

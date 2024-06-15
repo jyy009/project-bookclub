@@ -56,7 +56,7 @@ router.post("/wishlist", async (req, res) => {
   }
 });
 
-router.post("/wishlist/:wishId/like", authenticateUser, async (req, res) => {
+router.post("/wishlist/like/:wishId/", authenticateUser, async (req, res) => {
   const { wishId } = req.params;
   const userId = req.user._id;
 
@@ -77,6 +77,13 @@ router.post("/wishlist/:wishId/like", authenticateUser, async (req, res) => {
       });
     }
 
+    if (wish.dislikedBy.includes(userId)) {
+      await BookWish.findByIdAndUpdate(wishId, {
+        // $inc: { likes: 1 },
+        $pull: { dislikedBy: userId },
+      });
+    }
+
     const incrementLike = await BookWish.findByIdAndUpdate(
       wishId,
       { $inc: { likes: 1 }, $push: { likedBy: userId } },
@@ -89,6 +96,50 @@ router.post("/wishlist/:wishId/like", authenticateUser, async (req, res) => {
       success: false,
       response: error,
       message: "Could not like book",
+    });
+  }
+});
+
+router.post("/wishlist/dislike/:wishId", authenticateUser, async (req, res) => {
+  const { wishId } = req.params;
+  const userId = req.user._id;
+
+  try {
+    const wish = await BookWish.findById(wishId);
+
+    if (!wish) {
+      return res.status(404).json({
+        success: false,
+        message: "Book not found",
+      });
+    }
+
+    if (wish.dislikedBy.includes(userId)) {
+      return res.status(400).json({
+        success: false,
+        message: "You have already disliked this post",
+      });
+    }
+
+    if (wish.likedBy.includes(userId)) {
+      await BookWish.findByIdAndUpdate(wishId, {
+        // $inc: { likes: -1 },
+        $pull: { likedBy: userId },
+      });
+    }
+
+    const decrementLike = await BookWish.findByIdAndUpdate(
+      wishId,
+      { $inc: { likes: -1 }, $push: { dislikedBy: userId } },
+      { new: true }
+    );
+
+    res.json({ success: true, likes: decrementLike.likes });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error,
+      message: "Could not dislike book",
     });
   }
 });

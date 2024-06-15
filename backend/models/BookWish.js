@@ -31,6 +31,7 @@ const bookWishSchema = new Schema({
     required: true,
   },
   likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  dislikedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 // Model

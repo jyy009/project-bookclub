@@ -1,14 +1,22 @@
-export const Button = ({ btnText, type, onClick, width, disabled, backgroundColor }) => {
+export const Button = ({
+  btnText,
+  type,
+  onClick,
+  width,
+  disabled,
+  backgroundColor,
+}) => {
   return (
     <button
       onClick={onClick}
       type={type}
       className={`${
-        backgroundColor ? backgroundColor : "bg-tertiary"
+        backgroundColor ? backgroundColor : "bg-tertiary hover:bg-seventh"
       } text-white font-josefinsans rounded-md flex justify-center md:text-lg px-4 ${
         width ? width : "w-32 md:w-36"
       } py-1`}
-      disabled={disabled}>
+      disabled={disabled}
+    >
       {btnText}
     </button>
   );
