@@ -12,7 +12,7 @@ router.get("/wishlist", async (req, res) => {
   }
   const pageSize = parseInt(req.query.pageSize, 10) || 10;
   const sortField = req.query.sortField || "createdAt";
-  const sortOrder = req.query.sortOrder === "asc" ? 1 : -1; // Is this needed? Or should we always have -1?
+  const sortOrder = req.query.sortOrder === "asc" ? 1 : -1;
   const offset = (page - 1) * pageSize;
 
   try {
