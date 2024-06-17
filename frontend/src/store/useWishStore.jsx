@@ -49,18 +49,17 @@ export const useWishStore = create((set, get) => ({
       const result = await response.json();
       const likesData = result.likes;
       console.log("likes data:", likesData);
-
       updateLikes(likesData, wishId);
       console.log("updated wishlist with like:", get().wishlist);
     } catch (error) {
-      console.error("Error posting like:", error);
+      console.error("Error updating likes:", error);
       return {
         success: false,
-        message: error.message || "Failed to like post.",
+        message: error.message || "Failed to update likes.",
       };
     }
   },
-
+  /*
   handleDislike: async (event, wishId) => {
     event.preventDefault();
     const { updateLikes } = get();
@@ -103,7 +102,7 @@ export const useWishStore = create((set, get) => ({
       };
     }
   },
-
+*/
   fetchWishlist: async (page, sortField) => {
     set({ loading: true });
     const { pageSize } = get();

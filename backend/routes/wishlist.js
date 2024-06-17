@@ -71,26 +71,51 @@ router.post("/wishlist/like/:wishId/", authenticateUser, async (req, res) => {
     }
 
     if (wish.likedBy.includes(userId)) {
+      const reduceLike = await BookWish.findByIdAndUpdate(
+        wishId,
+        {
+          $inc: { likes: -1 },
+          $pull: { likedBy: userId },
+        },
+        { new: true }
+      );
+
+      res.json({
+        success: true,
+        likes: reduceLike.likes,
+        message: "Success removing like.",
+      });
+    } else {
+      const incrementLike = await BookWish.findByIdAndUpdate(
+        wishId,
+        {
+          $inc: { likes: 1 },
+          $push: { likedBy: userId },
+        },
+        { new: true }
+      );
+
+      res.json({
+        success: true,
+        likes: incrementLike.likes,
+        message: "Success liking book.",
+      });
+    }
+
+    /*
+    if (wish.likedBy.includes(userId)) {
       return res.status(400).json({
         success: false,
         message: "You have already liked this post",
       });
     }
-
-    if (wish.dislikedBy.includes(userId)) {
-      await BookWish.findByIdAndUpdate(wishId, {
-        // $inc: { likes: 1 },
-        $pull: { dislikedBy: userId },
-      });
-    }
-
-    const incrementLike = await BookWish.findByIdAndUpdate(
-      wishId,
-      { $inc: { likes: 1 }, $push: { likedBy: userId } },
-      { new: true }
-    );
-
-    res.json({ success: true, likes: incrementLike.likes });
+*/
+    // if (wish.dislikedBy.includes(userId)) {
+    //   await BookWish.findByIdAndUpdate(wishId, {
+    //     // $inc: { likes: 1 },
+    //     $pull: { dislikedBy: userId },
+    //   });
+    // }
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -100,6 +125,7 @@ router.post("/wishlist/like/:wishId/", authenticateUser, async (req, res) => {
   }
 });
 
+/*
 router.post("/wishlist/dislike/:wishId", authenticateUser, async (req, res) => {
   const { wishId } = req.params;
   const userId = req.user._id;
@@ -143,5 +169,5 @@ router.post("/wishlist/dislike/:wishId", authenticateUser, async (req, res) => {
     });
   }
 });
-
+*/
 export default router;
