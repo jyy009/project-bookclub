@@ -16,6 +16,7 @@ export const Landing = () => {
         />
 
         <div className="flex flex-col px-2 md:col-span-1 gap-6 md:px-0 text-center">
+
           <Headline titleText={"Discover your next favorite book with us"} />
           {!isLoggedIn ? (
             <>
