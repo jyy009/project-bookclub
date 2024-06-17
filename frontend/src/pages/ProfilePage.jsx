@@ -6,6 +6,7 @@ import { Button } from "../atoms/Button";
 import { TextInput } from "../atoms/TextInput";
 import { ProfileCard } from "../components/ProfileCard";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../components/Loading";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
@@ -20,6 +21,7 @@ export const ProfilePage = () => {
     postCode: "",
     city: "",
   });
+  const [isFetchingProfile, setIsFetchingProfile] = useState(false);
 
   const [deleteUser, setDeleteUser] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -27,6 +29,7 @@ export const ProfilePage = () => {
   const navigate = useNavigate();
 
   const fetchProfile = async (id) => {
+    setIsFetchingProfile(true);
     try {
       const response = await fetch(`${backend_url}/users/${id}`);
       if (!response.ok) {
@@ -36,6 +39,8 @@ export const ProfilePage = () => {
       setUserData(data);
     } catch (error) {
       console.error("Error fetching profile:", error);
+    } finally {
+      setIsFetchingProfile(false);
     }
   };
 
@@ -104,6 +109,8 @@ export const ProfilePage = () => {
   };
 
   return (
+    <>
+  {isFetchingProfile ? ( <Loading />) : (
     <div className="flex flex-col max-w-sm mx-auto p-2 items-center pb-8 gap-6 lg:gap-4 md:max-w-md lg:max-w-2xl md:pb-10 lg:pb-36">
       <Headline titleText={`${username}`} section="" />
       <div className="flex flex-col">
@@ -216,5 +223,9 @@ export const ProfilePage = () => {
         </div>
       </div>
     </div>
+  )}
+
+    
+    </>
   );
 };
