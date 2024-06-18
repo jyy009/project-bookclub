@@ -28,10 +28,7 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
           onClick={() => navigatePage(currentPage - 1)}
           disabled={currentPage === 1}
           btnText={
-            <Image
-              link={"./public/icons/chevron-left.svg"}
-              imgText={"left arrow"}
-            />
+            <Image link={"/icons/chevron-left.svg"} imgText={"left arrow"} />
           }
           btnStyle={"bg-secondary hover:bg-secondary"}
           width={"w-13"}
@@ -42,10 +39,7 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
           onClick={() => navigatePage(currentPage + 1)}
           disabled={isLastPage}
           btnText={
-            <Image
-              link={"./public/icons/chevron-right.svg"}
-              imgText={"right arrow"}
-            />
+            <Image link={"/icons/chevron-right.svg"} imgText={"right arrow"} />
           }
           btnStyle={"bg-secondary hover:bg-secondary"}
           width={"w-13"}
