@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 export const Navbar = () => {
   const { isLoggedIn, signOut, toggleMenu, showMenu } = useUserStore();
@@ -11,13 +11,11 @@ export const Navbar = () => {
       setIsMobileView(window.innerWidth < 768);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    // Cleanup function to remove the event listener
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Adjust showMenu based on isMobileView
   useEffect(() => {
     if (isMobileView && showMenu) {
       toggleMenu();
@@ -29,7 +27,7 @@ export const Navbar = () => {
       <div className="md:hidden ">
         <nav
           className={
-            showMenu 
+            showMenu
               ? "fixed translate-y-14 transition duration-200 inset-y-0 inset-x-0 z-99 bg-secondary text-fifth list-none pt-8 flex flex-col items-center gap-5 font-josefinsans text-xl"
               : "hidden"
           }

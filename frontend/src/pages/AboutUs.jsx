@@ -12,7 +12,7 @@ export const AboutUs = () => {
     "Together, Emily, Jack, and Sarah have built a book club that not only celebrates great books but also the friendships and connections that grow from a shared love of reading. Join us and become part of our story!";
 
   const contactUs =
-    "We’d love to hear from you! Whether you have questions, suggestions, or just want to share your thoughts, feel free to reach out. Contact us at [email address] and we’ll get back to you as soon as possible. Happy reading!";
+    "We’d love to hear from you! Whether you have questions, suggestions, or just want to share your thoughts, feel free to reach out. Contact us at omcbookclub@omc.omc and we’ll get back to you as soon as possible. Happy reading!";
 
   const ourFounders = founders;
 
@@ -38,7 +38,11 @@ export const AboutUs = () => {
       </div>
 
       <div className="flex flex-col items-center md:flex-row md:gap-6 lg:gap-10 mt-16">
-        <Image link={"images/mail-letter.jpg"} imgText={"Envelope"} section={"rounded-lg"} />
+        <Image
+          link={"images/mail-letter.jpg"}
+          imgText={"Envelope"}
+          section={"rounded-lg"}
+        />
 
         <div className="flex flex-col items-center md:items-start md:self-start">
           <Headline titleText={"Get in touch!"} />

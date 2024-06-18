@@ -22,7 +22,9 @@ export const InfoCard = ({
         <Image
           imgText={imgText}
           link={imgSrc}
-          section={"object-cover w-full h-72 md:h-largeImg object-top md:rounded-lg"}
+          section={
+            "object-cover w-full h-72 md:h-largeImg object-top md:rounded-lg"
+          }
         />
       </div>
       <div className="flex flex-col mx-4 items-center md:mx-0 md:w-1/2 md:self-start md:items-start">

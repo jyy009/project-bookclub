@@ -34,17 +34,14 @@ export const Wishlist = () => {
             <Headline section={"py-0 pt-4"} titleText={"Book Wishlist"} />
             <Text section={"pb-2"} text={"Add your book wish!"} />
           </div>
-
           <div className="w-full max-w-sm mx-auto p-2 md:max-w-lg lg:max-w-3xl">
             <WishlistForm />
-
             <WishlistNav
               sortWishes={sortWishes}
               navigatePage={navigatePage}
               currentPage={currentPage}
             />
           </div>
-
           <div className="w-full max-w-sm mx-auto p-2 md:max-w-lg lg:max-w-3xl">
             {isLastPage && (
               <div className="text-center p-12">
@@ -55,29 +52,26 @@ export const Wishlist = () => {
                 />
               </div>
             )}
-
             <div className="flex flex-col gap-2">
-              {!isLastPage && !loading ? (
-                wishlist.map((wish) => (
-                  <WishlistCard
-                    key={wish._id}
-                    id={wish._id}
-                    title={wish.title}
-                    author={wish.author}
-                    message={wish.message}
-                    user={wish.user}
-                    likes={wish.likes}
-                  />
-                ))
-              ) : ""}
-              {loading ? (
-                <Loading />
-              ) : ""}
+              {!isLastPage && !loading
+                ? wishlist.map((wish) => (
+                    <WishlistCard
+                      key={wish._id}
+                      id={wish._id}
+                      title={wish.title}
+                      author={wish.author}
+                      message={wish.message}
+                      user={wish.user}
+                      likes={wish.likes}
+                    />
+                  ))
+                : ""}
+              {loading ? <Loading /> : ""}
             </div>
           </div>
         </div>
       ) : (
-        <Navigate replace to="/sign-up" /> // This doesn't appear to work. Navigates to "/"
+        <Navigate replace to="/sign-up" />
       )}
     </>
   );

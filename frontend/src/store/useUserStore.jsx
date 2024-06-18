@@ -73,9 +73,21 @@ export const useUserStore = create((set, get) => ({
 
     const { signUpData } = get();
     const constructedAddress = `${signUpData.street} ${signUpData.postCode} ${signUpData.city}`;
+    const emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    const validEmail = new RegExp(emailPattern).test(signUpData.email);
+    if (!validEmail) {
+      set((state) => ({
+        ...state,
+        errorMessage: "Please use a valid email address",
+      }));
+      return false;
+    }
 
     if (signUpData.password !== signUpData.verifyingPassword) {
-      console.error("Passwords do not match");
+      set((state) => ({
+        ...state,
+        errorMessage: "Password doesn't match",
+      }));
       return false;
     }
     try {
@@ -130,7 +142,6 @@ export const useUserStore = create((set, get) => ({
         localStorage.setItem("token", updatedAccessToken);
         localStorage.setItem("username", updatedUsername);
         localStorage.setItem("userId", updatedUserId);
-        console.log(result.message);
 
         return true;
       }
@@ -138,7 +149,8 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }
@@ -208,7 +220,8 @@ export const useUserStore = create((set, get) => ({
       set((state) => ({
         ...state,
         backendError: true,
-        errorMessage: "Unable to sign up, try again or contact us by email if this issue persists.",
+        errorMessage:
+          "Unable to sign up, try again or contact us by email if this issue persists.",
       }));
       return false;
     }

@@ -10,7 +10,7 @@ export const WishlistCard = ({ id, title, author, message, user, likes }) => {
         <Text text={message} />
         <div className="flex flex-row pt-4 justify-between place-items-start">
           <Text text={`by ${user}`} />
-          <Like id={id} label="heart" likes={likes} />
+          <Like id={id} likes={likes} />
         </div>
       </div>
     </div>

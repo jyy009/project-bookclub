@@ -48,6 +48,7 @@ export const RegisterForm = () => {
             label={"E-mail"}
             inputType={"email"}
             inputName={"email"}
+            requiredPattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder={"Type your e-mail"}
             value={signUpData.email}
             onChange={(event) =>
@@ -125,7 +126,7 @@ export const RegisterForm = () => {
               handleSignUpChange("verifyingPassword", event.target.value)
             }
           />
-          {backendError && <p>{errorMessage}</p>}
+          {backendError && <p className="text-sixth">{errorMessage}</p>}
           <div className="flex justify-end mt-4">
             <Button
               type={"submit"}

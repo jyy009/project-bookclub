@@ -33,19 +33,13 @@ export const Carousel = ({ children }) => {
           onClick={showPrev}
           className="bg-primary rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
-          <Image
-            link={"./icons/chevron-left.svg"}
-            imgText={"left arrow"}
-          />
+          <Image link={"/icons/chevron-left.svg"} imgText={"left arrow"} />
         </button>
         <button
           onClick={showNext}
           className="bg-primary rounded-full p-3 shadow bg-opacity-80 hover:bg-opacity-100"
         >
-          <Image
-            link={"./icons/chevron-right.svg"}
-            imgText={"left arrow"}
-          />
+          <Image link={"/icons/chevron-right.svg"} imgText={"left arrow"} />
         </button>
       </div>
       <div className="bottom-0 py-4 flex justify-center gap-3 w-full">
@@ -63,10 +57,3 @@ export const Carousel = ({ children }) => {
     </div>
   );
 };
-
-/*
-
-
-
-
- */

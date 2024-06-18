@@ -57,7 +57,10 @@ export const Home = () => {
                 <>
                   <Route path="/sign-up" element={<Register />} />
                   <Route path="/sign-in" element={<SignIn />} />
-                  <Route path="/wishlist" element={<Navigate to="/" />} />
+                  <Route
+                    path="/wishlist"
+                    element={<Navigate to="/sign-up" />}
+                  />
                 </>
               )}
               <Route path="/*" element={<NotFound />} />

@@ -25,7 +25,6 @@ export const NotFound = () => {
         ) : (
           <Text text={"Please try again."} />
         )}
-
         <Link to={"/"}>
           <Button
             btnText={"Back to Home"}

@@ -33,7 +33,7 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
               imgText={"left arrow"}
             />
           }
-          backgroundColor={"bg-secondary hover:bg-secondary"}
+          btnStyle={"bg-secondary hover:bg-secondary"}
           width={"w-13"}
           x
         />
@@ -47,7 +47,7 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
               imgText={"right arrow"}
             />
           }
-          backgroundColor={"bg-secondary hover:bg-secondary"}
+          btnStyle={"bg-secondary hover:bg-secondary"}
           width={"w-13"}
         />
       </div>
