@@ -10,8 +10,16 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
       <div className="mx-auto">
         <Text text={"Sort by:"} section="text-center" />
         <div className="flex gap-4">
-          <Button onClick={() => sortWishes("createdAt")} btnText={"Newest"} width={"w-24 md:w-28"} />
-          <Button onClick={() => sortWishes("likes")} btnText={"Likes"} width={"w-24 md:w-28"} />
+          <Button
+            onClick={() => sortWishes("createdAt")}
+            btnText={"Newest"}
+            width={"w-24 md:w-28"}
+          />
+          <Button
+            onClick={() => sortWishes("likes")}
+            btnText={"Likes"}
+            width={"w-24 md:w-28"}
+          />
         </div>
       </div>
 
@@ -19,8 +27,13 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
         <Button
           onClick={() => navigatePage(currentPage - 1)}
           disabled={currentPage === 1}
-          btnText={<Image link={"./public/icons/chevron-left.svg"} imgText={"left arrow"} />}
-          backgroundColor={"bg-secondary"}
+          btnText={
+            <Image
+              link={"./public/icons/chevron-left.svg"}
+              imgText={"left arrow"}
+            />
+          }
+          backgroundColor={"bg-secondary hover:bg-secondary"}
           width={"w-13"}
           x
         />
@@ -28,8 +41,13 @@ export const WishlistNav = ({ sortWishes, navigatePage, currentPage }) => {
         <Button
           onClick={() => navigatePage(currentPage + 1)}
           disabled={isLastPage}
-          btnText={<Image link={"./public/icons/chevron-right.svg"} imgText={"right arrow"} />}
-          backgroundColor={"bg-secondary"}
+          btnText={
+            <Image
+              link={"./public/icons/chevron-right.svg"}
+              imgText={"right arrow"}
+            />
+          }
+          backgroundColor={"bg-secondary hover:bg-secondary"}
           width={"w-13"}
         />
       </div>
