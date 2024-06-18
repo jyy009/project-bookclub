@@ -6,12 +6,13 @@ export const Like = ({ label, likes, id }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const { handleLike } = useWishStore();
 
+  /*
   const handleClick = async (event) => {
     event.preventDefault();
-    if (isClicked) {
-      setErrorMessage("You have already liked this post.");
-      return;
-    }
+    // if (isClicked) {
+    //   setErrorMessage("You have already liked this post.");
+    //   return;
+    // }
     try {
       const errorObj = await handleLike(event, id);
       if (errorObj && !errorObj.success) {
@@ -22,6 +23,22 @@ export const Like = ({ label, likes, id }) => {
     } catch (error) {
       console.error("Error liking post:", error);
       setErrorMessage("Failed to like post.");
+    }
+  };
+*/
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+    try {
+      const errorObj = await handleLike(event, id);
+      if (errorObj && !errorObj.success) {
+        setErrorMessage(errorObj.message);
+        return;
+      }
+      setIsClicked(!isClicked);
+    } catch (error) {
+      console.error("Error updating post:", error);
+      setErrorMessage("Failed to update likes.");
     }
   };
 

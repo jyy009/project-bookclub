@@ -12,7 +12,7 @@ router.get("/wishlist", async (req, res) => {
   }
   const pageSize = parseInt(req.query.pageSize, 10) || 10;
   const sortField = req.query.sortField || "createdAt";
-  const sortOrder = req.query.sortOrder === "asc" ? 1 : -1; // Is this needed? Or should we always have -1?
+  const sortOrder = req.query.sortOrder === "asc" ? 1 : -1;
   const offset = (page - 1) * pageSize;
 
   try {
@@ -56,7 +56,7 @@ router.post("/wishlist", async (req, res) => {
   }
 });
 
-router.post("/wishlist/:wishId/like", authenticateUser, async (req, res) => {
+router.post("/wishlist/like/:wishId/", authenticateUser, async (req, res) => {
   const { wishId } = req.params;
   const userId = req.user._id;
 
@@ -71,19 +71,36 @@ router.post("/wishlist/:wishId/like", authenticateUser, async (req, res) => {
     }
 
     if (wish.likedBy.includes(userId)) {
-      return res.status(400).json({
-        success: false,
-        message: "You have already liked this post",
+      const reduceLike = await BookWish.findByIdAndUpdate(
+        wishId,
+        {
+          $inc: { likes: -1 },
+          $pull: { likedBy: userId },
+        },
+        { new: true }
+      );
+
+      res.json({
+        success: true,
+        likes: reduceLike.likes,
+        message: "Success removing like.",
+      });
+    } else {
+      const incrementLike = await BookWish.findByIdAndUpdate(
+        wishId,
+        {
+          $inc: { likes: 1 },
+          $push: { likedBy: userId },
+        },
+        { new: true }
+      );
+
+      res.json({
+        success: true,
+        likes: incrementLike.likes,
+        message: "Success liking book.",
       });
     }
-
-    const incrementLike = await BookWish.findByIdAndUpdate(
-      wishId,
-      { $inc: { likes: 1 }, $push: { likedBy: userId } },
-      { new: true }
-    );
-
-    res.json({ success: true, likes: incrementLike.likes });
   } catch (error) {
     res.status(400).json({
       success: false,
