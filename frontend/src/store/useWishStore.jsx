@@ -2,8 +2,6 @@ import { create } from "zustand";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
-// "https://project-final-rvhj.onrender.com"
-
 export const useWishStore = create((set, get) => ({
   loading: false,
   wishlist: [],
