@@ -38,7 +38,7 @@ Once you become a member, you will have access to the "Wishlist" page where you 
 
 ## View it live
 
-[Frontend]()
+[Frontend](https://main--omc-book-club.netlify.app/)
 [Backend](https://project-final-rvhj.onrender.com)
 
 ## Contact Us
