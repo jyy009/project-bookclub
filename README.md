@@ -2,7 +2,7 @@
 
 ## Project Introduction
 
-Our application, built with React + Vite, Node.js and MongoDB database, delivers a bookclub where people can sign up to become a subscribed member, receive a monthly book, and post books that they would like to read to a interactive feed.
+Our application, built with React + Vite, Node.js and MongoDB database, delivers a bookclub where people can sign up to become a subscribed member, receive a monthly book, and post books that they would like to read to an interactive feed.
 
 ## Table of Contents
 
